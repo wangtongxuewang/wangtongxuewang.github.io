@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的空间</title>
-    <updated>2021-04-12T12:11:10.447Z</updated>
+    <updated>2021-04-12T12:14:13.746Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -18,7 +18,7 @@
         <updated>2021-04-12T11:33:50.000Z</updated>
         <content type="html"><![CDATA[<h1 id="c中的explicit">C++中的explicit</h1>
 <h2 id="引言">引言</h2>
-<p>在C++开发中，常会因为各种原因无意中发生如下代码段错误：</p>
+<p>在C++开发中，常会因为各种原因无意中编写出如下代码：</p>
 <pre><code class="language-c++">class Demo {
 public:
     Demo() = default;
@@ -39,7 +39,7 @@ int main()
     return 0;
 }
 </code></pre>
-<p>上述代码编译通过，即编译器允许这种操作，其实际上是调用了构造函数 Demo(const int a) 进行了隐式转换，但此操作很可能是开发人员不希望发生的，程序可能在运行中发生意想不到的错误，所以需要一种机制禁止这种隐式转换；</p>
+<p>上述代码编译通过，即编译器允许这种操作，这实际上是调用了构造函数 Demo(const int a) 进行了隐式转换，但此操作很可能是开发人员不希望发生的，程序有可能会在运行中发生意想不到的错误，所以需要一种机制禁止这种隐式转换；</p>
 <h2 id="方法">方法</h2>
 <p>C++提供了在构造函数中添加 explicit 关键字来防止上述问题的发生，在 Qt 库中，经常可以看到此种习惯，这减少了程序隐患，值得我们学习参考；</p>
 <p>上述代码改进后，如下所示：</p>
@@ -65,7 +65,7 @@ int main()
 }
 </code></pre>
 <h2 id="结论">结论</h2>
-<p>最佳实践：在类构造函数中，只要能使用一个参数的均加上 explicit 关键字以防止隐式转换；</p>
+<p>最佳实践：在类构造函数中，只要能使用一个参数的，均加上 explicit 关键字以防止隐式转换；</p>
 ]]></content>
     </entry>
     <entry>
