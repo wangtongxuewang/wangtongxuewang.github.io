@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>C++中的explicit | 王同学的博客</title>
+<title>C++初始化最佳实践 | 王同学的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,14 +18,10 @@
 
 
 
-    <meta name="description" content="C++中的explicit
+    <meta name="description" content="C++初始化最佳实践
 引言
-在C++开发中，常会因为各种原因无意中编写出如下代码：
-class Demo {
-public:
-    Demo() = default;
-    Demo(const int a);
-    Demo(..." />
+对于变量初始化，C++提供多种方式，较为复杂，在使用中很容易给开发者造成很大困惑；
+C++11中的统一列表初始化（std::initializer_list）方式固然有很多优点，但是仍然有重载决议(若变量初始化使..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -97,69 +93,81 @@ public:
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">C++中的explicit</h2>
-            <div class="post-date">2021-04-12</div>
+            <h2 class="post-title">C++初始化最佳实践</h2>
+            <div class="post-date">2021-04-14</div>
             
             <div class="post-content" v-pre>
-              <h1 id="c中的explicit">C++中的explicit</h1>
+              <h1 id="c初始化最佳实践">C++初始化最佳实践</h1>
 <h2 id="引言">引言</h2>
-<p>在C++开发中，常会因为各种原因无意中编写出如下代码：</p>
-<pre><code class="language-c++">class Demo {
-public:
-    Demo() = default;
-    Demo(const int a);
-    Demo(const double b, const double c=2.5, const double d=3.5);
-    ~Demo() = default;
-    // ...
-private:
-    int m_a;
-    double m_b;
+<p>对于变量初始化，C++提供多种方式，较为复杂，在使用中很容易给开发者造成很大困惑；</p>
+<p>C++11中的统一列表初始化（std::initializer_list<T>）方式固然有很多优点，但是仍然有<strong>重载决议</strong>(若变量初始化使用大括号，则C++编译器优先调用统一列表初始化进行初始化)等令人迷惑的问题产生；</p>
+<p>所以在开发过程中，开发者需要遵循一种实践规范来指导各种类型变量的初始化，以使得初始化语义明确，简明易懂；</p>
+<h2 id="原则">原则</h2>
+<p>以下是我们认为理解容易、执行简单的一种初始化的最佳实践原则；当然，可能每一位开发者都有自己认为的最佳实践原则，只要简单易行即可，不必强求，故对于本原则，不喜勿喷；</p>
+<p>本原则条目如下：</p>
+<ul>
+<li>须对所有变量进行初始化，即在使用前不能有未定义的值；</li>
+<li>使用语义明确且符合直觉的初始化方式；</li>
+<li>根据不同数据类型与给定初始化参数使用不同初始化方式；</li>
+</ul>
+<h2 id="最佳实践">最佳实践</h2>
+<p>综合上述三条原则，结合开发实践，总结了对于不同数据类型初始化的操作性较强的最佳实践，示例代码如下：</p>
+<pre><code class="language-c++">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+struct Stru {
+    int a;
+    string b;
 };
 
-int main()
-{
-    Demo demo = 10;  // 编译通过，但这不是我们想要的行为
-    
-    // ...
-    return 0;
-}
-</code></pre>
-<p>上述代码编译通过，即编译器允许这种操作，这实际上是调用了构造函数 Demo(const int a) 进行了隐式转换，但此操作很可能是开发人员不希望发生的，程序有可能会在运行中发生意想不到的错误，所以需要一种机制禁止这种隐式转换；</p>
-<h2 id="方法">方法</h2>
-<p>C++提供了在构造函数中添加 explicit 关键字来防止上述问题的发生，在 Qt 库中，经常可以看到此种习惯，这减少了程序隐患，值得我们学习参考；</p>
-<p>上述代码改进后，如下所示：</p>
-<pre><code class="language-c++">class Demo {
+class Demo {
 public:
     Demo() = default;
     explicit Demo(const int a);
-    explicit Demo(const double b, const double c=2.5, const double d=3.5);
+    explicit Demo(const int a, const double b);
+    Demo(const Demo&amp; rhs) = default;
+    Demo&amp; operator=(const Demo&amp; rh) = default;
     ~Demo() = default;
-    void update();
-    // ...
 private:
     int m_a;
     double m_b;
+    std::vector&lt;double&gt; m_c;
 };
+
 
 int main()
 {
-    Demo demo = 10;  // 编译不通过，符合我们对程序行为的预期
+    double a = 2.0;                         // 单个POD类型：拷贝初始化
+    struct Stru c = {2， &quot;stringTest&quot;};     // 结构体：列表初始化   
+    double b[3] = {1.0, 2.0, 3.0};         // 数组：列表初始化
     
-    // ...
-    return 0;
+    Demo demo1;                            // 单个类类型（无参数初始化）：默认初始化
+    Demo demo2(1, 2,5);                    // 单个类类型（参数化初始化）：实参匹配直接初始化
+    
+    vector&lt;double&gt; vec = {1.0, 2.0, 3.0};  // 容器序列 ： 列表初始化
+    
+    return 0;  
 }
 </code></pre>
 <h2 id="结论">结论</h2>
-<p>最佳实践：在类构造函数中，只要能使用一个参数的，均加上 explicit 关键字以防止隐式转换；</p>
+<p>对以上初始化最佳实践总结如下：</p>
+<ul>
+<li>单个POD类型数据的初始化： 拷贝初始化；</li>
+<li>单个类类型数据的无参数与参数化初始化： 默认初始化 or 实参匹配直接初始化；</li>
+<li>依次赋值各成员容器[结构体、数组、STL各种容器、可逐个赋值各成员的类、等]序列初始化： 列表初始化；</li>
+<li>其他方式尽量不要使用；</li>
+</ul>
 
             </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://wangtongxuewang.github.io/post/clei-cheng-yuan-han-shu-zhi-zhen-huo-qu/">
+                <a href="https://wangtongxuewang.github.io/post/clei-nei-chu-shi-hua/">
                   <h3 class="post-title">
-                    C++类成员函数指针获取
+                    C++类内初始化
                   </h3>
                 </a>
               </div>
