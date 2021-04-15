@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-04-14T05:15:44.781Z</updated>
+    <updated>2021-04-15T02:03:16.050Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,43 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[C++STL迭代器]]></title>
+        <id>https://wangtongxuewang.github.io/post/cstl-die-dai-qi/</id>
+        <link href="https://wangtongxuewang.github.io/post/cstl-die-dai-qi/">
+        </link>
+        <updated>2021-04-15T01:30:55.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="cstl迭代器">C++STL迭代器</h1>
+<p>迭代器是开发中操作容器的常用工具，大部分迭代器操作在容器类成员函数中可直接使用；<br>
+但是有一些操作直接使用容器成员函数中的方法可能并不方便，而C++STL中提供的迭代器辅助函数可简洁实现这些操作；<br>
+故以下介绍C++STL中迭代器辅助函数，其与容器中成员函数迭代器相关方法结合使用，可有事半功倍的效果；<br>
+其中有四个迭代器辅助函数最为常用，示例代码如下：</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;iterator&gt;
+#include &lt;vector&gt;
+
+int main()
+{
+    std::vector&lt;int&gt; vec = {3, 1, 4};
+    std::vector&lt;int&gt;::iterator it = vec.begin();
+
+    auto itBeg = std::begin(vec);    // 推荐使用容器类的成员函数
+    auto itEnd = std::end(vec);    // 推荐使用容器类的成员函数
+
+    // 以下是迭代器辅助函数最为常用的四种操作
+    std::advance(it, 1);    // 跳转
+    auto prev_it = std::prev(it);    // 上一个
+    auto next_it = std::next(it);    // 下一个
+    int dis = std::distance(prev_it, next_it);    // 两个游标之间距离
+    
+    std::cout &lt;&lt; &quot;*it = &quot; &lt;&lt; *it &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;dis = &quot; &lt;&lt; dis &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C++初始化最佳实践]]></title>
         <id>https://wangtongxuewang.github.io/post/cchu-shi-hua-zui-jia-shi-jian/</id>

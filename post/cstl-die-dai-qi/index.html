@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>标签列表 | 王同学的博客</title>
+<title>C++STL迭代器 | 王同学的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,7 +18,11 @@
 
 
 
-    <meta name="description" content="&lt;font size=&#34;10&#34;&gt;sharing&lt;/font&gt;">
+    <meta name="description" content="C++STL迭代器
+迭代器是开发中操作容器的常用工具，大部分迭代器操作在容器类成员函数中可直接使用；
+但是有一些操作直接使用容器成员函数中的方法可能并不方便，而C++STL中提供的迭代器辅助函数可简洁实现这些操作；
+故以下介绍C++STL中..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div id="app" class="main">
@@ -88,10 +92,58 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="tag-list-title">标签列表</h2>
-          <div class="tags-container">
+          <div class="post-detail">
+            <h2 class="post-title">C++STL迭代器</h2>
+            <div class="post-date">2021-04-15</div>
             
+            <div class="post-content" v-pre>
+              <h1 id="cstl迭代器">C++STL迭代器</h1>
+<p>迭代器是开发中操作容器的常用工具，大部分迭代器操作在容器类成员函数中可直接使用；<br>
+但是有一些操作直接使用容器成员函数中的方法可能并不方便，而C++STL中提供的迭代器辅助函数可简洁实现这些操作；<br>
+故以下介绍C++STL中迭代器辅助函数，其与容器中成员函数迭代器相关方法结合使用，可有事半功倍的效果；<br>
+其中有四个迭代器辅助函数最为常用，示例代码如下：</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;iterator&gt;
+#include &lt;vector&gt;
+
+int main()
+{
+    std::vector&lt;int&gt; vec = {3, 1, 4};
+    std::vector&lt;int&gt;::iterator it = vec.begin();
+
+    auto itBeg = std::begin(vec);    // 推荐使用容器类的成员函数
+    auto itEnd = std::end(vec);    // 推荐使用容器类的成员函数
+
+    // 以下是迭代器辅助函数最为常用的四种操作
+    std::advance(it, 1);    // 跳转
+    auto prev_it = std::prev(it);    // 上一个
+    auto next_it = std::next(it);    // 下一个
+    int dis = std::distance(prev_it, next_it);    // 两个游标之间距离
+    
+    std::cout &lt;&lt; &quot;*it = &quot; &lt;&lt; *it &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;dis = &quot; &lt;&lt; dis &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wangtongxuewang.github.io/post/cchu-shi-hua-zui-jia-shi-jian/">
+                  <h3 class="post-title">
+                    C++初始化最佳实践
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
           </div>
+
         </div>
       </div>
     </div>
