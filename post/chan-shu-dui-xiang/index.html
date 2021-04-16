@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1618554421683">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1618554870563">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
 
 
@@ -20,8 +20,8 @@
 
     <meta name="description" content="C++函数对象
 引言
-在实际开发中我们常常希望函数可以像变量一样，如：可以在一个函数作用域内临时定义，能够方便的当做函数参数进行传递等，而函数对象正是实现这类功能的理想方法；
-概念：重载了 operator() 的类对象称为函数对象。当该对..." />
+在实际开发中我们常常希望函数定义与使用可以像变量一样方便，如：可以在一个函数作用域内临时定义，能够方便的当做函数参数进行传递等，而函数对象正是实现这类功能的理想方法；
+概念：重载了 operator() 的类对象称为函..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -31,7 +31,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://wangtongxuewang.github.io">
-        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1618554421683" class="site-logo">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1618554870563" class="site-logo">
         <h1 class="site-title">王同学的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -99,7 +99,7 @@
             <div class="post-content" v-pre>
               <h1 id="c函数对象">C++函数对象</h1>
 <h2 id="引言">引言</h2>
-<p>在实际开发中我们常常希望函数可以像变量一样，如：可以在一个函数作用域内临时定义，能够方便的当做函数参数进行传递等，而函数对象正是实现这类功能的理想方法；</p>
+<p>在实际开发中我们常常希望函数定义与使用可以像变量一样方便，如：可以在一个函数作用域内临时定义，能够方便的当做函数参数进行传递等，而函数对象正是实现这类功能的理想方法；</p>
 <p>概念：重载了 operator() 的类对象称为函数对象。当该对象调用 operator() 时，方式、效果同普通函数调用，故名函数对象，示例如下：</p>
 <pre><code class="language-c++">class Demo {
 public:

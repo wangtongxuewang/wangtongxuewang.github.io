@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-04-16T06:28:06.935Z</updated>
+    <updated>2021-04-16T06:34:33.440Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -18,7 +18,7 @@
         <updated>2021-04-16T06:24:17.000Z</updated>
         <content type="html"><![CDATA[<h1 id="c函数对象">C++函数对象</h1>
 <h2 id="引言">引言</h2>
-<p>在实际开发中我们常常希望函数可以像变量一样，如：可以在一个函数作用域内临时定义，能够方便的当做函数参数进行传递等，而函数对象正是实现这类功能的理想方法；</p>
+<p>在实际开发中我们常常希望函数定义与使用可以像变量一样方便，如：可以在一个函数作用域内临时定义，能够方便的当做函数参数进行传递等，而函数对象正是实现这类功能的理想方法；</p>
 <p>概念：重载了 operator() 的类对象称为函数对象。当该对象调用 operator() 时，方式、效果同普通函数调用，故名函数对象，示例如下：</p>
 <pre><code class="language-c++">class Demo {
 public:
