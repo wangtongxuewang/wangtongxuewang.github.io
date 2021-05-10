@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>C++函数传参方式 | 王同学的博客</title>
+<title>C++智能指针 | 王同学的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,12 +18,10 @@
 
 
 
-    <meta name="description" content="C++函数传参方式
-引言
-C++函数传参方式有很多种选择，可以传值、传指针、传引用、返回值等，故需要一种内部规范让函数参数传递简明易懂，同时兼顾性能；
-代码示例
-以下代码使用了结构化绑定，需要编译器支持C++17；
-#include &lt..." />
+    <meta name="description" content="C++智能指针
+std::unique_ptr
+C++11提供了三种智能指针, 分别为: shared_ptr, weak_ptr 与 unique_ptr, 以方便内存管理，避免仅使用裸指针可能产生的隐患;
+在开发实践中, 为明确内存资源..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -95,68 +93,94 @@ C++函数传参方式有很多种选择，可以传值、传指针、传引用�
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">C++函数传参方式</h2>
-            <div class="post-date">2021-04-25</div>
+            <h2 class="post-title">C++智能指针</h2>
+            <div class="post-date">2021-05-10</div>
             
             <div class="post-content" v-pre>
-              <h1 id="c函数传参方式">C++函数传参方式</h1>
-<h2 id="引言">引言</h2>
-<p>C++函数传参方式有很多种选择，可以传值、传指针、传引用、返回值等，故需要一种内部规范让函数参数传递简明易懂，同时兼顾性能；</p>
-<h2 id="代码示例">代码示例</h2>
-<p>以下代码使用了结构化绑定，需要编译器支持C++17；</p>
-<pre><code class="language-c++">#include &lt;tuple&gt;
-
-class CDemo1 {
+              <h1 id="c智能指针">C++智能指针</h1>
+<h2 id="stdunique_ptr">std::unique_ptr</h2>
+<p>C++11提供了三种智能指针, 分别为: shared_ptr, weak_ptr 与 unique_ptr, 以方便内存管理，避免仅使用裸指针可能产生的隐患;<br>
+在开发实践中, 为明确内存资源所有权, 我们推荐多使用 unique_ptr , 其他两个智能指针尽量少用, 可将 std::unique_ptr 与裸指针搭配使用, 其中std::unique_ptr 负责内存的管理, 而裸指针仅负责内存的使用, 这样所有权明确, 减少了问题发生的可能性;<br>
+同时, std::unique_ptr 体现了C++RAII的思想精髓，实现了资源的自动管理, 其思想值得在开发实践中学习借鉴;</p>
+<h2 id="示例代码">示例代码</h2>
+<p>关于 C++11/14 中智能指针使用对于代码的改善如下所示:</p>
+<pre><code class="language-c++">// C++98/03 风格
+class Demo {
+public:
+    Demo() {
+        m_mem = new Mem();
+    }
+    ~Demo() {
+        // 很有可能忘记此步骤
+        if (m_mem) {
+            delete m_mem;
+        }
+    }
+    // ...
+private:
+    Mem* m_mem;
     // ...
 };
 
-class CDemo2 {
-    // ..
-};
-
-// 函数传参方式示例
-std::tuple&lt;double, std::string&gt; testFunc(const int n, 
-                                         const std::vector&lt;double&gt;&amp; x,
-                                         CDemo1&amp; out1,
-                                         CDemo2* out2 = nullptr)
-{
-    // do something
-}
 
 int main()
 {
-    const int n = 10;
-    const std::vector&lt;double&gt; x = {1.1, 2.2, 3.3};
-    CDemo1 d1;
-    CDemo2 d2;
-    auto [y, errInfo] = testFunc(n, x, d1, &amp;d2);
+    Demo* demo1 = new Demo();
+    Demo* demo2 = new Demo();
+    std::vector&lt;Demo*&gt; vec;
+    vec.push_back(demo1);
+    vec.push_back(demo2);
+    
+    // ...
+    // 很有可能忘记此步骤
+    for (Demo* ptrDemo : vec) {
+        delete ptrDemo;
+    }
+    
+    return 0;
+}
+</code></pre>
+<pre><code class="language-c++">// C++11/14 风格
+class Demo {
+public:
+    Demo() {
+        m_mem = std::make_unique&lt;Mem&gt;();
+    }
+    ~Demo() {
+        // do other things
+    }
+    // ...
+private:
+    std::unique_ptr&lt;Mem&gt; m_mem;
+    // ...
+};
+
+
+int main()
+{
+    std::unique_ptr&lt;Demo&gt; demo1 = std::make_unique&lt;Demo&gt;();
+    std::unique_ptr&lt;Demo&gt; demo2 = std::make_unique&lt;Demo&gt;();
+    std::vector&lt;std::unique_ptr&lt;Demo&gt;&gt; vec;
+    vec.push_back(std::move(demo1));
+    vec.push_back(std::move(demo2);
+
+    assert(demo1 == nullptr);
+    assert(demo2 == nullptr);
     
     // ...
     
     return 0;
 }
 </code></pre>
-<h2 id="结论">结论</h2>
-<p>通过上述代码示例，可总结函数传参中传值、传引用、传指针、函数返回值的的 <strong>最佳实践</strong>：</p>
-<h3 id="函数入参">函数入参</h3>
-<p>POD类型使用常值（如  const double x）；</p>
-<p>类类型使用常引用（如  const T&amp; x）；</p>
-<h3 id="函数出参">函数出参</h3>
-<p>若有可能，优先使用函数返回值，尽量不要使用函数出参，以增强可读性；</p>
-<p>若需要使用出参，优先使用 T&amp; ；</p>
-<p>在出参中，若可能为空（如 有默认参数 = nullptr）或者其指向可能变化，才使用 T* ；</p>
-<h3 id="函数返回值">函数返回值</h3>
-<p>若是新产生的变量，则返回 单个/多个 值（类类型同样可以返回值，只要保证返回值优化发生，则性能与出参是一样的）；</p>
-<p>若是修改函数体之外的变量，可返回比本函数生命周期更长变量的引用/指针；</p>
 
             </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://wangtongxuewang.github.io/post/chan-shu-dui-xiang/">
+                <a href="https://wangtongxuewang.github.io/post/cji-cheng-yu-xu-han-shu/">
                   <h3 class="post-title">
-                    C++函数对象
+                    C++继承与虚函数
                   </h3>
                 </a>
               </div>
