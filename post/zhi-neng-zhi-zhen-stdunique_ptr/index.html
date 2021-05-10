@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1620648530444">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1620648793495">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
 
 
@@ -31,7 +31,7 @@ C++11提供了三种智能指针, 分别为: shared_ptr, weak_ptr 与 unique_ptr
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://wangtongxuewang.github.io">
-        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1620648530444" class="site-logo">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1620648793495" class="site-logo">
         <h1 class="site-title">王同学的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -100,7 +100,7 @@ C++11提供了三种智能指针, 分别为: shared_ptr, weak_ptr 与 unique_ptr
               <h1 id="c智能指针">C++智能指针</h1>
 <h2 id="stdunique_ptr">std::unique_ptr</h2>
 <p>C++11提供了三种智能指针, 分别为: shared_ptr, weak_ptr 与 unique_ptr, 以方便内存管理，避免仅使用裸指针可能产生的隐患;<br>
-在开发实践中, 为明确内存资源所有权, 我们推荐多使用 unique_ptr , 其他两个智能指针尽量少用, 可将 std::unique_ptr 与裸指针搭配使用, 其中std::unique_ptr 负责内存的管理, 而裸指针仅负责内存的使用, 这样所有权明确, 减少了问题发生的可能性;<br>
+在开发实践中, 为明确内存资源所有权, 我们推荐多使用 unique_ptr , 其他两个智能指针尽量少用, 可将 std::unique_ptr 与裸指针搭配使用, 其中 std::unique_ptr 负责内存的管理, 而裸指针仅负责内存的使用, 这样所有权明确, 减少了问题发生的可能性;<br>
 同时, std::unique_ptr 体现了C++RAII的思想精髓，实现了资源的自动管理, 其思想值得在开发实践中学习借鉴;</p>
 <h2 id="示例代码">示例代码</h2>
 <p>关于 C++11/14 中智能指针使用对于代码的改善如下所示:</p>
@@ -147,6 +147,7 @@ public:
         m_mem = std::make_unique&lt;Mem&gt;();
     }
     ~Demo() {
+        // 内存由 unique_ptr 自动管理, 无需开发者手动释放
         // do other things
     }
     // ...
