@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-05-17T12:52:35.079Z</updated>
+    <updated>2021-05-17T12:57:10.884Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -82,7 +82,7 @@ int main()
 Demo()
 ~Demo()
 </code></pre>
-<p>上述令我们感到惊讶的现象背后就是：编译器的<strong>复制省略(copy-elison)/返回值优化(rvo/nrvo)技术</strong>，此技术已经是C++标准的一部分，所以此代码的性能在任何主流编译器默认选项中都能得到保证；</p>
+<p>上述令我们感到惊讶的现象背后就是：编译器的<strong>复制省略(copy-elison)/返回值优化(rvo/nrvo)技术</strong>，此技术已经是C++标准(C++17)的一部分，所以此代码的性能在任何主流编译器的默认选项中都能得到保证；</p>
 <p>若想要关闭此功能，以观察编译器原始的表现，可在CMakeLists.txt中进行如下设置：</p>
 <pre><code>set(CMAKE_C_FLAGS   &quot;-O0 -Wall -fno-elide-constructors&quot;)
 set(CMAKE_CXX_FLAGS &quot;-O0 -Wall -fno-elide-constructors&quot;)
@@ -96,7 +96,7 @@ Demo(Demo&amp;&amp; rhs)
 ~Demo()
 ~Demo()
 </code></pre>
-<p>上述结果符合我们预期，产生了额外的两次移动构造与析构操作，第一次是函数返回一个对象到临时空间中，另一次是临时对象赋值给目标变量；</p>
+<p>上述结果符合我们预期，产生了两次额外移动构造与析构操作，第一次是函数返回一个对象到临时空间中，另一次是临时对象赋值给目标变量；</p>
 <h2 id="最佳实践">最佳实践</h2>
 <p>现代C++推荐我们在函数中直接返回一个对象，这可让代码更为简洁，而且其性能由C++标准保证，所以在编写新代码时，尽量使用现代C++推荐的方式；</p>
 ]]></content>
