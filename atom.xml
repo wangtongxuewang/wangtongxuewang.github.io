@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-05-17T13:10:49.033Z</updated>
+    <updated>2021-05-31T12:18:59.636Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,56 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[关于 std::unique_ptr 的思考]]></title>
+        <id>https://wangtongxuewang.github.io/post/guan-yu-stdunique_ptr-de-si-kao/</id>
+        <link href="https://wangtongxuewang.github.io/post/guan-yu-stdunique_ptr-de-si-kao/">
+        </link>
+        <updated>2021-05-31T12:11:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="关于-stdunique_ptr-的思考">关于 std::unique_ptr 的思考</h1>
+<p>std::unique_ptr 表示独占所有权的智能指针，正常情况下，此智能指针管理内存的获取与释放，而普通指针仅负责使用内存；</p>
+<h2 id="禁止拷贝">禁止拷贝</h2>
+<p>由于 std::unique_ptr 表示独占的含义，所以其是不支持拷贝的，在C++标准库中，unique_ptr 禁止拷贝的实现如下 [ 代码片段来自 MinGW5.3.0 中的 unique_ptr.h ]：</p>
+<pre><code class="language-c++">template &lt;typename _Tp, typename _Dp = default_delete&lt;_Tp&gt;&gt;
+class unique_ptr {
+public:
+    // ...
+    // Disable copy from lvalue.
+    unique_ptr(const unique_ptr&amp;) = delete;
+    unique_ptr&amp; operator=(const unique_ptr&amp;) = delete;
+    // ...
+};
+</code></pre>
+<p>由代码可知，禁止拷贝的实现中采用了C++11的 delete 关键字；而在C++11之前，若要实现禁止拷贝的功能，传统方法是将拷贝构造与赋值运算符私有化，这样是非常不直观的，示例代码如下：</p>
+<pre><code class="language-C++">// C++98/03风格的禁止拷贝实现方式
+class Demo {
+public:
+    Demo();
+    // ...
+private:
+    Demo(const Demo&amp; rhs);
+    Demo&amp; operator=(const Demo&amp; rhs);
+    // ...
+}
+</code></pre>
+<h2 id="函数返回">函数返回</h2>
+<p>在C++标准中，std::unique_ptr 是支持函数返回的，最为典型的就是 std::make_unique，其实现代码如下 [ 代码片段来自 MinGW5.3.0 中的 unique_ptr.h ]：</p>
+<pre><code class="language-c++">/// std::make_unique for single objects
+template&lt;typename _Tp, typename... _Args&gt;
+inline typename _MakeUniq&lt;_Tp&gt;::__single_object
+make_unique(_Args&amp;&amp;... __args)
+{
+    return unique_ptr&lt;_Tp&gt;(new _Tp(std::forward&lt;_Args&gt;(__args)...)); 
+}
+</code></pre>
+<p>既然 std::unique_ptr 不支持拷贝，那么为什么其可以进行函数返回呢？这似乎与不支持拷贝是矛盾的；</p>
+<p>我们知道，在函数返回中，返回值优化RVO(其在C++17中进入标准)可以让对象直接在函数调用处生成， 而不产生多余的临时对象，从而绕过拷贝/移动构造操作；</p>
+<p>因此，std::unique_ptr 的能够函数返回的重要机制是返回值优化RVO绕过了拷贝/移动构造，使其能够函数返回；</p>
+<h2 id="开发启示">开发启示</h2>
+<p>如上所述，C++标准库在实现中大量应用了C++11/14/17等现代特性，如  =delete，RVO，等；</p>
+<p>所以，在开发实践中，我们亦应编写现代C++风格的代码，与时俱进，才能让程序更优雅，更具维护性；</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C++复制省略]]></title>
         <id>https://wangtongxuewang.github.io/post/cfu-zhi-sheng-lue/</id>
@@ -583,51 +633,6 @@ int main()
 </code></pre>
 <h2 id="结论">结论</h2>
 <p>最佳实践：在类构造函数中，只要能使用一个参数的，均加上 explicit 关键字以防止隐式转换；</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++类成员函数指针获取]]></title>
-        <id>https://wangtongxuewang.github.io/post/clei-cheng-yuan-han-shu-zhi-zhen-huo-qu/</id>
-        <link href="https://wangtongxuewang.github.io/post/clei-cheng-yuan-han-shu-zhi-zhen-huo-qu/">
-        </link>
-        <updated>2021-04-11T03:51:38.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="c类成员函数指针获取">C++类成员函数指针获取</h1>
-<p>在C++开发中，我们经常会遇到需要获取类成员函数中的指针，这个是大家都比较熟悉的；</p>
-<p>那么如果类成员函数是重载的，应如何获取指定类成员函数指针呢，示例C++代码如下：</p>
-<pre><code class="language-c++">class GLWidget {
-public:
-    void update(int a, int b);
-    void updata();
-private:
-    // ...
-};
-
-
-#include &lt;QObject&gt;
-#include &lt;QTimer&gt;
-
-int main()
-{
-    const int updateMilliSec = 10;
-    
-    QTimer timer;
-    timer.start(updateMilliSec);
-    
-    GLWidget glWidget;
-    
-    typedef void (GLWidget::*PtrTypeUpdate1)(int, int);
-    using PtrTypeUpdate2 = void (GLWidget::*)(void);
-    
-    PtrTypeUpdate1 ptrUpdate1 = static_cast&lt;PtrTypeUpdate1&gt;(&amp;GLWidget::update);
-    PtrTypeUpdate2 ptrUpdate2 = static_cast&lt;PtrTypeUpdate2&gt;(&amp;GLWidget::update);
-    
-    QObject::connect(&amp;timer, &amp;QTimer::timeout, &amp;glWidget, ptrUpdate1); 
-    
-    // ...
-    
-    return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
