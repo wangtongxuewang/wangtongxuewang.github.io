@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-05-31T12:37:47.371Z</updated>
+    <updated>2021-06-13T09:33:05.568Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,152 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[运行时类型识别]]></title>
+        <id>https://wangtongxuewang.github.io/post/yun-xing-shi-lei-xing-shi-bie/</id>
+        <link href="https://wangtongxuewang.github.io/post/yun-xing-shi-lei-xing-shi-bie/">
+        </link>
+        <updated>2021-06-13T09:26:47.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="运行时类型识别">运行时类型识别</h1>
+<p>运行时类型识别(RTTI)主要作用是获得指针及引用变量的实际类型, 其主要操作有两种, 分别是 获取实际类型 与 安全类型转换；</p>
+<h2 id="获取实际类型">获取实际类型</h2>
+<p>获取实际类型主要依靠:  typeid 关键字 与 type_info 类, 示例代码如下:</p>
+<p>类代码:</p>
+<pre><code class="language-c++">// demo.h
+class Demo {
+public:
+    Demo() = default;
+    virtual ~Demo() = default;
+
+    virtual void disp()  {cout &lt;&lt; &quot;Demo&quot; &lt;&lt; endl;}
+
+    inline double dispA() {return m_a;}
+private:
+    double m_a = 10.0;
+};
+
+
+class DemoDerived : public Demo {
+public:
+    DemoDerived() = default;
+    ~DemoDerived() = default;
+
+    virtual void disp() override {cout &lt;&lt; &quot;DemoDeriv&quot; &lt;&lt; endl;}
+
+    inline double dispB() {return m_b;}
+private:
+    double m_b = 8.0;
+};
+</code></pre>
+<p>主函数:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+
+#include &quot;demo.h&quot;
+
+using std::cout;
+using std::endl;
+using std::type_info;
+
+
+int main()
+{
+    Demo* demo1 = new Demo();
+    Demo* demo2 = new DemoDerived();
+
+    const type_info&amp; type1 = typeid (*demo1);
+    const type_info&amp; type2 = typeid (*demo2);
+
+    cout &lt;&lt; type1.name() &lt;&lt; endl;
+    cout &lt;&lt; type2.name() &lt;&lt; endl;
+
+    delete demo1;
+    delete demo2;
+
+    return 0;
+}
+</code></pre>
+<p>终端输出:</p>
+<pre><code class="language-c++">// console output : 
+4Demo
+11DemoDerived
+</code></pre>
+<p>不同编译器可能输出略微不同, 但是仍可看到两个指针所指向的实际类型分别为 Demo 与 DemoDerived, 其中数字表示类型名称的字符长度；</p>
+<h2 id="安全类型转换">安全类型转换</h2>
+<p>在基类与继承类之间进行安全类型转换主要依靠 dynamic_cast&lt;&gt;() 操作, 示例代码如下；</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+
+#include &quot;demo.h&quot;
+
+using std::cout;
+using std::endl;
+using std::type_info;
+
+
+int main()
+{
+    Demo* demo1 = new Demo();
+    Demo* demo2 = new DemoDerived();
+
+    DemoDerived* demoCast1 = dynamic_cast&lt;DemoDerived*&gt;(demo1);
+    DemoDerived* demoCast2 = dynamic_cast&lt;DemoDerived*&gt;(demo2);
+
+    cout &lt;&lt; &quot;demoCast1 addr = &quot; &lt;&lt; demoCast1 &lt;&lt; endl;
+    cout &lt;&lt; &quot;demoCast2 addr = &quot; &lt;&lt; demoCast2 &lt;&lt; endl;
+
+    delete demo1;
+    delete demo2;
+
+    return 0;
+}
+</code></pre>
+<p>上述代码终端输出:</p>
+<pre><code class="language-c++">// console output : 
+demoCast1 addr = 0
+demoCast2 addr = 0x55555556aed0
+</code></pre>
+<p>其中, demo2 的实际类型是 DemoDerived, 所以动态类型转换成功, demoCast2是有效地址；demo1 的实际类型 Demo, 所以动态类型转换失败, demoCast1 地址为 0, 是无效地址, 表示了这种转换是不正确的, 这正是动态类型转换的安全性所在；</p>
+<p>而静态类型转换 static_cast 不会检查类型转换之间的安全性, 反而会引起一些潜在危险,且难以排查, 示例代码如下:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+
+#include &quot;demo.h&quot;
+
+using std::cout;
+using std::endl;
+using std::type_info;
+
+int main()
+{
+    Demo* demo1 = new Demo();
+    Demo* demo2 = new DemoDerived();
+
+    DemoDerived* ptrDemoError = static_cast&lt;DemoDerived *&gt;(demo1);
+
+    cout &lt;&lt; &quot;ptrDemoError addr = &quot; &lt;&lt; ptrDemoError &lt;&lt; endl;
+
+    cout &lt;&lt; ptrDemoError-&gt;dispA() &lt;&lt; endl;
+    cout &lt;&lt; ptrDemoError-&gt;dispB() &lt;&lt; endl;
+
+    delete demo1;
+    delete demo2;
+
+    return 0;
+}
+</code></pre>
+<p>上述代码终端输出为:</p>
+<pre><code class="language-c++">// console output : 
+ptrDemoError addr = 0x55555556aeb0
+10
+0
+</code></pre>
+<p>虽然上述代码中的类型转换是不正确的, 但是静态类型转换仍然能够获得demo1的地址, 而后其错误地使用了DemoDerived中的dispB(), 给出了错误的结果；这种错误排查难度远远大于程序意外终止等明显的问题；</p>
+<p>所以, 在基类与继承类之间的转换中尽量只使用 dynamic_cast, 不要使用C风格的强制类型转换 与 static_cast 等不安全的类型转换, 除非自己明确知道这种类型的转换一定是正确的, 否则产生错误可能非常难以排查；</p>
+<h2 id="总结">总结</h2>
+<p>运行时类型识别RTTI虽然会降低程序性能, 但是适当使用提升了程序的安全性, 对编码起到事半功倍的效果；</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[关于 std::unique_ptr 的思考]]></title>
         <id>https://wangtongxuewang.github.io/post/guan-yu-stdunique_ptr-de-si-kao/</id>
@@ -575,64 +721,6 @@ int main()
 </code></pre>
 <h2 id="结论">结论</h2>
 <p>当类中成员变量较多时，可适当使用类内初始化来避免遗漏某些成员变量初始化值；</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++中的explicit]]></title>
-        <id>https://wangtongxuewang.github.io/post/czhong-de-explicit/</id>
-        <link href="https://wangtongxuewang.github.io/post/czhong-de-explicit/">
-        </link>
-        <updated>2021-04-12T11:33:50.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="c中的explicit">C++中的explicit</h1>
-<h2 id="引言">引言</h2>
-<p>在C++开发中，常会因为各种原因无意中编写出如下代码：</p>
-<pre><code class="language-c++">class Demo {
-public:
-    Demo() = default;
-    Demo(const int a);
-    Demo(const double b, const double c=2.5, const double d=3.5);
-    ~Demo() = default;
-    // ...
-private:
-    int m_a;
-    double m_b;
-};
-
-int main()
-{
-    Demo demo = 10;  // 编译通过，但这不是我们想要的行为
-    
-    // ...
-    return 0;
-}
-</code></pre>
-<p>上述代码编译通过，即编译器允许这种操作，这实际上是调用了构造函数 Demo(const int a) 进行了隐式转换，但此操作很可能是开发人员不希望发生的，程序有可能会在运行中发生意想不到的错误，所以需要一种机制禁止这种隐式转换；</p>
-<h2 id="方法">方法</h2>
-<p>C++提供了在构造函数中添加 explicit 关键字来防止上述问题的发生，在 Qt 库中，经常可以看到此种习惯，这减少了程序隐患，值得我们学习参考；</p>
-<p>上述代码改进后，如下所示：</p>
-<pre><code class="language-c++">class Demo {
-public:
-    Demo() = default;
-    explicit Demo(const int a);
-    explicit Demo(const double b, const double c=2.5, const double d=3.5);
-    ~Demo() = default;
-    void update();
-    // ...
-private:
-    int m_a;
-    double m_b;
-};
-
-int main()
-{
-    Demo demo = 10;  // 编译不通过，符合我们对程序行为的预期
-    
-    // ...
-    return 0;
-}
-</code></pre>
-<h2 id="结论">结论</h2>
-<p>最佳实践：在类构造函数中，只要能使用一个参数的，均加上 explicit 关键字以防止隐式转换；</p>
 ]]></content>
     </entry>
 </feed>

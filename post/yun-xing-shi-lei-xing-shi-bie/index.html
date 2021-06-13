@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>运行时类型识别 | 王同学的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1623576780273">
+<link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="运行时类型识别
+运行时类型识别(RTTI)主要作用是获得指针及引用变量的实际类型, 其主要操作有两种, 分别是 获取实际类型 与 安全类型转换；
+获取实际类型
+获取实际类型主要依靠:  typeid 关键字 与 type_info 类, 示..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wangtongxuewang.github.io">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1623576780273" class="site-logo">
+        <h1 class="site-title">王同学的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      coding && writing
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">运行时类型识别</h2>
+            <div class="post-date">2021-06-13</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="运行时类型识别">运行时类型识别</h1>
+<p>运行时类型识别(RTTI)主要作用是获得指针及引用变量的实际类型, 其主要操作有两种, 分别是 获取实际类型 与 安全类型转换；</p>
+<h2 id="获取实际类型">获取实际类型</h2>
+<p>获取实际类型主要依靠:  typeid 关键字 与 type_info 类, 示例代码如下:</p>
+<p>类代码:</p>
+<pre><code class="language-c++">// demo.h
+class Demo {
+public:
+    Demo() = default;
+    virtual ~Demo() = default;
+
+    virtual void disp()  {cout &lt;&lt; &quot;Demo&quot; &lt;&lt; endl;}
+
+    inline double dispA() {return m_a;}
+private:
+    double m_a = 10.0;
+};
+
+
+class DemoDerived : public Demo {
+public:
+    DemoDerived() = default;
+    ~DemoDerived() = default;
+
+    virtual void disp() override {cout &lt;&lt; &quot;DemoDeriv&quot; &lt;&lt; endl;}
+
+    inline double dispB() {return m_b;}
+private:
+    double m_b = 8.0;
+};
+</code></pre>
+<p>主函数:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+
+#include &quot;demo.h&quot;
+
+using std::cout;
+using std::endl;
+using std::type_info;
+
+
+int main()
+{
+    Demo* demo1 = new Demo();
+    Demo* demo2 = new DemoDerived();
+
+    const type_info&amp; type1 = typeid (*demo1);
+    const type_info&amp; type2 = typeid (*demo2);
+
+    cout &lt;&lt; type1.name() &lt;&lt; endl;
+    cout &lt;&lt; type2.name() &lt;&lt; endl;
+
+    delete demo1;
+    delete demo2;
+
+    return 0;
+}
+</code></pre>
+<p>终端输出:</p>
+<pre><code class="language-c++">// console output : 
+4Demo
+11DemoDerived
+</code></pre>
+<p>不同编译器可能输出略微不同, 但是仍可看到两个指针所指向的实际类型分别为 Demo 与 DemoDerived, 其中数字表示类型名称的字符长度；</p>
+<h2 id="安全类型转换">安全类型转换</h2>
+<p>在基类与继承类之间进行安全类型转换主要依靠 dynamic_cast&lt;&gt;() 操作, 示例代码如下；</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+
+#include &quot;demo.h&quot;
+
+using std::cout;
+using std::endl;
+using std::type_info;
+
+
+int main()
+{
+    Demo* demo1 = new Demo();
+    Demo* demo2 = new DemoDerived();
+
+    DemoDerived* demoCast1 = dynamic_cast&lt;DemoDerived*&gt;(demo1);
+    DemoDerived* demoCast2 = dynamic_cast&lt;DemoDerived*&gt;(demo2);
+
+    cout &lt;&lt; &quot;demoCast1 addr = &quot; &lt;&lt; demoCast1 &lt;&lt; endl;
+    cout &lt;&lt; &quot;demoCast2 addr = &quot; &lt;&lt; demoCast2 &lt;&lt; endl;
+
+    delete demo1;
+    delete demo2;
+
+    return 0;
+}
+</code></pre>
+<p>上述代码终端输出:</p>
+<pre><code class="language-c++">// console output : 
+demoCast1 addr = 0
+demoCast2 addr = 0x55555556aed0
+</code></pre>
+<p>其中, demo2 的实际类型是 DemoDerived, 所以动态类型转换成功, demoCast2是有效地址；demo1 的实际类型 Demo, 所以动态类型转换失败, demoCast1 地址为 0, 是无效地址, 表示了这种转换是不正确的, 这正是动态类型转换的安全性所在；</p>
+<p>而静态类型转换 static_cast 不会检查类型转换之间的安全性, 反而会引起一些潜在危险,且难以排查, 示例代码如下:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+
+#include &quot;demo.h&quot;
+
+using std::cout;
+using std::endl;
+using std::type_info;
+
+int main()
+{
+    Demo* demo1 = new Demo();
+    Demo* demo2 = new DemoDerived();
+
+    DemoDerived* ptrDemoError = static_cast&lt;DemoDerived *&gt;(demo1);
+
+    cout &lt;&lt; &quot;ptrDemoError addr = &quot; &lt;&lt; ptrDemoError &lt;&lt; endl;
+
+    cout &lt;&lt; ptrDemoError-&gt;dispA() &lt;&lt; endl;
+    cout &lt;&lt; ptrDemoError-&gt;dispB() &lt;&lt; endl;
+
+    delete demo1;
+    delete demo2;
+
+    return 0;
+}
+</code></pre>
+<p>上述代码终端输出为:</p>
+<pre><code class="language-c++">// console output : 
+ptrDemoError addr = 0x55555556aeb0
+10
+0
+</code></pre>
+<p>虽然上述代码中的类型转换是不正确的, 但是静态类型转换仍然能够获得demo1的地址, 而后其错误地使用了DemoDerived中的dispB(), 给出了错误的结果；这种错误排查难度远远大于程序意外终止等明显的问题；</p>
+<p>所以, 在基类与继承类之间的转换中尽量只使用 dynamic_cast, 不要使用C风格的强制类型转换 与 static_cast 等不安全的类型转换, 除非自己明确知道这种类型的转换一定是正确的, 否则产生错误可能非常难以排查；</p>
+<h2 id="总结">总结</h2>
+<p>运行时类型识别RTTI虽然会降低程序性能, 但是适当使用提升了程序的安全性, 对编码起到事半功倍的效果；</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wangtongxuewang.github.io/post/guan-yu-stdunique_ptr-de-si-kao/">
+                  <h3 class="post-title">
+                    关于 std::unique_ptr 的思考
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>
