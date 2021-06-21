@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>C++的值类别 | 王同学的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1624272060382">
+<link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="C++的值类别
+值类别
+C++表达式有两种属性：类型(type)和值类别(value category)。其中类型主要区别值的大小与解读方式，此属性是大家熟知的，故不赘述，以下内容主要阐述值类别。
+每个表达式只属于三种值类别中的一种，纯右值..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wangtongxuewang.github.io">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1624272060382" class="site-logo">
+        <h1 class="site-title">王同学的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      coding && writing
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">C++的值类别</h2>
+            <div class="post-date">2021-06-21</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="c的值类别">C++的值类别</h1>
+<h2 id="值类别">值类别</h2>
+<p>C++表达式有两种属性：类型(type)和值类别(value category)。其中类型主要区别值的大小与解读方式，此属性是大家熟知的，故不赘述，以下内容主要阐述值类别。</p>
+<p>每个表达式只属于三种值类别中的一种，纯右值(prvalue)、亡值(xvalue)、左值(lvalue)；纯右值和亡值统称为右值(rvalue)，亡值和左值统称为泛左值(glvalue)；以上对于值类别的表述可能难以理解，以下进行详细解释；</p>
+<p>在C++11中，值类别主要用以表达区别表达式<strong>是否拥有身份</strong>以及<strong>是否可被移动</strong>：</p>
+<ul>
+<li>拥有身份(泛左值)：可以确定表达式是否与另一表达式指代同一实体，例如通过比较它们所标识的对象或函数的地址；</li>
+<li>可被移动(右值)：移动构造函数、移动赋值运算符或实现了移动语义的其他函数重载能够绑定于这个表达式；</li>
+</ul>
+<p>即拥有身份的表达式被称作泛左值表达式，可被移动的表达式被称作右值表达式，同时又有：</p>
+<ul>
+<li>拥有身份 且 不可被移动 的表达式被称作*左值 (lvalue)*表达式 [只属于泛左值表达式]；</li>
+<li>拥有身份 且 可被移动 的表达式被称作*亡值 (xvalue)*表达式 [既属于泛左值表达式，又属于右值表达式]；</li>
+<li>不拥有身份 且 可被移动 的表达式被称作*纯右值 (prvalue)*表达式 [只属于右值表达式]；</li>
+<li>不拥有身份 且 不可被移动 的表达式无法使用；</li>
+</ul>
+<p>使用树状图直观展示如下：</p>
+<pre><code class="language-mermaid">graph TB
+A(表达式)
+B(泛左值)
+C(右值)
+D(左值)
+E(亡值)
+F(纯右值)
+
+A--&gt;B
+A--&gt;C
+B--&gt;D
+B--&gt;E
+C--&gt;E
+C--&gt;F
+</code></pre>
+<h2 id="移动语义">移动语义</h2>
+<p>在C++11中引入新的值类别的概念，其中重要目的就是应用移动语义，以此减少很多不必要的拷贝，从而大幅度提升性能；</p>
+<p>实现“移动”主要是依靠std::move(), 其主要功能其实并不是真正的移动，而是将表达式值类别强制转换为右值型别，其具体实现在C++STL中如下所示 [ 代码片段来自 MinGW7.3.0 中的 move.h ]</p>
+<pre><code class="language-c++">/**
+  *  @brief  Convert a value to an rvalue.
+  *  @param  __t  A thing of arbitrary type.
+  *  @return The parameter cast to an rvalue-reference to allow moving it.
+  */
+template&lt;typename _Tp&gt;
+constexpr typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
+move(_Tp&amp;&amp; __t) noexcept
+{ 
+    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t); 
+}
+</code></pre>
+<h2 id="应用举例">应用举例</h2>
+<p>下述例子并不能体现 std::move() 的优点，只是作为一个简单例子进行说明：</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+#include &lt;memory&gt;
+
+using std::cout;
+using std::endl;
+using std::unique_ptr;
+
+class Demo {
+public:
+    Demo() = default;
+    Demo(const Demo&amp; rhs) = default;
+    Demo(Demo&amp;&amp; rhs) = default;
+    Demo&amp; operator=(const Demo&amp; rhs) = default;
+    Demo&amp; operator=(Demo&amp;&amp; rhs) = default;
+    ~Demo() = default;
+private:
+    int m_a = 1;
+    // ...
+};
+
+
+int main()
+{
+    unique_ptr&lt;Demo&gt; ptrDemo = std::make_unique&lt;Demo&gt;();
+
+    cout &lt;&lt; &quot;ptrDemo : &quot; &lt;&lt; ptrDemo.get() &lt;&lt; endl;
+
+    // unique_ptr不支持拷贝构造与拷贝赋值操作
+    unique_ptr&lt;Demo&gt; ptrDemo2 = std::move(ptrDemo);
+    assert(ptrDemo == nullptr);
+
+    cout &lt;&lt; &quot;ptrDemo : &quot; &lt;&lt; ptrDemo.get() &lt;&lt; endl;
+    cout &lt;&lt; &quot;ptrDemo2 : &quot; &lt;&lt; ptrDemo2.get() &lt;&lt; endl;
+
+    // ...
+
+    return 0;
+}
+
+</code></pre>
+<p>终端输出：</p>
+<pre><code class="language-c++">// console output : 
+ptrDemo : 0x1304b68
+ptrDemo : 0
+ptrDemo2 : 0x1304b68
+</code></pre>
+<h2 id="参考">参考</h2>
+<p><a href="https://www.cnblogs.com/zhao-zongsheng/p/value_categories_and_move_semantics.html">C++11的value category(值类别)以及move semantics(移动语义)</a></p>
+<p><a href="https://zh.cppreference.com/w/cpp/language/value_category">cppreference - value_category</a></p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wangtongxuewang.github.io/post/yun-xing-shi-lei-xing-shi-bie/">
+                  <h3 class="post-title">
+                    运行时类型识别
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>
