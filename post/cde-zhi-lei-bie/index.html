@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1624274972623">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1624275032911">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
 
 
@@ -31,7 +31,7 @@ C++表达式有两种属性：类型(type)和值类别(value category)。其中�
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://wangtongxuewang.github.io">
-        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1624274972623" class="site-logo">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1624275032911" class="site-logo">
         <h1 class="site-title">王同学的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -130,6 +130,7 @@ B--&gt;E
 C--&gt;E
 C--&gt;F
 </code></pre>
+<figure data-type="image" tabindex="1"><img src="https://wangtongxuewang.github.io/post-images/1624275021149.jpg" alt="" loading="lazy"></figure>
 <h2 id="移动语义">移动语义</h2>
 <p>在C++11中引入新的值类别的概念，其中重要目的就是应用移动语义，以此减少很多不必要的拷贝，从而大幅度提升性能；</p>
 <p>实现“移动”主要是依靠std::move(), 其主要功能其实并不是真正的移动，而是将表达式值类别强制转换为右值型别，其具体实现在C++STL中如下所示 [ 代码片段来自 MinGW7.3.0 中的 move.h ]</p>
