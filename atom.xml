@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-06-21T11:34:14.077Z</updated>
+    <updated>2021-07-03T02:40:22.666Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,63 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[面向对象设计]]></title>
+        <id>https://wangtongxuewang.github.io/post/mian-xiang-dui-xiang-she-ji/</id>
+        <link href="https://wangtongxuewang.github.io/post/mian-xiang-dui-xiang-she-ji/">
+        </link>
+        <updated>2021-07-03T02:22:49.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="面向对象设计">面向对象设计</h1>
+<h2 id="目标与方法">目标与方法</h2>
+<p>随着程序代码不断扩张，软件中各部分交互关系日益庞杂，其维护扩展变得异常困难，为应对此危机，面向对象设计方法得到不断发展，其要实现的目标与所用方法如下：</p>
+<ul>
+<li>实现目标：模块相互独立，即插即用；</li>
+<li>使用方法：约定抽象接口，减少依赖；</li>
+</ul>
+<h2 id="特点">特点</h2>
+<p>面向对象的设计有三大特点，区别于其他编程范式，分别为：</p>
+<ul>
+<li>封装：隐藏内部实现，达到使用接口编程而不用了解内部实现的目的；</li>
+<li>继承：继承父类的属性与数据，达到代码复用的目的；</li>
+<li>多态：对于同一种接口，不同的类型的对象展现不同的行为，达到接口统一的目的；</li>
+</ul>
+<h2 id="基本原则">基本原则</h2>
+<p>为实现面向对象设计的目标，开发领域在长期理论与实践中总结出几个基本原则，不同的教材的阐述略有不同，但是表达的基本思想是一致的，最为经典的说法是将面向对象设计的这几个原则称为“SOLID”原则，名称取自这五个原则的英文缩写首字母，同时寓意在这几个原则指导下所开发软件系统的稳固性；</p>
+<h3 id="单一职责原则-srp-single-responsibility-principle">单一职责原则 (SRP - Single Responsibility Principle)</h3>
+<p>一个类只做一件事，一个类应该仅有一个引起它变化的原因，且其变化隐含着类的责任；</p>
+<p>比如，在实际开发中，对大的类进行拆解，减少类中蕴含不同概念的成员变量与成员函数；</p>
+<h3 id="开放封闭原则-ocp-open-closed-principle">开放封闭原则 (OCP - Open Closed Principle)</h3>
+<p>对扩展开放，对修改关闭；即当程序需要扩展的时候，尽量不要去修改原来的代码，而应复用扩展代码，使其易于维护和升级，同时还能减少编译时间；</p>
+<p>因此在开发中，要利用好继承与组合等方法，约定抽象接口，让系统中的组件相互解耦，互不影响；</p>
+<h3 id="里氏替换原则-lsp-liskov-substitution-principle">里氏替换原则 (LSP - Liskov Substitution Principle)</h3>
+<p>子类必须能够替换父类，即子类对象若看作是抽象父类使用时，其接口行为须与抽象语义所期望的一致，这也是开闭原则具体实现手段之一；</p>
+<p>所以在实际开发中，使用继承实现约定的抽象接口，可以对同一抽象语义实现不同的具体方法；</p>
+<p>这条原则也提示我们：</p>
+<ul>
+<li>在开发中不要仅仅为了使用一个类的属性或方法就使用继承，此时应该使用组合代替继承；</li>
+<li>真正使用继承的地方应该是：一个类的概念是另一个类的概念的更上一层抽象；</li>
+</ul>
+<h3 id="接口隔离原则-isp-interface-segregation-principle">接口隔离原则 (ISP - Interface Segregation Principle)</h3>
+<p>接口应小而完备，程序不要依赖不需要的部分；若不需要的接口太多，则会给用户程序更多困惑，且相应具体实现也会增多；当不需要的接口被修改，那么其依赖者也要被重新编译部署；</p>
+<p>所以在开发中，public的抽象接口应该尽量少而精；</p>
+<h3 id="依赖倒置原则-dip-dependency-inversion-principle">依赖倒置原则 (DIP - Dependency Inversion Principle)</h3>
+<p>针对接口编程，程序应依赖于抽象接口而不依赖于具体实现；</p>
+<p>抽象不应依赖于实现细节，而应反过来，让实现细节依赖于抽象，因为抽象接口一般是经过长期设计共同约定，是稳定的，而实现细节一般是多样且多变的；</p>
+<p>所以在开发中，需精心设计抽象接口，力求抽象接口稳定，同时让具体实现依赖于(使用继承)抽象接口，当具体实现变动时，抽象接口无需变化；</p>
+<h2 id="设计模式">设计模式</h2>
+<p>在五大设计原则指导下，经过长期工程实践，开发领域总结出了很多实用的设计“套路”，其中最为经典与广泛使用的就是各教科书中介绍的23种设计模式；</p>
+<p>随着软件开发领域的不断发展，各种设计模式还在不停的变化，但是这些设计模式所体现的设计原则是一直稳固不变的；</p>
+<p>关于设计模式，篇幅所限，在本文中便不再展开；</p>
+<h2 id="总结">总结</h2>
+<p>我们在面向对象编程实践中，需要不断理解巩固并灵活应用面向对象的基本原则与各种设计模式，不断提升程序的可维护性与可扩展性，在此与大家共勉；</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li>GoF，设计模式--可复用面向对象软件的基础，机械工业出版社，2000年09月；</li>
+<li>李建忠，C++设计模式课程；</li>
+<li>程序喵大人 ，一文让你搞懂设计模式；</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C++的值类别]]></title>
         <id>https://wangtongxuewang.github.io/post/cde-zhi-lei-bie/</id>
@@ -715,76 +772,6 @@ int main()
     return 0;
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++初始化最佳实践]]></title>
-        <id>https://wangtongxuewang.github.io/post/cchu-shi-hua-zui-jia-shi-jian/</id>
-        <link href="https://wangtongxuewang.github.io/post/cchu-shi-hua-zui-jia-shi-jian/">
-        </link>
-        <updated>2021-04-14T05:10:15.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="c初始化最佳实践">C++初始化最佳实践</h1>
-<h2 id="引言">引言</h2>
-<p>对于变量初始化，C++提供多种方式，较为复杂，在使用中很容易给开发者造成很大困惑；</p>
-<p>C++11中的统一列表初始化（std::initializer_list<T>）方式固然有很多优点，但是仍然有<strong>重载决议</strong>(若变量初始化使用大括号，则C++编译器优先调用统一列表初始化进行初始化)等令人迷惑的问题产生；</p>
-<p>所以在开发过程中，开发者需要遵循一种实践规范来指导各种类型变量的初始化，以使得初始化语义明确，简明易懂；</p>
-<h2 id="原则">原则</h2>
-<p>以下是我们认为理解容易、执行简单的一种初始化的最佳实践原则；当然，可能每一位开发者都有自己认为的最佳实践原则，只要简单易行即可，不必强求，故对于本原则，不喜勿喷；</p>
-<p>本原则条目如下：</p>
-<ul>
-<li>须对所有变量进行初始化，即在使用前不能有未定义的值；</li>
-<li>使用语义明确且符合直觉的初始化方式；</li>
-<li>根据不同数据类型与给定初始化参数使用不同初始化方式；</li>
-</ul>
-<h2 id="最佳实践">最佳实践</h2>
-<p>综合上述三条原则，结合开发实践，总结了对于不同数据类型初始化的操作性较强的最佳实践，示例代码如下：</p>
-<pre><code class="language-c++">#include &lt;string&gt;
-#include &lt;vector&gt;
-
-using namespace std;
-
-struct Stru {
-    int a;
-    string b;
-};
-
-class Demo {
-public:
-    Demo() = default;
-    explicit Demo(const int a);
-    explicit Demo(const int a, const double b);
-    Demo(const Demo&amp; rhs) = default;
-    Demo&amp; operator=(const Demo&amp; rh) = default;
-    ~Demo() = default;
-private:
-    int m_a;
-    double m_b;
-    std::vector&lt;double&gt; m_c;
-};
-
-
-int main()
-{
-    double a = 2.0;                         // 单个POD类型：拷贝初始化
-    struct Stru c = {2， &quot;stringTest&quot;};     // 结构体：列表初始化   
-    double b[3] = {1.0, 2.0, 3.0};         // 数组：列表初始化
-    
-    Demo demo1;                            // 单个类类型（无参数初始化）：默认初始化
-    Demo demo2(1, 2,5);                    // 单个类类型（参数化初始化）：实参匹配直接初始化
-    
-    vector&lt;double&gt; vec = {1.0, 2.0, 3.0};  // 容器序列 ： 列表初始化
-    
-    return 0;  
-}
-</code></pre>
-<h2 id="结论">结论</h2>
-<p>对以上初始化最佳实践总结如下：</p>
-<ul>
-<li>单个POD类型数据的初始化： 拷贝初始化；</li>
-<li>单个类类型数据的无参数与参数化初始化： 默认初始化 or 实参匹配直接初始化；</li>
-<li>依次赋值各成员容器[结构体、数组、STL各种容器、可逐个赋值各成员的类、等]序列初始化： 列表初始化；</li>
-<li>其他方式尽量不要使用；</li>
-</ul>
 ]]></content>
     </entry>
 </feed>
