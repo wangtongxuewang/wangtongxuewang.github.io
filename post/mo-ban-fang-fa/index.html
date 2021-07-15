@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>模板方法 | 王同学的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1626352354238">
+<link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="模板方法
+以下介绍几种常用的设计模式，既作复习，也是在开发实践中对于设计模式的再理解；
+顺序并不按照主要教材所列，且有些内容掺杂个人理解，并非完全正确，欢迎交流探讨；
+首先从模板方法开始；
+目的
+在开发中常会遇到这样的情况：自己写的库中，一..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wangtongxuewang.github.io">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1626352354238" class="site-logo">
+        <h1 class="site-title">王同学的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      coding && writing
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">模板方法</h2>
+            <div class="post-date">2021-07-15</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="模板方法">模板方法</h1>
+<p>以下介绍几种常用的设计模式，既作复习，也是在开发实践中对于设计模式的再理解；</p>
+<p>顺序并不按照主要教材所列，且有些内容掺杂个人理解，并非完全正确，欢迎交流探讨；</p>
+<p>首先从模板方法开始；</p>
+<h2 id="目的">目的</h2>
+<p>在开发中常会遇到这样的情况：自己写的库中，一个功能的流程是固定的，且大部分步骤具体实现也是固定的，但是其中某一些步骤的具体实现无法确定，是由使用该库的人进行开发，那么如何让别人使用该库时能够复用自己的代码呢？这就是模板方法的使用场景；</p>
+<h2 id="概念">概念</h2>
+<p>模板方法：定义一个操作中稳定不变的算法骨架，将一些步骤延迟到变化的子类中，其目的是使得子类可以复用一个算法框架；</p>
+<h2 id="示例">示例</h2>
+<p>在C++中，具体方法是，使用虚函数与继承实现模板方法，简单示例如下：</p>
+<pre><code class="language-C++">class Solver {   
+public:    
+    Solver() = default;
+    virtual ~Solver() = default;
+    
+    void solve() 
+    {        
+        preprocess();        
+        compute();        
+        postprocess();    
+    }
+protected:    
+    virtual void compute() 
+    { 
+        // 常常变化
+        // ...
+    }
+private:    
+    void preprocess() 
+    { 
+        // 稳定的实现
+        // ...
+    }    
+    void postprocess() 
+    { 
+        // 稳定的实现
+        // ...
+    }
+    
+    // ...
+};
+
+
+class SolverA : public Solver {
+protected:     
+    virtual void compute() override 
+    { 
+        // SolverA 的计算过程
+    }
+    
+    // ...
+};
+
+class SolverB : public Solver {    
+protected:    
+    virtual void compute() override 
+    { 
+        // SolverB 的计算过程
+    }
+    
+    // ...
+};
+
+class SolverC : public Solver {    
+protected:    
+    virtual void compute() override 
+    { 
+        // SolverC 的计算过程
+    }
+    
+    // ...
+};
+
+#include &lt;vector&gt;
+#include &lt;memory&gt;
+
+using std::vector
+using std::unique_ptr;
+
+int main() 
+{
+    unique_ptr&lt;Solver&gt; solA = std::make_unique&lt;SolverA&gt;();
+    unique_ptr&lt;Solver&gt; solB = std::make_unique&lt;SolverB&gt;();
+    // ...
+    
+    vector&lt;unique_ptr&lt;Solver&gt;&gt; sol;
+    sol.push_back(std::move(solA));
+    sol.push_back(std::move(solB));
+    // ...
+    
+    for (int i = 0; i &lt; sol.size(); ++i) {
+        sol[i]-&gt;solve();
+    }
+    // ...
+    
+    return 0;
+}
+</code></pre>
+<p>上述代码中，Solver包含：前处理，计算，后处理三个稳定的过程，其中前处理与后处理具体实现是固定的，但是“计算”因具体方法而异，所以使用模板方法，只需实现不同的计算方法即可， 而算法流程框架、前处理与后处理代码均得到复用；</p>
+<h2 id="参考">参考</h2>
+<p>本文参考 同 本博客前述&lt;面向对象设计&gt;一文中所参考项；</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wangtongxuewang.github.io/post/mian-xiang-dui-xiang-she-ji/">
+                  <h3 class="post-title">
+                    面向对象设计
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

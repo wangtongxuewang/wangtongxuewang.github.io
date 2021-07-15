@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-07-03T02:42:35.457Z</updated>
+    <updated>2021-07-15T12:32:39.977Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,115 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[模板方法]]></title>
+        <id>https://wangtongxuewang.github.io/post/mo-ban-fang-fa/</id>
+        <link href="https://wangtongxuewang.github.io/post/mo-ban-fang-fa/">
+        </link>
+        <updated>2021-07-15T12:29:42.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="模板方法">模板方法</h1>
+<p>以下介绍几种常用的设计模式，既作复习，也是在开发实践中对于设计模式的再理解；</p>
+<p>顺序并不按照主要教材所列，且有些内容掺杂个人理解，并非完全正确，欢迎交流探讨；</p>
+<p>首先从模板方法开始；</p>
+<h2 id="目的">目的</h2>
+<p>在开发中常会遇到这样的情况：自己写的库中，一个功能的流程是固定的，且大部分步骤具体实现也是固定的，但是其中某一些步骤的具体实现无法确定，是由使用该库的人进行开发，那么如何让别人使用该库时能够复用自己的代码呢？这就是模板方法的使用场景；</p>
+<h2 id="概念">概念</h2>
+<p>模板方法：定义一个操作中稳定不变的算法骨架，将一些步骤延迟到变化的子类中，其目的是使得子类可以复用一个算法框架；</p>
+<h2 id="示例">示例</h2>
+<p>在C++中，具体方法是，使用虚函数与继承实现模板方法，简单示例如下：</p>
+<pre><code class="language-C++">class Solver {   
+public:    
+    Solver() = default;
+    virtual ~Solver() = default;
+    
+    void solve() 
+    {        
+        preprocess();        
+        compute();        
+        postprocess();    
+    }
+protected:    
+    virtual void compute() 
+    { 
+        // 常常变化
+        // ...
+    }
+private:    
+    void preprocess() 
+    { 
+        // 稳定的实现
+        // ...
+    }    
+    void postprocess() 
+    { 
+        // 稳定的实现
+        // ...
+    }
+    
+    // ...
+};
+
+
+class SolverA : public Solver {
+protected:     
+    virtual void compute() override 
+    { 
+        // SolverA 的计算过程
+    }
+    
+    // ...
+};
+
+class SolverB : public Solver {    
+protected:    
+    virtual void compute() override 
+    { 
+        // SolverB 的计算过程
+    }
+    
+    // ...
+};
+
+class SolverC : public Solver {    
+protected:    
+    virtual void compute() override 
+    { 
+        // SolverC 的计算过程
+    }
+    
+    // ...
+};
+
+#include &lt;vector&gt;
+#include &lt;memory&gt;
+
+using std::vector
+using std::unique_ptr;
+
+int main() 
+{
+    unique_ptr&lt;Solver&gt; solA = std::make_unique&lt;SolverA&gt;();
+    unique_ptr&lt;Solver&gt; solB = std::make_unique&lt;SolverB&gt;();
+    // ...
+    
+    vector&lt;unique_ptr&lt;Solver&gt;&gt; sol;
+    sol.push_back(std::move(solA));
+    sol.push_back(std::move(solB));
+    // ...
+    
+    for (int i = 0; i &lt; sol.size(); ++i) {
+        sol[i]-&gt;solve();
+    }
+    // ...
+    
+    return 0;
+}
+</code></pre>
+<p>上述代码中，Solver包含：前处理，计算，后处理三个稳定的过程，其中前处理与后处理具体实现是固定的，但是“计算”因具体方法而异，所以使用模板方法，只需实现不同的计算方法即可， 而算法流程框架、前处理与后处理代码均得到复用；</p>
+<h2 id="参考">参考</h2>
+<p>本文参考 同 本博客前述&lt;面向对象设计&gt;一文中所参考项；</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[面向对象设计]]></title>
         <id>https://wangtongxuewang.github.io/post/mian-xiang-dui-xiang-she-ji/</id>
@@ -735,43 +844,6 @@ int main()
 <li>在函数中定义一个临时函数，就像定义一个变量一样方便；</li>
 <li>将函数对象作为参数传入另一个函数中，省去了传入函数指针的繁琐操作；</li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++STL迭代器]]></title>
-        <id>https://wangtongxuewang.github.io/post/cstl-die-dai-qi/</id>
-        <link href="https://wangtongxuewang.github.io/post/cstl-die-dai-qi/">
-        </link>
-        <updated>2021-04-15T01:30:55.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="cstl迭代器">C++STL迭代器</h1>
-<p>迭代器是开发中操作容器的常用工具，大部分迭代器操作在容器类成员函数中可直接使用；<br>
-但是有一些操作直接使用容器成员函数中的方法可能并不方便，而C++STL中提供的迭代器辅助函数可简洁实现这些操作；<br>
-故以下介绍C++STL中迭代器辅助函数，其与容器中成员函数迭代器相关方法结合使用，可有事半功倍的效果；<br>
-其中有四个迭代器辅助函数最为常用，示例代码如下：</p>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;iterator&gt;
-#include &lt;vector&gt;
-
-int main()
-{
-    std::vector&lt;int&gt; vec = {3, 1, 4};
-    std::vector&lt;int&gt;::iterator it = vec.begin();
-
-    auto itBeg = std::begin(vec);    // 推荐使用容器类的成员函数
-    auto itEnd = std::end(vec);    // 推荐使用容器类的成员函数
-
-    // 以下是迭代器辅助函数最为常用的四种操作
-    std::advance(it, 1);    // 跳转
-    auto prev_it = std::prev(it);    // 上一个
-    auto next_it = std::next(it);    // 下一个
-    int dis = std::distance(prev_it, next_it);    // 两个游标之间距离
-    
-    std::cout &lt;&lt; &quot;*it = &quot; &lt;&lt; *it &lt;&lt; std::endl;
-    std::cout &lt;&lt; &quot;dis = &quot; &lt;&lt; dis &lt;&lt; std::endl;
-
-    return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
