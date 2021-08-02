@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1627902635708">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1627903064798">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
 
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://wangtongxuewang.github.io">
-        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1627902635708" class="site-logo">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1627903064798" class="site-logo">
         <h1 class="site-title">王同学的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -105,7 +105,7 @@
 <p>一般在项目中，若发现多个 if-else 且预计还会在此增加多个 if-else 分支，那很有可能需要使用策略模式；</p>
 <p>策略模式将算法行为封装为对象，以便动态选择，而不是使用显式 if-else；</p>
 <h2 id="示例">示例</h2>
-<h3 id="重构代码对比">重构代码对比</h3>
+<h3 id="重构代码对比策略模式">重构代码对比策略模式</h3>
 <p>分别列举未使用策略模式的原始代码与使用策略模式的重构后代码进行对比，两者代码分述如下；</p>
 <p>原始代码：</p>
 <pre><code class="language-C++">enum class GridGenMethod {    
@@ -222,7 +222,7 @@ int main()
 <p>策略模式侧重的是将算法库代码分别封装，使得它们可以相互替换，代码使用者选择其一即可；</p>
 </li>
 </ul>
-<p>当然两种模式均使用了C++继承与重写机制来实现各自模式；</p>
+<p>当然，两种模式均使用了C++继承与重写机制来实现各自模式；</p>
 <h3 id="使用函数对象">使用函数对象</h3>
 <p>还可以使用C++中函数对象来实现策略模式，与C++继承及重写类似，但是更直观易懂，代码如下：</p>
 <pre><code class="language-c++">// 库代码
