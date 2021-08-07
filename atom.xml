@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-08-02T11:25:20.367Z</updated>
+    <updated>2021-08-07T02:19:49.412Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,120 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[观察者模式]]></title>
+        <id>https://wangtongxuewang.github.io/post/guan-cha-zhe-mo-shi/</id>
+        <link href="https://wangtongxuewang.github.io/post/guan-cha-zhe-mo-shi/">
+        </link>
+        <updated>2021-08-07T02:18:11.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="观察者模式">观察者模式</h1>
+<p>观察者模式是开发中常用的设计模式之一，C++Qt库中的信号槽机制就是观察者模式的典型代表，关于信号槽机制的原理与简化实现，读者可自行查阅相关资料；</p>
+<p>本文仅对观察者模式做一个简要介绍：</p>
+<h2 id="目的">目的</h2>
+<p>实现类似 “发布-订阅” 这样的需求，且信息发布者与订阅者之间应当是松耦合，以使得发布者与订阅者独立变化，信息发布者只要广播信息而无需了解具体的信息订阅者，同时信息订阅者可以自行决定如何响应；</p>
+<h2 id="概念">概念</h2>
+<p>定义对象间一种一对多的依赖关系，当一个对象状态发生改变时，所有依赖于它的对象都得到通知并自动更新；</p>
+<h2 id="示例">示例</h2>
+<p>观察者模式中信息发布者与订阅者需要松耦合设计，实现松耦合的重要方式就是多态技术，即利用类继承与虚函数重写来对不同的类约定相同的函数接口，C++示例代码如下：</p>
+<pre><code class="language-C++">#ifndef OBSERVER_H
+#define OBSERVER_H
+
+#include &lt;list&gt;
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+
+class AbstractObserver {   
+public:    
+    AbstractObserver();
+    virtual ~AbstractObserver();
+    
+    virtual void update() {
+        std::cout &lt;&lt; &quot;AbstractObserver update.&quot; &lt;&lt; std::endl; 
+        // ...
+    }
+    // ...
+};
+
+class Observer1 : public AbstractObserver {    
+public:  
+    virtual void update() override {        
+        std::cout &lt;&lt; &quot;Observer1 update.&quot; &lt;&lt; std::endl; 
+        // ...
+    }
+};
+
+class Observer2 : public AbstractObserver { 
+public:  
+    virtual void update() override {        
+        std::cout &lt;&lt; &quot;Observer2 update.&quot; &lt;&lt; std::endl;    
+    }
+};
+
+class Observer3 : public AbstractObserver { 
+public:  
+    virtual void update() override {        
+        std::cout &lt;&lt; &quot;Observer3 update.&quot; &lt;&lt; std::endl;    
+    }
+};
+
+class Publisher {   
+public:    
+    void addSubscriber(AbstractObserver * observer) { 
+        auto itor = std::find(m_observers.cbegin(), m_observers.cend(), observer);
+        if (itor != m_observers.cend()) {
+            std::cout &lt;&lt; &quot;Add failed : duplicated add.&quot; &lt;&lt; std::endl; 
+            return;
+        }
+        m_observers.push_back(observer); 
+    }
+    
+    void removeSubscriber(AbstractObserver * observer) { 
+        m_observers.remove(observer); 
+    }
+    
+    void publish() {        
+        for (AbstractObserver* ele : m_observers) {            
+            ele-&gt;update();        
+        }    
+    }
+    
+    // ...
+private:    
+    std::list&lt;AbstractObserver*&gt; m_observers;
+};
+
+#endif  // OBSERVER_H
+</code></pre>
+<p>主函数：</p>
+<pre><code class="language-C++">#include &lt;memory&gt;
+#include &quot;observer.h&quot;
+
+using std::unique_ptr;
+
+int main() 
+{    
+    unique_ptr&lt;AbstractObserver&gt; observer1 = std::make_unique&lt;Observer1&gt;();  
+    unique_ptr&lt;AbstractObserver&gt; observer2 = std::make_unique&lt;Observer2&gt;(); 
+    unique_ptr&lt;AbstractObserver&gt; observer3 = std::make_unique&lt;Observer3&gt;(); 
+    
+    Publisher publisher;    
+    publisher.addSubscriber(observer1.get());    
+    publisher.addSubscriber(observer2.get());    
+    publisher.addSubscriber(observer3.get());
+    publisher.publish();
+    
+    publisher.removeSubscriber(observer2.get());    
+    publisher.publish();
+    
+    // ... 
+    
+    return 0;
+}
+</code></pre>
+<h2 id="参考">参考</h2>
+<p>本文参考 同 本博客前述&lt;面向对象设计&gt;一文中所参考项；</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[策略模式]]></title>
         <id>https://wangtongxuewang.github.io/post/ce-lue-mo-shi/</id>
@@ -946,63 +1060,6 @@ int main()
 <li>若无法避免继承，则要事先设计良好的继承体系(如严格树形结构)；</li>
 </ul>
 <p>上述条目仅供参考，也许有的并不适合某些开发场景，不喜勿喷；</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++函数传参方式]]></title>
-        <id>https://wangtongxuewang.github.io/post/chan-shu-chuan-can-fang-shi/</id>
-        <link href="https://wangtongxuewang.github.io/post/chan-shu-chuan-can-fang-shi/">
-        </link>
-        <updated>2021-04-25T04:13:16.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="c函数传参方式">C++函数传参方式</h1>
-<h2 id="引言">引言</h2>
-<p>C++函数传参方式有很多种选择，可以传值、传指针、传引用、返回值等，故需要一种内部规范让函数参数传递简明易懂，同时兼顾性能；</p>
-<h2 id="代码示例">代码示例</h2>
-<p>以下代码使用了结构化绑定，需要编译器支持C++17；</p>
-<pre><code class="language-c++">#include &lt;tuple&gt;
-
-class CDemo1 {
-    // ...
-};
-
-class CDemo2 {
-    // ..
-};
-
-// 函数传参方式示例
-std::tuple&lt;double, std::string&gt; testFunc(const int n, 
-                                         const std::vector&lt;double&gt;&amp; x,
-                                         CDemo1&amp; out1,
-                                         CDemo2* out2 = nullptr)
-{
-    // do something
-}
-
-int main()
-{
-    const int n = 10;
-    const std::vector&lt;double&gt; x = {1.1, 2.2, 3.3};
-    CDemo1 d1;
-    CDemo2 d2;
-    auto [y, errInfo] = testFunc(n, x, d1, &amp;d2);
-    
-    // ...
-    
-    return 0;
-}
-</code></pre>
-<h2 id="结论">结论</h2>
-<p>通过上述代码示例，可总结函数传参中传值、传引用、传指针、函数返回值的的 <strong>最佳实践</strong>：</p>
-<h3 id="函数入参">函数入参</h3>
-<p>POD类型使用常值（如  const double x）；</p>
-<p>类类型使用常引用（如  const T&amp; x）；</p>
-<h3 id="函数出参">函数出参</h3>
-<p>若有可能，优先使用函数返回值，尽量不要使用函数出参，以增强可读性；</p>
-<p>若需要使用出参，优先使用 T&amp; ；</p>
-<p>在出参中，若可能为空（如 有默认参数 = nullptr）或者其指向可能变化，才使用 T* ；</p>
-<h3 id="函数返回值">函数返回值</h3>
-<p>若是新产生的变量，则返回 单个/多个 值（类类型同样可以返回值，只要保证返回值优化发生，则性能与出参是一样的）；</p>
-<p>若是修改函数体之外的变量，可返回比本函数生命周期更长变量的引用/指针；</p>
 ]]></content>
     </entry>
 </feed>
