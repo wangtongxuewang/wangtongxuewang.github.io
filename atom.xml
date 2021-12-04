@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-12-04T03:36:43.333Z</updated>
+    <updated>2021-12-04T03:42:00.983Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -574,7 +574,6 @@ std::unique_ptr&lt;Bicycle&gt; MeridaFactory::createBicyle()
 <li><a href="https://www.cnblogs.com/xiaolincoding/p/11524401.html">《C++ 深入浅出工厂模式(进阶篇)》博客， &lt;小林coding&gt;</a>；</li>
 <li><a href="https://blog.csdn.net/silangquan/article/details/20492293">《三种工厂模式的C++实现》博客， &lt;拳四郎&gt;</a>；</li>
 </ul>
-<h1 id="单例模式-todo-0828">单例模式 [@todo 08.28]</h1>
 ]]></content>
     </entry>
     <entry>
