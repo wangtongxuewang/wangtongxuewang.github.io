@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-12-13T00:31:02.756Z</updated>
+    <updated>2021-12-13T00:39:46.918Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -24,7 +24,7 @@
 <p>单例模式恰当使用可以起到良好的效果，但是过度使用反而会阻碍程序的解耦，所以在实际使用中需要仔细考量；</p>
 <p>根据单例对象构建的时机的不同，可将单例模式分为两种：</p>
 <ul>
-<li>懒汉方式，在首次使用单例对象时构建单例对象，即用时间换空间；</li>
+<li>懒汉方式，在首次使用时构建单例对象，即用时间换空间；</li>
 <li>饿汉方式，在程序启动时构建单例对象，即用空间换时间；</li>
 </ul>
 <h2 id="代码示例">代码示例</h2>
