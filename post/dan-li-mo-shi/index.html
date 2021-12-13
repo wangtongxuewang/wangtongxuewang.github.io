@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1639357061085">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1639357354605">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
 
 
@@ -20,7 +20,7 @@
 
     <meta name="description" content="单例模式
 目的与概念
-在开发中有时会需要确保系统中某一个类只有一个对象实例，并提供一个全局访问点以被所有模块共享，这应由对象提供者而不是使用者来保证。
+在开发中有时会需要确保系统中某一个类只有一个对象实例，并提供一个全局访问点以被所有模块共享，这应由对象提供者而不是使用者来保证；
 例如：日志系统应只有一个，若有多个的话，可能会导致日志的混乱，而日志模块的提供者有责任约..." />
     <meta name="keywords" content="" />
   </head>
@@ -31,7 +31,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://wangtongxuewang.github.io">
-        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1639357061085" class="site-logo">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1639357354605" class="site-logo">
         <h1 class="site-title">王同学的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -99,8 +99,8 @@
             <div class="post-content" v-pre>
               <h1 id="单例模式">单例模式</h1>
 <h2 id="目的与概念">目的与概念</h2>
-<p>在开发中有时会需要确保系统中某一个类只有一个对象实例，并提供一个全局访问点以被所有模块共享，这应由对象提供者而不是使用者来保证。</p>
-<p>例如：日志系统应只有一个，若有多个的话，可能会导致日志的混乱，而日志模块的提供者有责任约束其使用者，确保使用者的程序中只能有一个日志系统实例。</p>
+<p>在开发中有时会需要确保系统中某一个类只有一个对象实例，并提供一个全局访问点以被所有模块共享，这应由对象提供者而不是使用者来保证；</p>
+<p>例如：日志系统应只有一个，若有多个的话，可能会导致日志的混乱，而日志模块的提供者有责任约束其使用者，确保使用者的程序中只能有一个日志系统实例；</p>
 <p>实现上述目的的方法就是单例模式。单例模式实际上是对唯一变量的一种封装，约束了其使用方式，让开发者更方便更安全地访问此变量；同时其可以让单例对象如同普通对象一样，作为参数在其他模块中使用，而其他模块不必知道其是否是单例；</p>
 <p>单例模式恰当使用可以起到良好的效果，但是过度使用反而会阻碍程序的解耦，所以在实际使用中需要仔细考量；</p>
 <p>根据单例对象构建的时机的不同，可将单例模式分为两种：</p>
