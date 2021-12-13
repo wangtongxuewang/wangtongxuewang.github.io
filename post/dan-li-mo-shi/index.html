@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>单例模式 | 王同学的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1639355151481">
+<link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="单例模式
+目的与概念
+在开发中有时会需要确保系统中某一个类只有一个对象实例，并提供一个全局访问点以被所有模块共享，这应由对象提供者而不是使用者来保证。
+例如：日志系统应只有一个，若有多个的话，可能会导致日志的混乱，而日志模块的提供者有责任约..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wangtongxuewang.github.io">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1639355151481" class="site-logo">
+        <h1 class="site-title">王同学的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      coding && writing
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">单例模式</h2>
+            <div class="post-date">2021-12-13</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="单例模式">单例模式</h1>
+<h2 id="目的与概念">目的与概念</h2>
+<p>在开发中有时会需要确保系统中某一个类只有一个对象实例，并提供一个全局访问点以被所有模块共享，这应由对象提供者而不是使用者来保证。</p>
+<p>例如：日志系统应只有一个，若有多个的话，可能会导致日志的混乱，而日志模块的提供者有责任约束其使用者，确保使用者的程序中只能有一个日志系统实例。</p>
+<p>实现上述目的的方法就是单例模式。单例模式实际上是对唯一变量的一种封装，约束了其使用方式，让开发者更方便更安全地访问此变量；同时其可以让单例对象如同普通对象一样，作为参数在其他模块中使用，而其他模块不必知道其是否是单例；</p>
+<p>单例模式恰当使用可以起到良好的效果，但是过度使用反而会阻碍程序的解耦，所以在实际使用中需要仔细考量；</p>
+<p>根据单例对象构建的时机的不同，可将单例模式分为两种：</p>
+<ul>
+<li>懒汉方式，在首次使用单例对象时构建单例对象，即用时间换空间；</li>
+<li>饿汉方式，在程序启动时构建单例对象，即用空间换时间；</li>
+</ul>
+<h2 id="代码示例">代码示例</h2>
+<p>懒汉方式与饿汉方式的代码描述如下所示：</p>
+<ul>
+<li>懒汉方式：</li>
+</ul>
+<pre><code class="language-C++">//  ----------------------------------------------------------------------------
+/**
+ * @file  Singleton.h
+ */
+// 本例中使用 Scott Meyers，《Effective C++》 中的 Singleton，这种方式在C++11之后保证线程安全。
+class Singleton {
+public:
+	Singleton(const Singleton&amp; rhs) = delete;
+	Singleton&amp; operator=(const Singleton&amp; rhs) = delete;
+    Singleton(Singleton&amp;&amp; rhs) = delete;
+    Singleton&amp; operator=(Singleton&amp;&amp; rhs) = delete;
+    ~Singleton() {}
+    
+	static Singleton&amp; getInstance() {
+		static Singleton s_instance;
+		return s_instance;
+	}
+private:
+    Singleton() {}
+    // 其他非静态成员变量
+    // ...
+};
+
+
+//  ----------------------------------------------------------------------------
+/**
+ * @file  main.cpp
+ */
+// 调用代码
+#include &quot;Singleton.h&quot;
+int main()
+{
+    // 类型为引用
+    Singleton &amp; singleInst = Singleton::getInstance();
+    // ...
+    return 0;
+}
+</code></pre>
+<ul>
+<li>饿汉方式：</li>
+</ul>
+<pre><code class="language-c++">//  ----------------------------------------------------------------------------
+/**
+ * @file  Singleton.h
+ */
+// 此方式无需担心线程安全性问题，但是可能存在初始化顺序不确定问题
+class Singleton {
+public:
+	Singleton(const Singleton&amp; rhs) = delete;
+	Singleton&amp; operator=(const Singleton&amp; rhs) = delete;
+    Singleton(Singleton&amp;&amp; rhs) = delete;
+    Singleton&amp; operator=(Singleton&amp;&amp; rhs) = delete;
+    ~Singleton() {}
+
+	static Singleton&amp; getInstance() {
+		return s_instance;
+	}
+private:
+    Singleton() {}
+	static Singleton s_instance;
+    // 其他非静态成员变量
+    // ...
+};
+//  ----------------------------------------------------------------------------
+/**
+ * @file  Singleton.cpp
+ */
+// 静态变量类外初始化
+#include &quot;Singleton.h&quot;
+Singleton Singleton::s_instance = {};
+
+
+//  ----------------------------------------------------------------------------
+/**
+ * @file  main.cpp
+ */
+// 调用代码
+#include &quot;Singleton.h&quot;
+int main()
+{
+    // 类型为引用
+    Singleton &amp; singleInst = Singleton::getInstance();
+    // ...
+    return 0;
+}
+</code></pre>
+<h2 id="qt中的单例模式">Qt中的单例模式</h2>
+<p>单例模式使用十分广泛，例如 Qt 中 QCoreApplication 的实现也使用了单例模式，其代码片段如下：</p>
+<pre><code class="language-c++">//  ----------------------------------------------------------------------------
+/**
+ * @file  qapplication.h
+ * @note  引自 Qt 库中的 include/QtCore/qapplication.h
+ */
+#if defined(qApp)
+#undef qApp
+#endif
+#define qApp (static_cast&lt;QApplication *&gt;(QCoreApplication::instance()))
+// ...
+
+
+//  ----------------------------------------------------------------------------
+/**
+ * @file  qcoreapplication.h
+ * @note  引自 Qt 库中的 include/QtCore/qcoreapplication.h
+ */
+class QCoreApplication {
+    // ...
+    static QCoreApplication *instance() { return self; }
+    // ...
+private:
+    // ...
+    static QCoreApplication *self;
+
+    Q_DISABLE_COPY(QCoreApplication)
+    // ...
+};
+
+
+//  ----------------------------------------------------------------------------
+/**
+ * @file  main.cpp
+ */
+// 调用代码
+#include &lt;QApplication&gt;
+#include &lt;QString&gt;
+int main()
+{
+    // ...
+    QString sheetStr = qApp-&gt;styleSheet();
+    qDebug() &lt;&lt; sheetStr;
+    // ...
+    
+    return 0;
+}
+</code></pre>
+<h2 id="参考">参考</h2>
+<ul>
+<li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
+<li>《C++设计模式》课程，李建忠主讲；</li>
+<li><a href="https://zhuanlan.zhihu.com/p/37469260">《C++ 单例模式》博客， &lt;Arkin&gt; </a>；</li>
+</ul>
+<h1 id=""></h1>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wangtongxuewang.github.io/post/gong-han-mo-shi/">
+                  <h3 class="post-title">
+                    工厂模式
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

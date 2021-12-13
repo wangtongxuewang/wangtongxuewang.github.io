@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>C++类成员函数指针获取 | 王同学的博客</title>
+<title>王同学的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,12 +18,10 @@
 
 
 
-    <meta name="description" content="C++类成员函数指针获取
-在C++开发中，我们经常会遇到需要获取类成员函数中的指针，这个是大家都比较熟悉的；
-那么如果类成员函数是重载的，应如何获取指定类成员函数指针呢，示例C++代码如下：
-class GLWidget {
-public:..." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="coding &amp;&amp; writing">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    
   </head>
   <body>
     <div id="app" class="main">
@@ -93,56 +91,29 @@ public:..." />
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">C++类成员函数指针获取</h2>
-            <div class="post-date">2021-04-11</div>
-            
-            <div class="post-content" v-pre>
-              <h1 id="c类成员函数指针获取">C++类成员函数指针获取</h1>
-<p>在C++开发中，我们经常会遇到需要获取类成员函数中的指针，这个是大家都比较熟悉的；</p>
-<p>那么如果类成员函数是重载的，应如何获取指定类成员函数指针呢，示例C++代码如下：</p>
-<pre><code class="language-c++">class GLWidget {
-public:
-    void update(int a, int b);
-    void updata();
-private:
-    // ...
-};
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="https://wangtongxuewang.github.io/post/clei-cheng-yuan-han-shu-zhi-zhen-huo-qu/">
+                  <h2 class="post-title">C++类成员函数指针获取</h2>
+                </a>
+                <div class="post-date">
+                  2021-04-11
+                </div>
+                <div class="post-abstract">
+                  
+                </div>
+              </div>
+              
+            </article>
+          
 
-
-#include &lt;QObject&gt;
-#include &lt;QTimer&gt;
-
-int main()
-{
-    const int updateMilliSec = 10;
-    
-    QTimer timer;
-    timer.start(updateMilliSec);
-    
-    GLWidget glWidget;
-    
-    typedef void (GLWidget::*PtrTypeUpdate1)(int, int);
-    using PtrTypeUpdate2 = void (GLWidget::*)(void);
-    
-    PtrTypeUpdate1 ptrUpdate1 = static_cast&lt;PtrTypeUpdate1&gt;(&amp;GLWidget::update);
-    PtrTypeUpdate2 ptrUpdate2 = static_cast&lt;PtrTypeUpdate2&gt;(&amp;GLWidget::update);
-    
-    QObject::connect(&amp;timer, &amp;QTimer::timeout, &amp;glWidget, ptrUpdate1); 
-    
-    // ...
-    
-    return 0;
-}
-</code></pre>
-
-            </div>
-            
-            
-
-            
-
-          </div>
+          <div class="pagination-container">
+  
+    <a href="https://wangtongxuewang.github.io/page/2/" class="prev"><i class="icon-arrow-ios-back-outline"></i> 上一页</a>
+  
+  
+</div>
 
         </div>
       </div>
