@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-12-18T07:57:57.300Z</updated>
+    <updated>2021-12-18T08:07:22.415Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -42,6 +42,7 @@ public:
  */
 // 代理类，可以被用户看到
 #include &quot;Subject.h&quot;
+class RealSubject;
 class SubjectProxy : public Subject {
 public:
     SubjectProxy();
@@ -88,7 +89,7 @@ void SubjectProxy::postProcess()
 class RealSubject : public Subject {
 public:
     void operate() override {
-        // 具体实现方法代码
+        // 具体实现方法代码，一般会放在 RealSubject.cpp 中
         // ...
     }
     // 其他各种复杂的操作代码
@@ -104,7 +105,7 @@ public:
 #include &quot;SubjectProxy.h&quot;
 int main()
 {
-    std::unique&lt;Subject&gt; subj = std::make_unique&lt;RealSubject&gt;();
+    std::unique&lt;Subject&gt; subj = std::make_unique&lt;SubjectProxy&gt;();
     subj-&gt;operate();
     
     // ...
