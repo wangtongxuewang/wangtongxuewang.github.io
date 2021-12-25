@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2021-12-25T05:26:19.878Z</updated>
+    <updated>2021-12-25T06:32:30.815Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -34,6 +34,18 @@
 <li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
 <li>《C++设计模式》课程，李建忠主讲；</li>
 </ul>
+<hr>
+<div class="post-copyright">
+    <div class="author">    <b>本文作者：</b>
+        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
+    </div>
+    <div class="link">      <b>博客主页：</b>
+        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
+    </div>
+    <div class="copyright"> <b>版权声明：</b>
+        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </div>
+</div>
 ]]></content>
     </entry>
     <entry>
