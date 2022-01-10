@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1641806076364">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1641806226914">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
 
 
@@ -20,7 +20,7 @@
 
     <meta name="description" content="std::vector的emplace_back()
 C++11 后向 vector 容器尾部添加元素除了可以使用 push_back() ，还可以使用 emplace_back()；
-两者的主要区别主要体现在添加临时对象的效率上。当我们直..." />
+两者的主要区别体现在添加临时对象的效率上。当我们直接将..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -30,7 +30,7 @@ C++11 后向 vector 容器尾部添加元素除了可以使用 push_back() ，�
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://wangtongxuewang.github.io">
-        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1641806076364" class="site-logo">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1641806226914" class="site-logo">
         <h1 class="site-title">王同学的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -98,7 +98,7 @@ C++11 后向 vector 容器尾部添加元素除了可以使用 push_back() ，�
             <div class="post-content" v-pre>
               <h1 id="stdvector的emplace_back">std::vector的emplace_back()</h1>
 <p>C++11 后向 vector 容器尾部添加元素除了可以使用 push_back() ，还可以使用 emplace_back()；</p>
-<p>两者的主要区别主要体现在添加临时对象的效率上。当我们直接将构造函数的参数传递给 emplace_back() 时，emplace_back() 使用这些参数在容器内存中就地构造元素，不用构造一个临时对象后再将其复制到容器中，相比于 push_back() ，省去了一次移动构造与析构的操作，也减少了内存开销。</p>
+<p>两者的主要区别体现在添加临时对象的效率上。当我们直接将构造函数的参数传递给 emplace_back() 时，emplace_back() 使用这些参数在容器内存中就地构造元素，不用构造一个临时对象后再将其复制到容器中，相比于 push_back() ，省去了一次移动构造与析构的操作，也减少了内存开销。</p>
 <p>但是，只有 emplace_back() 中是直接使用构造函数的参数添加临时对象时，emplace_back() 才比 push_back() 有更高的效率，其他情况两者效率一致；</p>
 <p>添加临时对象时 push_back() 与 emplace_back() 代码示例如下：</p>
 <pre><code class="language-c++">class Date {

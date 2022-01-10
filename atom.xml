@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2022-01-10T09:14:46.265Z</updated>
+    <updated>2022-01-10T09:17:25.261Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -18,7 +18,7 @@
         <updated>2022-01-10T08:25:13.000Z</updated>
         <content type="html"><![CDATA[<h1 id="stdvector的emplace_back">std::vector的emplace_back()</h1>
 <p>C++11 后向 vector 容器尾部添加元素除了可以使用 push_back() ，还可以使用 emplace_back()；</p>
-<p>两者的主要区别主要体现在添加临时对象的效率上。当我们直接将构造函数的参数传递给 emplace_back() 时，emplace_back() 使用这些参数在容器内存中就地构造元素，不用构造一个临时对象后再将其复制到容器中，相比于 push_back() ，省去了一次移动构造与析构的操作，也减少了内存开销。</p>
+<p>两者的主要区别体现在添加临时对象的效率上。当我们直接将构造函数的参数传递给 emplace_back() 时，emplace_back() 使用这些参数在容器内存中就地构造元素，不用构造一个临时对象后再将其复制到容器中，相比于 push_back() ，省去了一次移动构造与析构的操作，也减少了内存开销。</p>
 <p>但是，只有 emplace_back() 中是直接使用构造函数的参数添加临时对象时，emplace_back() 才比 push_back() 有更高的效率，其他情况两者效率一致；</p>
 <p>添加临时对象时 push_back() 与 emplace_back() 代码示例如下：</p>
 <pre><code class="language-c++">class Date {
