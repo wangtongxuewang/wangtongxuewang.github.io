@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2022-01-10T09:17:25.261Z</updated>
+    <updated>2022-01-15T07:38:54.730Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,146 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[C++中的常用接口]]></title>
+        <id>https://wangtongxuewang.github.io/post/czhong-de-chang-yong-jie-kou/</id>
+        <link href="https://wangtongxuewang.github.io/post/czhong-de-chang-yong-jie-kou/">
+        </link>
+        <updated>2022-01-15T07:28:42.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="c中的常用接口">C++中的常用接口</h1>
+<h2 id="目的">目的</h2>
+<p>某一模块开发完成后，需要提供一个对外接口，让模块代码与调用者代码可以独立变化而互不影响，同时也能隐藏模块的实现细节；</p>
+<h2 id="pimpl技法">pImpl技法</h2>
+<p>当自己的模块进行升级时，若接口类中成员变量发生变化，那么调用者的代码就需要重新编译，这种情况应该极力避免，因此需要一种方法来消除模块之间的编译依赖，降低耦合性；</p>
+<p>在C++中，对于上述问题，pImpl 惯用技法（pointer to implementation idiom）被广泛使用。其具体做法是：实现细节的类不对外开放，在接口中仅仅存放实现类的指针，以隔离接口与实现，当实现变化时，只要被调用的接口函数形式不变，调用者代码就不会受到影响，无需重新编译。示例代码如下所示：</p>
+<p>接口头文件代码（只有此头文件提供给调用者，其他文件均不对外开放）：</p>
+<pre><code class="language-c++">//  ----------------------------------------------------------------------------
+/**
+ * @file  Demo.h
+ * @note  本接口中所有函数应为公有，不应存在私有函数
+ */
+class Demo {
+public:
+    Demo();
+    ~Demo();
+    double foo(const double x);
+private:
+    class DemoImpl;
+    DemoImpl* m_pImpl;
+};
+</code></pre>
+<p>接口的cpp文件代码：</p>
+<pre><code class="language-c++">//  ----------------------------------------------------------------------------
+/**
+ * @file  Demo.cpp
+ */
+#include &quot;Demo.h&quot;
+#include &quot;DemoImpl.h&quot;
+
+Demo::Demo() : m_pImpl( new Demo() ) {}
+
+Demo::~Demo()
+{
+    if (m_pImpl) {
+        delete m_pImpl;
+    }
+}
+
+double Demo::foo(const double x) 
+{ 
+    return m_pImpl-&gt;foo(x); 
+}
+</code></pre>
+<p>具体实现头文件代码：</p>
+<pre><code class="language-c++">//  ----------------------------------------------------------------------------
+/**
+ * @file  DemoImpl.h
+ */
+class DemoImpl {
+public:
+    DemoImpl() = default;
+    double foo(const double x);
+private:
+    double operateOf(const std::vector&lt;double&gt;&amp; bar, const double x);
+    // ...
+private:
+    std::vector&lt;double&gt; m_bar;
+};
+</code></pre>
+<p>具体实现的cpp文件代码：</p>
+<pre><code class="language-c++">//  ----------------------------------------------------------------------------
+/**
+ * @file  DemoImpl.cpp
+ */
+#include &quot;DemoImpl.h&quot;
+
+double DemoImpl::foo(const double x)
+{
+    // ...
+    double y = this-&gt;operateOf(m_bar, x);
+    // ...
+}
+
+double DemoImpl::operateOf(std::vector&lt;double&gt;&amp; bar, const double x)
+{
+    // ...
+}
+</code></pre>
+<p>调用者代码：</p>
+<pre><code class="language-c++">#include &quot;Demo.h&quot;
+
+int main()
+{
+    Demo demo; 
+    double x = 0.0;
+    double y = demo.foo(x);
+    
+    // ...
+    return 0;
+}
+</code></pre>
+<h2 id="其他形式接口">其他形式接口</h2>
+<h3 id="c语言接口">C语言接口</h3>
+<p>由于各语言一般都支持调用C接口，所以C++实现的模块提供C接口是最为通用的，而C++与C语言有着紧密的联系，故其导出为C接口十分方便，其示例代码如下：</p>
+<pre><code class="language-c++">//  ----------------------------------------------------------------------------
+/**
+ * @file  foo.h
+ */
+#ifdef _cplusplus
+extern &quot;C&quot; {
+#endif
+ 
+double foo(double x);
+ 
+#ifdef _cplusplus
+}
+#endif
+
+
+//  ----------------------------------------------------------------------------
+/**
+ * @file  foo.cpp
+ */
+#include &quot;foo.h&quot;
+#include &quot;Demo.h&quot;
+
+double foo(double x)
+{
+    Demo demo;   
+    double y = demo.foo(x);
+    return y;
+}
+</code></pre>
+<h3 id="纯虚接口">纯虚接口</h3>
+<p>还有一种接口方式就是纯虚接口，即设计一个纯虚类作为接口，让模块中具体实现类均继承此类，其优点是当模块中要添加新的类时，只需新的类成为纯虚类的子类即可，而调用者代码无需修改，降低了模块间的耦合；</p>
+<p>其典型实现与前述文章中 <a href="https://wangtongxuewang.github.io/post/gong-han-mo-shi/">工厂模式</a> 类似，故不在此处赘述，若要详细了解，可参考前述文中代码；</p>
+<h2 id="总结">总结</h2>
+<p>在C++开发中，常需要避免模块间的编译依赖，惯用方式为 pImpl 技法；</p>
+<p>若要模块接口更为通用，可使用C接口；</p>
+<p>而纯虚接口常用于面向对象设计中的多态需求；</p>
+<p>实践中，根据不同要求，需恰当使用这些接口，以降低模块间耦合性；</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[std::vector的emplace_back()]]></title>
         <id>https://wangtongxuewang.github.io/post/stdvector-de-emplace_back/</id>
@@ -1511,126 +1651,6 @@ void main()
     return 0;
 } 
 </code></pre>
-<h2 id="参考">参考</h2>
-<p>本文参考 同 本博客前述&lt;面向对象设计&gt;一文中所参考项；</p>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[模板方法]]></title>
-        <id>https://wangtongxuewang.github.io/post/mo-ban-fang-fa/</id>
-        <link href="https://wangtongxuewang.github.io/post/mo-ban-fang-fa/">
-        </link>
-        <updated>2021-07-15T12:29:42.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="模板方法">模板方法</h1>
-<p>以下介绍几种常用的设计模式，既作复习，也是在开发实践中对于设计模式的再理解；</p>
-<p>顺序并不按照主要教材所列，且有些内容掺杂个人理解，并非完全正确，欢迎交流探讨；</p>
-<p>首先从模板方法开始；</p>
-<h2 id="目的">目的</h2>
-<p>在开发中常会遇到这样的情况：自己写的库中，一个功能的流程是固定的，且大部分步骤具体实现也是固定的，但是其中某一些步骤的具体实现无法确定，是由使用该库的人进行开发，那么如何让别人使用该库时能够复用自己的代码呢？这就是模板方法的使用场景；</p>
-<h2 id="概念">概念</h2>
-<p>模板方法：定义一个操作中稳定不变的算法骨架，将一些步骤延迟到变化的子类中，其目的是使得子类可以复用一个算法框架；</p>
-<h2 id="示例">示例</h2>
-<p>在C++中，具体方法是，使用虚函数与继承实现模板方法，简单示例如下：</p>
-<pre><code class="language-C++">class Solver {   
-public:    
-    Solver() = default;
-    virtual ~Solver() = default;
-    
-    void solve() 
-    {        
-        preprocess();        
-        compute();        
-        postprocess();    
-    }
-protected:    
-    virtual void compute() 
-    { 
-        // 常常变化
-        // ...
-    }
-private:    
-    void preprocess() 
-    { 
-        // 稳定的实现
-        // ...
-    }    
-    void postprocess() 
-    { 
-        // 稳定的实现
-        // ...
-    }
-    
-    // ...
-};
-
-
-class SolverA : public Solver {
-protected:     
-    virtual void compute() override 
-    { 
-        // SolverA 的计算过程
-    }
-    
-    // ...
-};
-
-class SolverB : public Solver {    
-protected:    
-    virtual void compute() override 
-    { 
-        // SolverB 的计算过程
-    }
-    
-    // ...
-};
-
-class SolverC : public Solver {    
-protected:    
-    virtual void compute() override 
-    { 
-        // SolverC 的计算过程
-    }
-    
-    // ...
-};
-
-#include &lt;vector&gt;
-#include &lt;memory&gt;
-
-using std::vector
-using std::unique_ptr;
-
-int main() 
-{
-    unique_ptr&lt;Solver&gt; solA = std::make_unique&lt;SolverA&gt;();
-    unique_ptr&lt;Solver&gt; solB = std::make_unique&lt;SolverB&gt;();
-    // ...
-    
-    vector&lt;unique_ptr&lt;Solver&gt;&gt; sol;
-    sol.push_back(std::move(solA));
-    sol.push_back(std::move(solB));
-    // ...
-    
-    for (int i = 0; i &lt; sol.size(); ++i) {
-        sol[i]-&gt;solve();
-    }
-    // ...
-    
-    return 0;
-}
-</code></pre>
-<p>上述代码中，Solver包含：前处理，计算，后处理三个稳定的过程，其中前处理与后处理具体实现是固定的，但是“计算”因具体方法而异，所以使用模板方法，只需实现不同的计算方法即可， 而算法流程框架、前处理与后处理代码均得到复用；</p>
 <h2 id="参考">参考</h2>
 <p>本文参考 同 本博客前述&lt;面向对象设计&gt;一文中所参考项；</p>
 <hr>
