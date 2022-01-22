@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2022-01-15T08:18:25.257Z</updated>
+    <updated>2022-01-22T07:21:55.409Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,66 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[lambda 表达式简单使用]]></title>
+        <id>https://wangtongxuewang.github.io/post/lambda-biao-da-shi-jian-dan-shi-yong/</id>
+        <link href="https://wangtongxuewang.github.io/post/lambda-biao-da-shi-jian-dan-shi-yong/">
+        </link>
+        <updated>2022-01-22T07:19:52.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="lambda-表达式简单使用">lambda 表达式简单使用</h1>
+<p>在开发中常常会用到 C++11 中的 lambda 表达式，其结合 STL 可让代码更简洁明了。</p>
+<p>简单示例代码如下：</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+int main()
+{
+    std::vector&lt;std::string&gt; strLst = {&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;, &quot;abcd&quot;, &quot;abcde&quot;, &quot;fghi&quot;, &quot;fgh&quot;, &quot;fg&quot;, &quot;f&quot;};
+
+    std::for_each(strLst.cbegin(), strLst.cend(), [](const std::string&amp; str) { 
+        std::cout &lt;&lt; str &lt;&lt; std::endl; 
+    });
+
+    auto compStrSize = [](const std::string&amp; str1, const std::string&amp; str2) -&gt; bool {
+        return str1.size() &lt; str2.size();
+    };
+    const std::string&amp; maxSizeStr = *std::max_element(strLst.cbegin(), strLst.cend(), compStrSize);
+    std::cout &lt;&lt; &quot;\nmax size str: &quot; &lt;&lt; maxSizeStr &lt;&lt; std::endl;
+    
+    return 0;
+}
+</code></pre>
+<p>终端输出：</p>
+<pre><code class="language-c++">a
+ab
+abc
+abcd
+abcde
+fghi
+fgh
+fg
+f
+
+max size str: abcde
+</code></pre>
+<p>通过上述代码可知，使用 lambda 表达式不仅简明地表达了所需功能，还让代码更加紧凑，无需另外定义一个函数；</p>
+<p>本文仅展示了 lambda 表达式的简单使用，关于其详细介绍，参考任一包含 C++11 标准的教材即可；</p>
+<hr>
+<div class="post-copyright">
+    <div class="author">    <b>本文作者：</b>
+        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
+    </div>
+    <div class="link">      <b>博客主页：</b>
+        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
+    </div>
+    <div class="copyright"> <b>版权声明：</b>
+        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </div>
+</div>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C++中的常用接口]]></title>
         <id>https://wangtongxuewang.github.io/post/czhong-de-chang-yong-jie-kou/</id>
@@ -1440,228 +1500,6 @@ int main()
     
     return 0;
 }
-</code></pre>
-<h2 id="参考">参考</h2>
-<p>本文参考 同 本博客前述&lt;面向对象设计&gt;一文中所参考项；</p>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[策略模式]]></title>
-        <id>https://wangtongxuewang.github.io/post/ce-lue-mo-shi/</id>
-        <link href="https://wangtongxuewang.github.io/post/ce-lue-mo-shi/">
-        </link>
-        <updated>2021-08-02T11:10:12.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="策略模式">策略模式</h1>
-<h2 id="目的">目的</h2>
-<p>在开发过程中，常使用 if-else 这样的多个分支来应对程序中的多种情况，每一个分支就是一种情况；随着需求的不断增多，分支将会迅速膨胀，造成代码块的冗长，且很有可能这样的分支远不止一处，这会给代码的维护扩展带来极大困难，策略模式可以用来解决上述问题；</p>
-<h2 id="概念">概念</h2>
-<p>策略模式概念：定义一系列算法，将各算法进行封装，使得它们可以相互替换；</p>
-<p>策略模式让算法独立于使用它的用户而变化，当有新的算法时，代码进行扩展即可，无需过多变动；</p>
-<p>一般在项目中，若发现多个 if-else 且预计还会在此增加多个 if-else 分支，那很有可能需要使用策略模式；</p>
-<p>策略模式将算法行为封装为对象，以便动态选择，而不是使用显式 if-else；</p>
-<h2 id="示例">示例</h2>
-<h3 id="重构代码对比策略模式">重构代码对比策略模式</h3>
-<p>分别列举未使用策略模式的原始代码与使用策略模式的重构后代码进行对比，两者代码分述如下；</p>
-<p>原始代码：</p>
-<pre><code class="language-C++">enum class GridGenMethod {    
-    TransfiniteInterp,    
-    EllipticEqs,
-    AdvancingFrontTech,
-    DelaunayTri
-};
-
-// ...
-
-
-// 用户代码
-void genGrid(const GridGenMethod method) 
-{   
-    std::cout &lt;&lt; &quot;gen grid start.&quot; &lt;&lt; std::endl; 
-    
-    if (method == GridGenMethod::TransfiniteInterp) {        
-        std::cout &lt;&lt; &quot;TransfiniteInterp Method : &quot; &lt;&lt; std::endl;  
-        // ...
-    } else if (method == GridGenMethod::EllipticEqs) {        
-        std::cout &lt;&lt; &quot;EllipticEqs Method : &quot; &lt;&lt; std::endl;  
-        // ...   
-    } else if (method == GridGenMethod::AdvancingFrontTech) {
-        std::cout &lt;&lt; &quot;AdvancingFrontTech Method : &quot; &lt;&lt; std::endl;  
-        // ...
-    } else if (method == GridGenMethod::DelaunayTri) {
-        std::cout &lt;&lt; &quot;DelaunayTri Method : &quot; &lt;&lt; std::endl;  
-        // ...
-    }
-    
-    // ...
-    
-    std::cout &lt;&lt; &quot;gen grid finish.&quot; &lt;&lt; std::endl;
-}
-
-int main()
-{
-    GridGenMethod method = GridGenMethod::EllipticEqs;
-    genGrid(method);
-    
-    // ...
-    return 0;
-}
-
-</code></pre>
-<p>使用策略模式重构后代码：</p>
-<pre><code class="language-C++">// 库代码
-class GridGenerator {   
-public:
-    GridGenerator() = default;
-    GridGenerator(const GridGenerator&amp; rhs) = default;
-    GridGenerator&amp; operator=(const GridGenerator&amp; rhs) = default;
-    GridGenerator(GridGenerator&amp;&amp; rhs) = default;
-    GridGenerator&amp; operator=(GridGenerator&amp;&amp; rhs) = default;
-    virtual ~GridGenerator() {
-        // ...
-    }
-    virtual void genGrid() { 
-        std::cout &lt;&lt; &quot;virtual genGrid&quot; &lt;&lt; std::endl; 
-    }
-private:
-    //...
-};
-
-class TransfiniteInterpGenerator : public GridGenerator {    
-    virtual void genGrid() override { 
-        std::cout &lt;&lt; &quot;TransfiniteInterp Method : &quot; &lt;&lt; std::endl; 
-        // ...
-    }
-};
-
-class EllipticEqsGenerator : public GridGenerator {    
-    virtual void genGrid() override { 
-        std::cout &lt;&lt; &quot;EllipticEqs Method : &quot; &lt;&lt; std::endl; 
-        // ...
-    }
-};
-
-class AdvancingFrontTechGenerator : public GridGenerator {    
-    virtual void genGrid() override { 
-        std::cout &lt;&lt; &quot;AdvancingFrontTech Method : &quot; &lt;&lt; std::endl; 
-        // ...
-    }
-};
-
-class DelaunayTriGenerator : public GridGenerator {    
-    virtual void genGrid() override { 
-        std::cout &lt;&lt; &quot;DelaunayTri Method : &quot; &lt;&lt; std::endl; 
-        // ...
-    }
-};
-
-// 若后续有新的方法，还可以在此添加新方法的代码
-// ...
-
-// 用户代码 : 相比于原始代码，精简了很多
-int main() 
-{    
-    std::unique_ptr&lt;GridGenerator&gt; gridGen = std::make_unique&lt;EllipticEqsGenerator&gt;();
-    gridGen-&gt;genGrid();
-    // ...
-    
-    return 0;
-}
-</code></pre>
-<p>每增加一种方法，就增加一个继承基类的子类，重写 genGrid() 函数进行代码扩展即可；</p>
-<p>观察上述代码，模板方法的代码和策略模式看起来很类似，但两者有很大区别：</p>
-<ul>
-<li>
-<p>模板方法侧重的是将整体框架流程提供给代码使用者，代码使用者重新实现某一些具体行为即可；</p>
-</li>
-<li>
-<p>策略模式侧重的是将算法库代码分别封装，使得它们可以相互替换，代码使用者选择其一即可；</p>
-</li>
-</ul>
-<p>当然，两种模式均使用了C++继承与重写机制来实现各自模式；</p>
-<h3 id="使用函数对象">使用函数对象</h3>
-<p>还可以使用C++中函数对象来实现策略模式，与C++继承及重写类似，但是更直观易懂，代码如下：</p>
-<pre><code class="language-c++">// 库代码
-class TransfiniteInterpGenerator {
-public:
-    void operator()() { 
-        std::cout &lt;&lt; &quot;TransfiniteInterp Method : &quot; &lt;&lt; std::endl; 
-        // ...
-    }
-    // ...
-};
-
-class EllipticEqsGenerator {
-public:
-    void operator()() { 
-        std::cout &lt;&lt; &quot;EllipticEqs Method : &quot; &lt;&lt; std::endl; 
-        // ...
-    }
-    // ...
-};
-
-class AdvancingFrontTechGenerator {
-public:
-    void operator()() { 
-        std::cout &lt;&lt; &quot;AdvancingFrontTech Method : &quot; &lt;&lt; std::endl; 
-        // ...
-    }
-    // ...
-};
-
-class DelaunayTriGenerator { 
-public:
-    void operator()() { 
-        std::cout &lt;&lt; &quot;DelaunayTri Method : &quot; &lt;&lt; std::endl; 
-        // ...
-    }
-    // ...
-};
-
-// 若后续有新的方法，还可以在此添加新方法的代码
-// ...
-
-class GridGenerator {
-public:
-    enum class GridGenMethod {    
-        TransfiniteInterp,    
-        EllipticEqs,
-        AdvancingFrontTech,
-        DelaunayTri
-    };
-    static std::function&lt;void(void)&gt; genGrid(const GridGenMethod method) {
-        return s_methodFunc.at(method);
-    }
-private:
-    static map&lt;GridGenMethod, std::function&lt;void(void)&gt;&gt; s_methodFunc = {
-        {GridGenMethod::TransfiniteInterp   , TransfiniteInterpGenerator()},
-        {GridGenMethod::EllipticEqs         , EllipticEqsGenerator()},
-        {GridGenMethod::AdvancingFrontTech  , AdvancingFrontTechGenerator()},
-        {GridGenMethod::DelaunayTriGenerator, DelaunayTriGenerator()}
-    };  
-};
-
-
-// 用户代码
-void main() 
-{  
-    GridGenerator::GridGenMethod method = GridGenerator::GridGenMethod::EllipticEqs;
-    std::function&lt;void(void)&gt; gridGen = GridGenerator::genGrid(method);
-    gridGen();
-    // ...
-    
-    return 0;
-} 
 </code></pre>
 <h2 id="参考">参考</h2>
 <p>本文参考 同 本博客前述&lt;面向对象设计&gt;一文中所参考项；</p>
