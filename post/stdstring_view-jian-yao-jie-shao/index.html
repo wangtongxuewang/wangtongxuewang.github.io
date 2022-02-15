@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>lambda 表达式简单使用 | 王同学的博客</title>
+<title>std::string_view 简要介绍 | 王同学的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,11 +18,9 @@
 
 
 
-    <meta name="description" content="lambda 表达式简单使用
-在开发中常常会用到 C++11 中的 lambda 表达式，其结合 STL 可让代码更简洁明了。
-简单示例代码如下：
-#include &lt;iostream&gt;
-#include &lt;string&..." />
+    <meta name="description" content="std::string_view 简要介绍
+目的
+字符串在开发中使用频率很高，其性能至关重要。C++ 标准库中的 std::string 采用多种技术以提升性能。比如：短字符串优化技术，当字符串较短时，直接在栈上分配空间，不进行动态内存分配..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -94,50 +92,64 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">lambda 表达式简单使用</h2>
-            <div class="post-date">2022-01-22</div>
+            <h2 class="post-title">std::string_view 简要介绍</h2>
+            <div class="post-date">2022-02-15</div>
             
             <div class="post-content" v-pre>
-              <h1 id="lambda-表达式简单使用">lambda 表达式简单使用</h1>
-<p>在开发中常常会用到 C++11 中的 lambda 表达式，其结合 STL 可让代码更简洁明了。</p>
-<p>简单示例代码如下：</p>
+              <h1 id="stdstring_view-简要介绍">std::string_view 简要介绍</h1>
+<h2 id="目的">目的</h2>
+<p>字符串在开发中使用频率很高，其性能至关重要。C++ 标准库中的 std::string 采用多种技术以提升性能。比如：短字符串优化技术，当字符串较短时，直接在栈上分配空间，不进行动态内存分配，从而提升短字符串的效率；</p>
+<p>但是字符串的初始化会影响其性能。std::string 一般通过 char* 类型进行初始化，例如：字符串字面量、从文件读入等，这样就需将 char* 字符数据拷贝到 std::string 所管理的内存空间中；而很多时候并不会去修改字符串内容，拷贝毫无必要，仅需生成 char* 某种标记即可，所以此时 std::string 初始化就造成了性能损失；</p>
+<p>针对上述问题，C++17 引入了 std::string_view 。std::string_view 仅标记字符串位置与尺寸，不拷贝字符串数据，避免了额外的内存分配。所以当仅访问而不修改字符串时，std::string_view 即可提升效率；</p>
+<h2 id="对比">对比</h2>
+<p>下述代码对 std::string 与 std::string_view 的性能进行了简单对比。需要注意的是，测试字符串的长度需超过 std::string 开启短字符串优化的长度，这样差别更为显著；</p>
 <pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
 #include &lt;vector&gt;
-#include &lt;algorithm&gt;
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+#include &lt;chrono&gt;
 
+/**
+ * @brief  std::string 与 std::string_view 测试
+ */
 int main()
 {
-    std::vector&lt;std::string&gt; strLst = {&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;, &quot;abcd&quot;, &quot;abcde&quot;, &quot;fghi&quot;, &quot;fgh&quot;, &quot;fg&quot;, &quot;f&quot;};
+    const int N = 1000000;
+    const char s[] = &quot;qwertyuiopasdfghjklzxcvbnm1234567890&quot;;  // 使用 GCC 编译，长度需超过 23
 
-    std::for_each(strLst.cbegin(), strLst.cend(), [](const std::string&amp; str) { 
-        std::cout &lt;&lt; str &lt;&lt; std::endl; 
-    });
+    auto start = std::chrono::system_clock::now();
+    for (int i = 0; i &lt; N; ++i) {
+        std::string str = s;
+        std::string sub = str.substr(2, 10);
+    }
+    auto end = std::chrono::system_clock::now();
+    auto elapse = (std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(end-start)).count();
+    std::cout &lt;&lt; &quot;string      type elapse: &quot; &lt;&lt; elapse &lt;&lt; &quot; ms \n&quot;;
 
-    auto compStrSize = [](const std::string&amp; str1, const std::string&amp; str2) -&gt; bool {
-        return str1.size() &lt; str2.size();
-    };
-    const std::string&amp; maxSizeStr = *std::max_element(strLst.cbegin(), strLst.cend(), compStrSize);
-    std::cout &lt;&lt; &quot;\nmax size str: &quot; &lt;&lt; maxSizeStr &lt;&lt; std::endl;
-    
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i &lt; N; ++i) {
+        std::string_view str = s;
+        std::string_view sub = str.substr(2, 10);
+    }
+    end = std::chrono::system_clock::now();
+    elapse = (std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(end-start)).count();
+    std::cout &lt;&lt; &quot;string_view type elapse: &quot; &lt;&lt; elapse &lt;&lt; &quot; ms \n&quot;;
+
     return 0;
 }
 </code></pre>
 <p>终端输出：</p>
-<pre><code class="language-c++">a
-ab
-abc
-abcd
-abcde
-fghi
-fgh
-fg
-f
-
-max size str: abcde
+<pre><code class="language-c++">string      type elapse: 4111 ms 
+string_view type elapse: 8 ms 
 </code></pre>
-<p>通过上述代码可知，使用 lambda 表达式不仅简明地表达了所需功能，还让代码更加紧凑，无需另外定义一个函数；</p>
-<p>本文仅展示了 lambda 表达式的简单使用，关于其详细介绍，参考任一包含 C++11 标准的教材即可；</p>
+<p>从上述代码看出，使用 std::string_view 后，循环中的操作性能提升约 500 倍，几乎是质的飞跃；</p>
+<h2 id="总结">总结</h2>
+<p>在处理字符串时，当仅需访问而不修改其内容时，可多使用 std::string_view 代替 std::string，以消除数据拷贝，避免额外内存分配，进而提升处理字符串的效率；</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://blog.csdn.net/sxy15956107015/article/details/105177307">字符串复制的优化策略</a>；</li>
+<li><a href="https://blog.csdn.net/tkokof1/article/details/82527370">C++17,使用 string_view 来避免复制</a>；</li>
+</ul>
 <hr>
 <div class="post-copyright">
     <div class="author">    <b>本文作者：</b>
@@ -156,9 +168,9 @@ max size str: abcde
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://wangtongxuewang.github.io/post/czhong-de-chang-yong-jie-kou/">
+                <a href="https://wangtongxuewang.github.io/post/lambda-biao-da-shi-jian-dan-shi-yong/">
                   <h3 class="post-title">
-                    C++中的常用接口
+                    lambda 表达式简单使用
                   </h3>
                 </a>
               </div>
