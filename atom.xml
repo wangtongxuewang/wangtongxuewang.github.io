@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2022-02-15T06:07:49.524Z</updated>
+    <updated>2022-06-20T08:09:46.342Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,55 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[C++ 编译加速简介]]></title>
+        <id>https://wangtongxuewang.github.io/post/c-bian-yi-jia-su-jian-jie/</id>
+        <link href="https://wangtongxuewang.github.io/post/c-bian-yi-jia-su-jian-jie/">
+        </link>
+        <updated>2022-06-20T08:07:40.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="c-编译加速简介">C++ 编译加速简介</h1>
+<h2 id="引言">引言</h2>
+<p>程序执行性能一直是 C++ 的优势。然而相比于其他语言， C++ 在大型项目中的编译速度简直慢的令人发指；</p>
+<p>其主要原因是 C++ “头文件-源文件”的编译方式。在 C++ 中，编译单元以文件为单位，每个源文件需独立解析所有包含的头文件，若某个头文件被 N 个源文件引用，则此头文件需重复解析 N 次。同时，若此头文件发生改变，则所有引用此头文件的文件均需重新编译；</p>
+<p>因此，大型 C++ 工程的编译会产生大量重复解析文件操作。开发人员需要根据 C++ 编译方式的特点，应用各种手段来缓解上述问题；</p>
+<h2 id="加速编译方法">加速编译方法</h2>
+<p>有很多行之有效的方法来应对 C++ 编译速度问题，现列举其中六种常用方法：</p>
+<h3 id="include-guard">Include Guard</h3>
+<p>这是编写头文件的规范，主要作用是防止头文件在编译单元中被重复引用（尤其是类定义在头文件中，多次引用会产生重复定义错误）。需要注意的是， #program once 在有些编译器中并不支持，所以还是使用常用的 #ifndef-#define-#endif  更靠谱；</p>
+<h3 id="减少头文件依赖">减少头文件依赖</h3>
+<p>头文件冗余是大型 C++ 项目中的常见问题，这会导致编译时间增加。冗余头文件无需手动清理，有很多工具可以自动化完成这一工作，如 <a href="https://include-what-you-use.org/">Include-What-You-Use</a> 等；</p>
+<h3 id="前置声明与-pimpl-技法">前置声明与 PImpl 技法</h3>
+<p>类前置声明与 PImpl 技法搭配使用，建立”编译防火墙“，这样就减少了头文件的引用，同时当类实现细节变更时，类的使用者不必重新编译；</p>
+<h3 id="预编译头文件-pch">预编译头文件 PCH</h3>
+<p>将那些不常变更且被大量引用的头文件集合进行预编译并保存为缓存，当编译时即可利用已保存的缓存而不用每次都重新解析；</p>
+<h3 id="使用动态库或静态库">使用动态库或静态库</h3>
+<p>将不常变动的基础库编译为动态库或静态库是常规操作，故不赘述；</p>
+<h3 id="提升硬件与并行分布式编译">提升硬件与并行/分布式编译</h3>
+<p>大力出奇迹，故不赘述；</p>
+<h2 id="总结">总结</h2>
+<p>在上述列举的六种常用方法中：前三种是编写 C++ 代码的规范，在编码过程中应时刻铭记并使用；后三种则是针对工程构建的方法，是编码过程之外所进行的操作；在实践中可结合具体项目使用上述六种常用方法以解决编译速度问题；</p>
+<p>需要注意的是， 除了上述提到的因素，模板也是 C++ 项目编译时间漫长原因之一，但模板在 C++ 中作用重大，使用广泛，故开发者需自行酌情考虑；</p>
+<p>最后，随着 C++ 20 标准中模块的引入， C++ 编译速度这一顽疾得到了根本性解决，但是其特性在工程中广泛应用还需一定时间，开发者可先尝鲜试用；</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li>《大规模 C++ 程序设计》，John Lakos，机械工业出版社，2014 年 10 月；</li>
+<li>《 C++ 编译加速完全指南白皮书》，<a href="https://www.incredibuild.cn/">Incredibuild</a>；</li>
+<li><a href="https://www.cnblogs.com/CocoML/p/14643379.html">《如何加速 C++ 文件的编译速度》，Aurelius84</a>；</li>
+</ul>
+<hr>
+<div class="post-copyright">
+    <div class="author">    <b>本文作者：</b>
+        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
+    </div>
+    <div class="link">      <b>博客主页：</b>
+        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
+    </div>
+    <div class="copyright"> <b>版权声明：</b>
+        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </div>
+</div>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[std::string_view 简要介绍]]></title>
         <id>https://wangtongxuewang.github.io/post/stdstring_view-jian-yao-jie-shao/</id>
@@ -1323,135 +1372,6 @@ int main()
 }
 </code></pre>
 <p>与时俱进的C++标准让开发人员可以像使用动态语言一样编写C++代码，在开发中适当使用这样的“语法糖”会让我们的代码更加简洁优雅。</p>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[智能指针与QVector组合使用问题]]></title>
-        <id>https://wangtongxuewang.github.io/post/zhi-neng-zhi-zhen-yu-qvector-zu-he-shi-yong-wen-ti/</id>
-        <link href="https://wangtongxuewang.github.io/post/zhi-neng-zhi-zhen-yu-qvector-zu-he-shi-yong-wen-ti/">
-        </link>
-        <updated>2021-08-14T03:58:17.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="智能指针与qvector组合使用问题">智能指针与QVector组合使用问题</h1>
-<h2 id="引言">引言</h2>
-<p>在C++开发中，由于Qt库接口完善易用，很多桌面端程序会使用Qt各种容器库[QTL]来代替STL，关于使用QTL还是STL，萝卜白菜，各有所爱，没有绝对优劣之分；</p>
-<p>但是可能由于Qt库成型较早缘故，其未能考虑到现代C++的演化，当Qt库与现代C++标准库组合使用时，有时会产生一些意想不到的问题；</p>
-<h2 id="问题由来">问题由来</h2>
-<p>开发中，常常需要将对象指针序列放存放在 vector 中，比如Qt库中的QVector，且为了自动内存管理，会使用智能指针 unique_ptr 来自动管理内存 [使用 unique_ptr 而不是 shared_ptr 的原因是为了更好的区分所有权]；</p>
-<p>为了阐明问题实质，将实际开发中的复杂问题简化为下述简单示例，但是麻雀虽小，五脏俱全，问题关键在下述代码已经体现：</p>
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;unique_ptr&gt;
-#include &lt;QVector&gt;
-
-using std::vector;
-using std::unique_ptr;
-
-class CTest {
-    // ...
-};
-
-int main()
-{
-    unique_ptr&lt;CTest&gt; ptr = std::make_unique&lt;CTest&gt;();
-    
-    QVector&lt;unique_ptr&lt;CTest&gt;&gt; ptrVec;  // 不能通过编译
-    // vector&lt;unique_ptr&lt;CTest&gt;&gt; ptrVec;  // 可以通过编译
-    
-    ptrVec.push_back(std:move(ptr));
-    
-}
-</code></pre>
-<p>上述代码中，使用 QVector 时并不能通过编译，若将 QVector 替换成 std::vector，便能通过编译，正常运行；</p>
-<h2 id="原因分析">原因分析</h2>
-<p>当使用 QVector 时，编译器在 QVector 的 reallocData 函数中报错，详见下述代码与注释 [ 代码片段来自 Qt5.12.10 中的 qvector.h ] ：</p>
-<pre><code class="language-C++">template &lt;typename T&gt;
-void QVector&lt;T&gt;::reallocData(const int asize, const int aalloc, QArrayData::AllocationOptions options)
-{
-    // ...
-    
-    // QVector 隐式共享机制导致 unique_ptr 不能使用;
-    // 下述代码中 isShared 值为 true , 可以通过对本部分代码的调试来验证这一点;
-    if (isShared || !std::is_nothrow_move_constructible&lt;T&gt;::value) {
-        // we can not move the data, we need to copy construct it
-        while (srcBegin != srcEnd)
-            new (dst++) T(*srcBegin++);    // 主要是本行代码需要使用 复制构造 产生问题
-    } else {
-        while (srcBegin != srcEnd)
-            new (dst++) T(std::move(*srcBegin++));
-    }
-    
-    // ...
-}
-</code></pre>
-<p>通过上述代码的行为可知，由于 QVector 使用隐式共享[或称写时复制(COW : copy-on-write)]机制，reallocData 函数中的 isShared 值为 true，所以需要进行复制构造操作，而 std::unique_ptr 复制构造函数无法调用，所以编译器报错，不能通过编译；</p>
-<p>std::unique_ptr 相关部分代码如下 [ 代码片段来自 mingw7.3.0 中的 unique_ptr.h ] ：</p>
-<pre><code class="language-C++">template &lt;typename _Tp, typename _Dp = default_delete&lt;_Tp&gt;&gt;
-class unique_ptr {
-    // ...
-
-    // Disable copy from lvalue.
-    unique_ptr(const unique_ptr&amp;) = delete;
-    unique_ptr&amp; operator=(const unique_ptr&amp;) = delete;
-    
-    // ...
-};
-</code></pre>
-<p>上述问题也是所有问题中我们最希望出现的一类，因为能在编译期发现问题，这比在运行时出现意想不到的错误要好很多，这也是编译型语言的优势所在；</p>
-<h2 id="最佳实践">最佳实践</h2>
-<p>上述问题的根源是 QVector<T> 内部设计所致：QVector<T> 使用隐式共享机制，其在reallocData 等函数实现中需要使用类的复制构造， 因此 QVector<T> 不适合存放复制构造函数无法调用的类，具体包含下述两种情况：</p>
-<ul>
-<li>复制构造函数 =delete；</li>
-<li>复制构造函数为 private；</li>
-</ul>
-<p>示例代码如下：</p>
-<pre><code class="language-C++">// 不能使用 QVector&lt;T&gt; 的情况1 : 赋值构造函数 被删除
-class Demo1 {
-public:
-    Demo1() = default;
-    Demo1(const Demo1&amp; rhs) = delete;
-    Demo1&amp; operator=(const Demo1&amp; rhs) = delete;
-    Demo1(Demo1&amp;&amp; rhs) = default;
-    Demo1&amp; operator=(Demo1&amp;&amp; rhs) = default;
-    ~Demo1() = default;
-    
-    // ...   
-private:
-    Obj m_obj;
-};
-
-
-// 不能使用 QVector&lt;T&gt; 的情况2 : 赋值构造函数 私有化
-class Demo2 {
-public:
-    Demo2() = default;
-    Demo2(Demo2&amp;&amp; rhs) = default;
-    Demo2&amp; operator=(Demo2&amp;&amp; rhs) = default;
-    ~Demo2() = default;
-
-private:
-    Demo2(const Demo2&amp; rhs);
-    Demo2&amp; operator=(const Demo2&amp; rhs);
-    
-    // ...   
-private:
-    Obj m_obj;
-};
-</code></pre>
-<p>Qt 中 QVector<T> 以及 QString 等库的设计中采用了隐式共享的技术以提高性能，但是有些情况下会导致类似上述问题，而 GCC 等主流编译器中标准库对 vector<T> 与 string 等的实现并不采用此技术，故不会产生以上问题，Qt 库不知后期会不会改进设计，以更好的兼容标准库；</p>
-<h2 id="后记">后记</h2>
-<p>后来搜索了一下，发现在 StackOverflow 中也有类似的问题：</p>
-<p><a href="https://stackoverflow.com/questions/53006163/use-stdfind-on-qvectorstdunique-ptrtype"> Use std::find on QVector&lt;std::unique_ptr<Type>&gt; </a></p>
-<p>其中回答也给出了简要解释，若要更为详细的介绍，可阅读本文；</p>
 <hr>
 <div class="post-copyright">
     <div class="author">    <b>本文作者：</b>
