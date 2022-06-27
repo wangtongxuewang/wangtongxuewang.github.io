@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1655712572719">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1656311539166">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
 
 
@@ -31,7 +31,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://wangtongxuewang.github.io">
-        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1655712572719" class="site-logo">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1656311539166" class="site-logo">
         <h1 class="site-title">王同学的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -106,8 +106,9 @@
 <p>有很多行之有效的方法来应对 C++ 编译速度问题，现列举其中六种常用方法：</p>
 <h3 id="include-guard">Include Guard</h3>
 <p>这是编写头文件的规范，主要作用是防止头文件在编译单元中被重复引用（尤其是类定义在头文件中，多次引用会产生重复定义错误）。需要注意的是， #program once 在有些编译器中并不支持，所以还是使用常用的 #ifndef-#define-#endif  更靠谱；</p>
-<h3 id="减少头文件依赖">减少头文件依赖</h3>
+<h3 id="减少依赖">减少依赖</h3>
 <p>头文件冗余是大型 C++ 项目中的常见问题，这会导致编译时间增加。冗余头文件无需手动清理，有很多工具可以自动化完成这一工作，如 <a href="https://include-what-you-use.org/">Include-What-You-Use</a> 等；</p>
+<p>另一种常见的依赖问题是原始代码的层级设计并不合理。对于这种情况，就需要分析代码的各个模块，利用“依赖反转”原则对变动频率相差过大的模块代码进行手动修改；</p>
 <h3 id="前置声明与-pimpl-技法">前置声明与 PImpl 技法</h3>
 <p>类前置声明与 PImpl 技法搭配使用，建立”编译防火墙“，这样就减少了头文件的引用，同时当类实现细节变更时，类的使用者不必重新编译；</p>
 <h3 id="预编译头文件-pch">预编译头文件 PCH</h3>
