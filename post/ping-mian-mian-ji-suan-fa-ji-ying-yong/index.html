@@ -1,22 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://wangtongxuewang.github.io</id>
-    <title>王同学的博客</title>
-    <updated>2022-08-08T09:43:45.896Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://wangtongxuewang.github.io"/>
-    <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
-    <subtitle>coding &amp;&amp; writing</subtitle>
-    <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
-    <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2022, 王同学的博客</rights>
-    <entry>
-        <title type="html"><![CDATA[平面面积算法及应用]]></title>
-        <id>https://wangtongxuewang.github.io/post/ping-mian-mian-ji-suan-fa-ji-ying-yong/</id>
-        <link href="https://wangtongxuewang.github.io/post/ping-mian-mian-ji-suan-fa-ji-ying-yong/">
-        </link>
-        <updated>2022-08-08T09:30:39.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="平面面积算法及应用">平面面积算法及应用</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>平面面积算法及应用 | 王同学的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1659951819472">
+<link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="平面面积算法及应用
+平面面积、形心、函数分布积分等问题是C++工程开发中常见问题，下面以平面面积为例介绍此类问题的计算方法；
+数学表达
+对于平面问题，由格林公式：
+∬D(∂fy∂x−∂fx∂y)dxdy=∮∂Dfxdx+fydywhere:..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wangtongxuewang.github.io">
+        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1659951819472" class="site-logo">
+        <h1 class="site-title">王同学的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      coding && writing
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">平面面积算法及应用</h2>
+            <div class="post-date">2022-08-08</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="平面面积算法及应用">平面面积算法及应用</h1>
 <p>平面面积、形心、函数分布积分等问题是C++工程开发中常见问题，下面以平面面积为例介绍此类问题的计算方法；</p>
 <h2 id="数学表达">数学表达</h2>
 <p>对于平面问题，由格林公式：</p>
@@ -138,1307 +220,51 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span><span class="vlist-
         本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
     </div>
 </div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++ 编译加速简介]]></title>
-        <id>https://wangtongxuewang.github.io/post/c-bian-yi-jia-su-jian-jie/</id>
-        <link href="https://wangtongxuewang.github.io/post/c-bian-yi-jia-su-jian-jie/">
-        </link>
-        <updated>2022-06-20T08:07:40.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="c-编译加速简介">C++ 编译加速简介</h1>
-<h2 id="引言">引言</h2>
-<p>程序执行性能一直是 C++ 的优势。然而相比于其他语言， C++ 在大型项目中的编译速度简直慢的令人发指；</p>
-<p>其主要原因是 C++ “头文件-源文件”的编译方式。在 C++ 中，编译单元以文件为单位，每个源文件需独立解析所有包含的头文件，若某个头文件被 N 个源文件引用，则此头文件需重复解析 N 次。同时，若此头文件发生改变，则所有引用此头文件的文件均需重新编译；</p>
-<p>因此，大型 C++ 工程的编译会产生大量重复解析文件操作。开发人员需要根据 C++ 编译方式的特点，应用各种手段来缓解上述问题；</p>
-<h2 id="加速编译方法">加速编译方法</h2>
-<p>有很多行之有效的方法来应对 C++ 编译速度问题，现列举其中六种常用方法：</p>
-<h3 id="include-guard">Include Guard</h3>
-<p>这是编写头文件的规范，主要作用是防止头文件在编译单元中被重复引用（尤其是类定义在头文件中，多次引用会产生重复定义错误）。需要注意的是， #program once 在有些编译器中并不支持，所以还是使用常用的 #ifndef-#define-#endif  更靠谱；</p>
-<h3 id="减少依赖">减少依赖</h3>
-<p>头文件冗余是大型 C++ 项目中的常见问题，这会导致编译时间增加。冗余头文件无需手动清理，有很多工具可以自动化完成这一工作，如 <a href="https://include-what-you-use.org/">Include-What-You-Use</a> 等；</p>
-<p>另一种常见的依赖问题是原始代码的层级设计并不合理。对于这种情况，就需要分析代码的各个模块，利用“依赖反转”原则对变动频率相差过大的模块代码进行手动修改；</p>
-<h3 id="前置声明与-pimpl-技法">前置声明与 PImpl 技法</h3>
-<p>类前置声明与 PImpl 技法搭配使用，建立”编译防火墙“，这样就减少了头文件的引用，同时当类实现细节变更时，类的使用者不必重新编译；</p>
-<h3 id="预编译头文件-pch">预编译头文件 PCH</h3>
-<p>将那些不常变更且被大量引用的头文件集合进行预编译并保存为缓存，当编译时即可利用已保存的缓存而不用每次都重新解析；</p>
-<h3 id="使用动态库或静态库">使用动态库或静态库</h3>
-<p>将不常变动的基础库编译为动态库或静态库是常规操作，故不赘述；</p>
-<h3 id="提升硬件与并行分布式编译">提升硬件与并行/分布式编译</h3>
-<p>大力出奇迹，故不赘述；</p>
-<h2 id="总结">总结</h2>
-<p>在上述列举的六种常用方法中：前三种是编写 C++ 代码的规范，在编码过程中应时刻铭记并使用；后三种则是针对工程构建的方法，是编码过程之外所进行的操作；在实践中可结合具体项目使用上述六种常用方法以解决编译速度问题；</p>
-<p>需要注意的是， 除了上述提到的因素，模板也是 C++ 项目编译时间漫长原因之一，但模板在 C++ 中作用重大，使用广泛，故开发者需自行酌情考虑；</p>
-<p>最后，随着 C++ 20 标准中模块的引入， C++ 编译速度这一顽疾得到了根本性解决，但是其特性在工程中广泛应用还需一定时间，开发者可先尝鲜试用；</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li>《大规模 C++ 程序设计》，John Lakos，机械工业出版社，2014 年 10 月；</li>
-<li>《 C++ 编译加速完全指南白皮书》，<a href="https://www.incredibuild.cn/">Incredibuild</a>；</li>
-<li><a href="https://www.cnblogs.com/CocoML/p/14643379.html">《如何加速 C++ 文件的编译速度》，Aurelius84</a>；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wangtongxuewang.github.io/post/c-bian-yi-jia-su-jian-jie/">
+                  <h3 class="post-title">
+                    C++ 编译加速简介
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
     </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[std::string_view 简要介绍]]></title>
-        <id>https://wangtongxuewang.github.io/post/stdstring_view-jian-yao-jie-shao/</id>
-        <link href="https://wangtongxuewang.github.io/post/stdstring_view-jian-yao-jie-shao/">
-        </link>
-        <updated>2022-02-15T04:57:52.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="stdstring_view-简要介绍">std::string_view 简要介绍</h1>
-<h2 id="目的">目的</h2>
-<p>字符串在开发中使用频率很高，其性能至关重要。C++ 标准库中的 std::string 采用多种技术以提升性能。比如：短字符串优化技术，当字符串较短时，直接在栈上分配空间，不进行动态内存分配，从而提升短字符串的效率；</p>
-<p>但是字符串的初始化会影响其性能。std::string 一般通过 char* 类型进行初始化，例如：字符串字面量、从文件读入等，这样就需将 char* 字符数据拷贝到 std::string 所管理的内存空间中；而很多时候并不会去修改字符串内容，拷贝毫无必要，仅需生成 char* 某种标记即可，所以此时 std::string 初始化就造成了性能损失；</p>
-<p>针对上述问题，C++17 引入了 std::string_view 。std::string_view 仅标记字符串位置与尺寸，不拷贝字符串数据，避免了额外的内存分配。所以当仅访问而不修改字符串时，std::string_view 即可提升效率；</p>
-<h2 id="对比">对比</h2>
-<p>下述代码对 std::string 与 std::string_view 的性能进行了简单对比。需要注意的是，测试字符串的长度需超过 std::string 开启短字符串优化的长度，这样差别更为显著；</p>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;string&gt;
-#include &lt;string_view&gt;
-#include &lt;chrono&gt;
 
-/**
- * @brief  std::string 与 std::string_view 测试
- */
-int main()
-{
-    const int N = 1000000;
-    const char s[] = &quot;qwertyuiopasdfghjklzxcvbnm1234567890&quot;;  // 使用 GCC 编译，长度需超过 23
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
 
-    auto start = std::chrono::system_clock::now();
-    for (int i = 0; i &lt; N; ++i) {
-        std::string str = s;
-        std::string sub = str.substr(2, 10);
-    }
-    auto end = std::chrono::system_clock::now();
-    auto elapse = (std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(end-start)).count();
-    std::cout &lt;&lt; &quot;string      type elapse: &quot; &lt;&lt; elapse &lt;&lt; &quot; ms \n&quot;;
+AOS.init();
 
-    start = std::chrono::system_clock::now();
-    for (int i = 0; i &lt; N; ++i) {
-        std::string_view str = s;
-        std::string_view sub = str.substr(2, 10);
-    }
-    end = std::chrono::system_clock::now();
-    elapse = (std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(end-start)).count();
-    std::cout &lt;&lt; &quot;string_view type elapse: &quot; &lt;&lt; elapse &lt;&lt; &quot; ms \n&quot;;
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
-    return 0;
-}
-</code></pre>
-<p>终端输出：</p>
-<pre><code class="language-c++">string      type elapse: 4111 ms 
-string_view type elapse: 8 ms 
-</code></pre>
-<p>从上述代码看出，使用 std::string_view 后，循环中的操作性能提升约 500 倍，几乎是质的飞跃；</p>
-<h2 id="总结">总结</h2>
-<p>在处理字符串时，当仅需访问而不修改其内容时，可多使用 std::string_view 代替 std::string，以消除数据拷贝，避免额外内存分配，进而提升处理字符串的效率；</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://blog.csdn.net/sxy15956107015/article/details/105177307">字符串复制的优化策略</a>；</li>
-<li><a href="https://blog.csdn.net/tkokof1/article/details/82527370">C++17,使用 string_view 来避免复制</a>；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[lambda 表达式简单使用]]></title>
-        <id>https://wangtongxuewang.github.io/post/lambda-biao-da-shi-jian-dan-shi-yong/</id>
-        <link href="https://wangtongxuewang.github.io/post/lambda-biao-da-shi-jian-dan-shi-yong/">
-        </link>
-        <updated>2022-01-22T07:19:52.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="lambda-表达式简单使用">lambda 表达式简单使用</h1>
-<p>在开发中常常会用到 C++11 中的 lambda 表达式，其结合 STL 可让代码更简洁明了。</p>
-<p>简单示例代码如下：</p>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;vector&gt;
-#include &lt;algorithm&gt;
+</script>
 
-int main()
-{
-    std::vector&lt;std::string&gt; strLst = {&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;, &quot;abcd&quot;, &quot;abcde&quot;, &quot;fghi&quot;, &quot;fgh&quot;, &quot;fg&quot;, &quot;f&quot;};
 
-    std::for_each(strLst.cbegin(), strLst.cend(), [](const std::string&amp; str) { 
-        std::cout &lt;&lt; str &lt;&lt; std::endl; 
-    });
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
 
-    auto compStrSize = [](const std::string&amp; str1, const std::string&amp; str2) -&gt; bool {
-        return str1.size() &lt; str2.size();
-    };
-    const std::string&amp; maxSizeStr = *std::max_element(strLst.cbegin(), strLst.cend(), compStrSize);
-    std::cout &lt;&lt; &quot;\nmax size str: &quot; &lt;&lt; maxSizeStr &lt;&lt; std::endl;
-    
-    return 0;
-}
-</code></pre>
-<p>终端输出：</p>
-<pre><code class="language-c++">a
-ab
-abc
-abcd
-abcde
-fghi
-fgh
-fg
-f
 
-max size str: abcde
-</code></pre>
-<p>通过上述代码可知，使用 lambda 表达式不仅简明地表达了所需功能，还让代码更加紧凑，无需另外定义一个函数；</p>
-<p>本文仅展示了 lambda 表达式的简单使用，关于其详细介绍，参考任一包含 C++11 标准的教材即可；</p>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++中的常用接口]]></title>
-        <id>https://wangtongxuewang.github.io/post/czhong-de-chang-yong-jie-kou/</id>
-        <link href="https://wangtongxuewang.github.io/post/czhong-de-chang-yong-jie-kou/">
-        </link>
-        <updated>2022-01-15T07:28:42.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="c中的常用接口">C++中的常用接口</h1>
-<h2 id="目的">目的</h2>
-<p>某一模块开发完成后，需要提供一个对外接口，让模块代码与调用者代码可以独立变化而互不影响，同时也能隐藏模块的实现细节；</p>
-<h2 id="pimpl技法">pImpl技法</h2>
-<p>当自己的模块进行升级时，若接口类中成员变量发生变化，那么调用者的代码就需要重新编译，这种情况应该极力避免，因此需要一种方法来消除模块之间的编译依赖，降低耦合性；</p>
-<p>在C++中，对于上述问题，pImpl 惯用技法（pointer to implementation idiom）被广泛使用。其具体做法是：实现细节的类不对外开放，在接口中仅仅存放实现类的指针，以隔离接口与实现，当实现变化时，只要被调用的接口函数形式不变，调用者代码就不会受到影响，无需重新编译。示例代码如下所示：</p>
-<p>接口头文件代码（只有此头文件提供给调用者，其他文件均不对外开放）：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Demo.h
- * @note  本接口中所有函数应为公有，不应存在私有函数
- */
-class Demo {
-public:
-    Demo();
-    ~Demo();
-    double foo(const double x);
-private:
-    class DemoImpl;
-    DemoImpl* m_pImpl;
-};
-</code></pre>
-<p>接口的cpp文件代码：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Demo.cpp
- */
-#include &quot;Demo.h&quot;
-#include &quot;DemoImpl.h&quot;
 
-Demo::Demo() : m_pImpl( new Demo() ) {}
 
-Demo::~Demo()
-{
-    if (m_pImpl) {
-        delete m_pImpl;
-    }
-}
 
-double Demo::foo(const double x) 
-{ 
-    return m_pImpl-&gt;foo(x); 
-}
-</code></pre>
-<p>具体实现头文件代码：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  DemoImpl.h
- */
-class DemoImpl {
-public:
-    DemoImpl() = default;
-    double foo(const double x);
-private:
-    double operateOf(const std::vector&lt;double&gt;&amp; bar, const double x);
-    // ...
-private:
-    std::vector&lt;double&gt; m_bar;
-};
-</code></pre>
-<p>具体实现的cpp文件代码：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  DemoImpl.cpp
- */
-#include &quot;DemoImpl.h&quot;
-
-double DemoImpl::foo(const double x)
-{
-    // ...
-    double y = this-&gt;operateOf(m_bar, x);
-    // ...
-}
-
-double DemoImpl::operateOf(std::vector&lt;double&gt;&amp; bar, const double x)
-{
-    // ...
-}
-</code></pre>
-<p>调用者代码：</p>
-<pre><code class="language-c++">#include &quot;Demo.h&quot;
-
-int main()
-{
-    Demo demo; 
-    double x = 0.0;
-    double y = demo.foo(x);
-    
-    // ...
-    return 0;
-}
-</code></pre>
-<h2 id="其他形式接口">其他形式接口</h2>
-<h3 id="c语言接口">C语言接口</h3>
-<p>由于各语言一般都支持调用C接口，所以C++实现的模块提供C接口是最为通用的，而C++与C语言有着紧密的联系，故其导出为C接口十分方便，其示例代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  foo.h
- */
-#ifdef _cplusplus
-extern &quot;C&quot; {
-#endif
- 
-double foo(double x);
- 
-#ifdef _cplusplus
-}
-#endif
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  foo.cpp
- */
-#include &quot;foo.h&quot;
-#include &quot;Demo.h&quot;
-
-double foo(double x)
-{
-    Demo demo;   
-    double y = demo.foo(x);
-    return y;
-}
-</code></pre>
-<h3 id="纯虚接口">纯虚接口</h3>
-<p>还有一种接口方式就是纯虚接口，即设计一个纯虚类作为接口，让模块中具体实现类均继承此类，其优点是当模块中要添加新的类时，只需新的类成为纯虚类的子类即可，而调用者代码无需修改，降低了模块间的耦合；</p>
-<p>其典型实现与前述文章中 <a href="https://wangtongxuewang.github.io/post/gong-han-mo-shi/">工厂模式</a> 类似，故不在此处赘述，若要详细了解，可参考前述文中代码；</p>
-<h2 id="总结">总结</h2>
-<p>在C++开发中，常需要避免模块间的编译依赖，惯用方式为 pImpl 技法；</p>
-<p>若要模块接口更为通用，可使用C接口；</p>
-<p>而纯虚接口常用于面向对象设计中的多态需求；</p>
-<p>实践中，根据不同要求，需恰当使用这些接口，以降低模块间耦合性；</p>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[std::vector的emplace_back()]]></title>
-        <id>https://wangtongxuewang.github.io/post/stdvector-de-emplace_back/</id>
-        <link href="https://wangtongxuewang.github.io/post/stdvector-de-emplace_back/">
-        </link>
-        <updated>2022-01-10T08:25:13.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="stdvector的emplace_back">std::vector的emplace_back()</h1>
-<p>C++11 后向 vector 容器尾部添加元素除了可以使用 push_back() ，还可以使用 emplace_back()；</p>
-<p>两者的主要区别体现在添加临时对象的效率上。当我们直接将构造函数的参数传递给 emplace_back() 时，emplace_back() 使用这些参数在容器内存中就地构造元素，不用构造一个临时对象后再将其复制到容器中，相比于 push_back() ，省去了一次移动构造与析构的操作，也减少了内存开销。</p>
-<p>但是，只有 emplace_back() 中是直接使用构造函数的参数添加临时对象时，emplace_back() 才比 push_back() 有更高的效率，其他情况两者效率一致；</p>
-<p>添加临时对象时 push_back() 与 emplace_back() 代码示例如下：</p>
-<pre><code class="language-c++">class Date {
-public:
-    Date() = default;
-    Date(const unsigned int year, const unsigned int month, const unsigned int day) : 
-        m_year(year), m_month(month), m_day(day) {}
-private:
-    unsigned int m_year;
-    unsigned int m_month;
-    unsigned int m_day;
-};
-
-int main()
-{
-    std::vector&lt;Date&gt; vecDate;
-    vecDate.reserve(4);
-    vecDate.push_back(Date(2021, 12, 7));
-    vecDate.emplace_back(2021, 12, 8);
-    
-    return 0;
-}
-</code></pre>
-<p>下图展示了上述代码中添加临时对象时两种方法的区别：</p>
-<figure data-type="image" tabindex="1"><img src="https://wangtongxuewang.github.io/post-images/1641803336860.jpg" alt="emplace_back" loading="lazy"></figure>
-<p>因此当向容器中添加临时对象时，可以多使用 emplace_back() 代替 push_back()；</p>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[设计模式小结]]></title>
-        <id>https://wangtongxuewang.github.io/post/she-ji-mo-shi-xiao-jie/</id>
-        <link href="https://wangtongxuewang.github.io/post/she-ji-mo-shi-xiao-jie/">
-        </link>
-        <updated>2021-12-25T05:24:21.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="设计模式小结">设计模式小结</h1>
-<p>前述文章中介绍了几种常用的设计模式，本文进行简单小结；</p>
-<h2 id="常用设计模式">常用设计模式</h2>
-<p>有六种设计模式在开发中应用广泛，分别是：</p>
-<p>创建型：工厂模式（包括：简单工厂、工厂方法、抽象工厂）、单例模式；</p>
-<p>结构型：代理模式；</p>
-<p>行为型：策略模式、模板方法、观察者模式；</p>
-<p>一般关于设计模式主题的书籍会介绍 23 种设计模式，而前述文章仅介绍了其中较为常用的六种，关于未提及的其他设计模式，若要深入了解，可参考 GoF 的经典著作《设计模式》；</p>
-<h2 id="总结">总结</h2>
-<p>关于设计模式，以下是在综合参考了 GoF 的《设计模式》与李建忠老师的《C++设计模式》后，对其浅薄理解：</p>
-<p>目标：隔离变化方向不同的模块，以提高程序可维护性与复用性；</p>
-<p>原则：面向对象的“SOLID”原则是设计模式的核心思想，而设计模式是这些设计原则的具体体现，即设计原则是“道”，设计模式是“术”，所以要运用设计模式，就应当理解其背后所蕴含的设计原则；</p>
-<p>实践：代码应该重构、迭代、演进到模式，而不是一开始就使用各种模式，不要为了使用模式而生搬硬套；</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
-<li>《C++设计模式》课程，李建忠主讲；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[代理模式]]></title>
-        <id>https://wangtongxuewang.github.io/post/dai-li-mo-shi/</id>
-        <link href="https://wangtongxuewang.github.io/post/dai-li-mo-shi/">
-        </link>
-        <updated>2021-12-18T07:53:52.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="代理模式">代理模式</h1>
-<h2 id="目的与概念">目的与概念</h2>
-<p>代理模式是一种结构型模式，其目的是为调用者提供中间层以<strong>控制</strong>对某个对象的访问，即在调用者与被调用者之间添加一层代理层，调用代理接口层来实现被调用者复杂的操作；</p>
-<p>代理模式提供了中间层，屏蔽了实现层复杂且用户并不想知道的操作，让调用者只需关注自己所需求的操作，这样调用者就可以方便地使用这些接口，而不用了解底层的具体操作；</p>
-<p>其另一个优点是，此中间层起到了隔离调用者与实现者的作用，当需求变更时，可以仅修改代理类而不修改具体实现，提高了代码的复用性与扩展性；</p>
-<p>代理模式与一些其他结构型模式虽目的不同，但在思想及做法上有很多相似的地方，即往往要添加一层中间层以实现自己的目标；</p>
-<p>代理模式思想的使用非常普遍，工程实践中，我们常会有意无意地应用代理模式的思想，只是很多时候我们并没有意识到而已；</p>
-<h2 id="代码示例">代码示例</h2>
-<p>下述代码简陋地展示了代理模式的某一种代码实现方式，代码仅作演示：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Subject.h
- */
-// 接口类，可以被用户看到
-class Subject {
-public:
-    virtual ~Subject() {}
-    virtual void operate() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  SubjectProxy.h
- */
-// 代理类，可以被用户看到
-#include &quot;Subject.h&quot;
-class RealSubject;
-class SubjectProxy : public Subject {
-public:
-    void operate() override;
-private:
-    void preProcess();
-    void postProcess();
-    std::unique_ptr&lt;RealSubject&gt; m_realSubject;
-}
-//  ----------------------------------------------------------------------------
-/**
- * @file  SubjectProxy.cpp
- */
-#include &quot;SubjectProxy.h&quot;
-#include &quot;RealSubject.h&quot;
-SubjectProxy::SubjectProxy()
-{
-    m_realSubject = std::make_unique&lt;RealSubject&gt;();
-}
-void SubjectProxy::operate() 
-{
-    preProcess();
-    m_realSubject-&gt;operate(); // 调用真正的实现函数
-    postProcess();
-}
-void SubjectProxy::preProcess()
-{
-    // 前处理操作
-    // ...
-}
-void SubjectProxy::postProcess() 
-{
-    // 后处理操作
-    // ...
-}
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  RealSubject.h
- */
-// 真正的实现类，不被用户看到
-#include &quot;Subject.h&quot;
-class RealSubject : public Subject {
-public:
-    void operate() override {
-        // 具体实现方法代码，一般会放在 RealSubject.cpp 中
-        // ...
-    }
-    // 其他各种复杂的操作代码
-    // ...
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-// 调用代码
-#include &quot;SubjectProxy.h&quot;
-int main()
-{
-    std::unique&lt;Subject&gt; subj = std::make_unique&lt;SubjectProxy&gt;();
-    subj-&gt;operate();
-    
-    // ...
-    
-    return 0;
-}
-</code></pre>
-<p>代理模式不一定要使用如上述代码的纯虚接口类与继承这样的方式来实现，上述代码仅仅是其中一种方式的演示；</p>
-<p>实际工程中，代理模式实现是十分复杂的，而且会含有很多变化，并没有固定的套路。例如：STL 中的智能指针、Qt 库中 QString 的写时复制技术等，都包含了代理模式的影子，关于这些技术的详细阐述，并非本文重点，故不赘述，若要了解，可自行查阅资料；</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
-<li>《C++设计模式》课程，李建忠主讲；</li>
-<li><a href="https://blog.csdn.net/Kobe51920/article/details/104217965">《C++设计模式：代理模式》博客， &lt;ZY-JIMMY&gt;</a>；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[单例模式]]></title>
-        <id>https://wangtongxuewang.github.io/post/dan-li-mo-shi/</id>
-        <link href="https://wangtongxuewang.github.io/post/dan-li-mo-shi/">
-        </link>
-        <updated>2021-12-13T00:23:57.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="单例模式">单例模式</h1>
-<h2 id="目的与概念">目的与概念</h2>
-<p>在开发中有时会需要确保系统中某一个类只有一个对象实例，并提供一个全局访问点以被所有模块共享，这应由对象提供者而不是使用者来保证；</p>
-<p>例如：日志系统应只有一个，若有多个的话，可能会导致日志的混乱，而日志模块的提供者有责任约束其使用者，确保使用者的程序中只能有一个日志系统实例；</p>
-<p>实现上述目的的方法就是单例模式。单例模式实际上是对唯一变量的一种封装，约束了其使用方式，让开发者更方便更安全地访问此变量；同时其可以让单例对象如同普通对象一样，作为参数在其他模块中使用，而其他模块不必知道其是否是单例；</p>
-<p>单例模式恰当使用可以起到良好的效果，但是过度使用反而会阻碍程序的解耦，所以在实际使用中需要仔细考量；</p>
-<p>根据单例对象构建的时机的不同，可将单例模式分为两种：</p>
-<ul>
-<li>懒汉方式，在首次使用时构建单例对象，即用时间换空间；</li>
-<li>饿汉方式，在程序启动时构建单例对象，即用空间换时间；</li>
-</ul>
-<h2 id="代码示例">代码示例</h2>
-<p>懒汉方式与饿汉方式的代码描述如下所示：</p>
-<ul>
-<li>懒汉方式：</li>
-</ul>
-<pre><code class="language-C++">//  ----------------------------------------------------------------------------
-/**
- * @file  Singleton.h
- */
-// 本例中使用 Scott Meyers，《Effective C++》 中的 Singleton，这种方式在C++11之后保证线程安全。
-class Singleton {
-public:
-	Singleton(const Singleton&amp; rhs) = delete;
-	Singleton&amp; operator=(const Singleton&amp; rhs) = delete;
-    Singleton(Singleton&amp;&amp; rhs) = delete;
-    Singleton&amp; operator=(Singleton&amp;&amp; rhs) = delete;
-    ~Singleton() {}
-    
-	static Singleton&amp; getInstance() {
-		static Singleton s_instance;
-		return s_instance;
-	}
-private:
-    Singleton() {}
-    // 其他非静态成员变量
-    // ...
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-// 调用代码
-#include &quot;Singleton.h&quot;
-int main()
-{
-    // 类型为引用
-    Singleton &amp; singleInst = Singleton::getInstance();
-    // ...
-    return 0;
-}
-</code></pre>
-<ul>
-<li>饿汉方式：</li>
-</ul>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Singleton.h
- */
-// 此方式无需担心线程安全性问题，但是可能存在初始化顺序不确定问题
-class Singleton {
-public:
-	Singleton(const Singleton&amp; rhs) = delete;
-	Singleton&amp; operator=(const Singleton&amp; rhs) = delete;
-    Singleton(Singleton&amp;&amp; rhs) = delete;
-    Singleton&amp; operator=(Singleton&amp;&amp; rhs) = delete;
-    ~Singleton() {}
-
-	static Singleton&amp; getInstance() {
-		return s_instance;
-	}
-private:
-    Singleton() {}
-	static Singleton s_instance;
-    // 其他非静态成员变量
-    // ...
-};
-//  ----------------------------------------------------------------------------
-/**
- * @file  Singleton.cpp
- */
-// 静态变量类外初始化
-#include &quot;Singleton.h&quot;
-Singleton Singleton::s_instance = {};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-// 调用代码
-#include &quot;Singleton.h&quot;
-int main()
-{
-    // 类型为引用
-    Singleton &amp; singleInst = Singleton::getInstance();
-    // ...
-    return 0;
-}
-</code></pre>
-<h2 id="qt中的单例模式">Qt中的单例模式</h2>
-<p>单例模式使用十分广泛，例如 Qt 中 QCoreApplication 的实现也使用了单例模式，其代码片段如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  qapplication.h
- * @note  引自 Qt 库中的 include/QtCore/qapplication.h
- */
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (static_cast&lt;QApplication *&gt;(QCoreApplication::instance()))
-// ...
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  qcoreapplication.h
- * @note  引自 Qt 库中的 include/QtCore/qcoreapplication.h
- */
-class QCoreApplication {
-    // ...
-    static QCoreApplication *instance() { return self; }
-    // ...
-private:
-    // ...
-    static QCoreApplication *self;
-
-    Q_DISABLE_COPY(QCoreApplication)
-    // ...
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-// 调用代码
-#include &lt;QApplication&gt;
-#include &lt;QString&gt;
-int main()
-{
-    // ...
-    QString sheetStr = qApp-&gt;styleSheet();
-    qDebug() &lt;&lt; sheetStr;
-    // ...
-    
-    return 0;
-}
-</code></pre>
-<h2 id="参考">参考</h2>
-<ul>
-<li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
-<li>《C++设计模式》课程，李建忠主讲；</li>
-<li><a href="https://zhuanlan.zhihu.com/p/37469260">《C++ 单例模式》博客， &lt;Arkin&gt; </a>；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[工厂模式]]></title>
-        <id>https://wangtongxuewang.github.io/post/gong-han-mo-shi/</id>
-        <link href="https://wangtongxuewang.github.io/post/gong-han-mo-shi/">
-        </link>
-        <updated>2021-12-04T03:25:16.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="工厂模式">工厂模式</h1>
-<h2 id="概念">概念</h2>
-<p>工厂模式是创建型模式中的一种，其目的是：隐藏各个对象创建的具体实现细节，仅通过抽象接口进行模块之间的调用；</p>
-<p>工厂模式的优点是：隔离了两个模块之间的源码依赖关系，防止了两个模块越过自己的边界而侵入对方，从而两个模块可以独立开发、独立编译、独立部署，互不影响；</p>
-<p>若整个软件代码能够确定永远是单体程序且不关心编译时间，那么工厂模式的作用并不会特别明显，</p>
-<p>工厂模式的实现关键是，创建纯虚接口，并通过多态，将创建对象的工作延迟到子类执行，由子类确定实例化的对象；</p>
-<p>工厂模式大致有：简单工厂、工厂方法、抽象工厂三种，现分述如下；</p>
-<h2 id="简单工厂">简单工厂</h2>
-<p>简单工厂模式，顾名思义，是工厂模式中较为简单的一个，没有其他多余的东西，朴素地展示了工厂模式中最精髓的观点：隐藏类创建实现细节，实现类使用者与提供者的源码隔离；</p>
-<p>为了说明简单工厂模式，使用生产自行车的场景来说明，自行车有美利达、捷安特与喜德盛三个产品类，使用工厂类来创建这三种产品，示例代码如下所示；</p>
-<p>产品类代码由：产品纯虚接口类、继承了纯虚接口的三种品牌的自行车产品类所组成，具体如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Bicycle.h
- */
-class Bicycle {
-public:
-	virtual ~Bicycle() {}
-	virtual void show() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class MeridaBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : MeridaBicycle.&quot; &lt;&lt; endl; }
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class GiantBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : GiantBicycle.&quot; &lt;&lt; std::endl; }
-};
- 
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class XdsBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : XdsBicycle.&quot; &lt;&lt; std::endl; }
-};
-</code></pre>
-<p>工厂类代码的头文件中是不包含产品类的代码的，只有实现文件中才包含产品类代码，具体如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  factory.h
- */
-class Bicycle;
-
-enum ProductType {
-    Merida,
-    Giant,
-    Xds
-};
-
-class Factory {
-public:
-	Bicycle * createBicycle(const ProductType type);
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  factory.cpp
- */
-#include &quot;factory.h&quot;
-#include &quot;MeridaBicycle.h&quot;
-#include &quot;GiantBicycle.h&quot;
-#include &quot;XdsBicycle.h&quot;
-Bicycle* Factory::creatBicycle(const ProductType type)
-{
-    switch(type) {
-	case Merida: 
-		return new MeridaBicycle();
-	case Giant:
-		return new GiantBicyle();
-	case Xds:
-		return new XdsBicycle();
-	default:
-        return nullptr;
-    }
-}
-</code></pre>
-<p>使用产品类的代码中只需要包含工厂类的头文件即可，完全没有引入产品类的源码，具体如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-#include &quot;factory.h&quot;
-int main()
-{
-    Factory builder;
-    Bicycle* pMerida = builder.createBicycle(Merida);
-    Bicycle* pGiant = builder.createBicycle(Giant);
-    Bicycle* pXds = builder.createBicycle(Xds);
-    
-    pMerida-&gt;show();
-    pGiant-&gt;show();
-    pXds-&gt;show();
-    
-    delete pMerida;
-    delete pGiant;
-    delete pXds;
-    
-    return 0;
-}
-</code></pre>
-<p>通过上述代码可知，使用简单工厂模式后，调用者不会引入对于产品类的源码的依赖，完全不知道产品类的具体实现细节，只需使用工厂类的抽象接口即可，这样就实现了不同模块之间的源码依赖；</p>
-<p>但是简单工厂模式有一个缺点，当需要增加新的产品类时，要修改工厂类的源码，这违背了开闭原则，而下述的工厂方法改进了这一点；</p>
-<h2 id="工厂方法">工厂方法</h2>
-<p>针对简单工厂的缺陷，可将工厂类改为纯虚接口，并添加继承于纯虚接口类的具体工厂类，让产品类的创建延迟到工厂子类中实现；</p>
-<p>当增加新的产品类时，同时添加一个继承于纯虚工厂类的子工厂类来实现新产品类的创建，这样就不用修改原工厂类的源码，虽然增加了部分类定义的代码，但是换来了开闭原则，这还是值得的；</p>
-<p>产品类的代码与简单工厂是一样的，示例代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Bicycle.h
- */
-class Bicycle {
-public:
-	virtual ~Bicycle() {}
-	virtual void show() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class MeridaBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : MeridaBicycle.&quot; &lt;&lt; endl; }
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class GiantBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : GiantBicycle.&quot; &lt;&lt; std::endl; }
-};
- 
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class XdsBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : XdsBicycle.&quot; &lt;&lt; std::endl; }
-};
-</code></pre>
-<p>不同的是工厂类的实现代码，需要创建纯虚工厂类，并让工厂子类继承于它：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Factory.h 
- */
-class Bicycle;
-class Factory {
-public:
-    virtual ~Factory() {}
-    virtual Bicycle* createBicycle() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.h 
- */
-#include &quot;Factory.h&quot;
-class MeridaFactory : public Factory {
-public:
-	Bicycle * createBicycle() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.cpp
- */
-#include &quot;MeridaFactory.h&quot;
-Bicycle* MeridaFactory::createBicycle()
-{
-    return new MeridaBicycle();
-}
-
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantFactory.h 
- */
-#include &quot;Factory.h&quot;
-class GiantFactory : public Factory {
-public:
-	Bicycle * createBicyle() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantFactory.cpp
- */
-#include &quot;GiantFactory.h&quot;
-Bicycle* GiantFactory::createBicyle()
-{
-    return new GiantBicycle();
-}
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsFactory.h 
- */
-#include &quot;Factory.h&quot;
-class XdsFactory : public Factory {
-public:
-	Bicycle * createBicyle() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsFactory.cpp 
- */
-#include &quot;XdsFactory.h&quot;
-Bicycle* XdsFactory::createBicycle()
-{
-    return new XdsBicycle();
-}
-</code></pre>
-<p>调用工厂类的代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp 
- */
-#include &quot;MeridaFactory.h&quot;
-#include &quot;GiantFactory.h&quot;
-#include &quot;XdsFactory.h&quot;
-int main()
-{
-    MeridaFactory meridaBuilder;
-    GiantFactory giantBuilder;
-    XdsFactory xdsBuilder;
-    
-    Bicycle* pMerida = meridaBuilder.createBicycle();
-    Bicycle* pGiant = giantBuilder.createBicycle();
-    Bicycle* pXds = xdsBuilder.createBicycle();
-    
-    pMerida-&gt;show();
-    pGiant-&gt;show();
-    pXds-&gt;show();
-    
-    delete pMerida;
-    delete pGiant;
-    delete pXds;
-    
-    return 0;
-}
-</code></pre>
-<p>从上述代码可看出，相对于简单工厂，当有新的产品时，无需修改抽象工厂类代码，只要添加继承于抽象工厂类的子类即可，遵循了开闭原则；</p>
-<p>综上，工厂方法成功实现了两大功能：</p>
-<ul>
-<li>隐藏产品类创建细节，遵循了依赖倒置原则；</li>
-<li>不修改工厂类源码的情况下添加新产品类，遵循了开闭原则；</li>
-</ul>
-<h2 id="抽象工厂">抽象工厂</h2>
-<p>有时在开发中还会遇到一个抽象工厂类需要创建多种有一定关联性的产品类的需求，由于多种产品类有一定关联性，所以放在一个抽象工厂类中创建更为合适；</p>
-<p>这时只需要在工厂方法的基础上作简单的扩展，提供更多创建产品类的接口即可，即衍生版的工厂方法，称之为抽象工厂；</p>
-<p>若无需创建多种对象，则无需使用抽象工厂，使用工厂方法即可；</p>
-<p>仍以生产自行车的厂商为例，若这三个品牌要添加电动车生产线，则产品类的代码需要添加电动车抽象产品类和三个子类，而自行车产品类代码不变，具体如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Bicycle.h
- */
-class Bicycle {
-public:
-	virtual ~Bicycle() {}
-	virtual void show() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class MeridaBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : MeridaBicycle.&quot; &lt;&lt; endl; }
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class GiantBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : GiantBicycle.&quot; &lt;&lt; std::endl; }
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class XdsBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : XdsBicycle.&quot; &lt;&lt; std::endl; }
-};
-</code></pre>
-<p>下述代码为新添加的电动车产品类代码：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Ebike.h 
- */
-class Ebike {
-public:
-	virtual ~Ebike() {}
-	virtual void show() = 0;
-};
- 
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaEbike.h 
- */
-#include &quot;Ebike.h&quot;
-class MeridaEbike : public Ebike {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : MeridaEbike.&quot; &lt;&lt; std::endl; }
-};
- 
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantEbike.h 
- */
-#include &quot;Ebike.h&quot;
-class GiantEbike : public Ebike {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : GiantEbike.&quot; &lt;&lt; std::endl; }
-};
- 
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsEbike.h 
- */
-#include &quot;Ebike.h&quot;
-class XdsEbike : public Ebike {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : XdsEbike.&quot; &lt;&lt; std::endl; }
-};
-</code></pre>
-<p>抽象工厂类中需要添加创建电动车的接口，各个子类也要同步添加并负责实现创建电动车产品类；</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Factory.h 
- */
-class Factory {
-public:
-    virtual Bicycle * createBicyle() = 0;
-    virtual Ebike * createEbike() = 0;
-    virtual ~Factory() {}
-};
-
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.h 
- */
-#include &quot;Factory.h&quot;
-class MeridaFactory : public Factory {
-public:
-    Bicycle * createBicyle() override;
-    Ebike * createEbike() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.cpp
- */
-#include &quot;MeridaBicycle.h&quot;
-#include &quot;MeridaEbike.h&quot;
-Bicycle* MeridaFactory::createBicyle()
-{
-    return new MeridaBicyle();
-}
-
-Ebike * MeridaFactory::createEbike()
-{
-    return new MeridaEbike();
-}
-
-
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantFactory.h 
- */
-#include &quot;Factory.h&quot;
-class GiantFactory : public Factory {
-public:
-    Bicycle * createBicyle() override;
-    Ebike * createEbike() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantFactory.cpp
- */
-#include &quot;GiantBicycle.h&quot;
-#include &quot;GiantEbike.h&quot;
-Bicycle* GiantFactory::createBicyle()
-{
-    return new GiantBicyle();
-}
-
-Ebike * GiantFactory::createEbike()
-{
-    return new GiantEbike();
-}
-
-
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsFactory.h 
- */
-#include &quot;Factory.h&quot;
-class XdsFactory : public Factory {
-public:
-    Bicycle * createBicyle() override;
-    Ebike * createEbike() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsFactory.cpp
- */
-#include &quot;XdsBicycle.h&quot;
-#include &quot;XdsEbike.h&quot;
-Bicycle* XdsFactory::createBicyle()
-{
-    return new XdsBicyle();
-}
-
-Ebike * XdsFactory::createEbike()
-{
-    return new XdsEbike();
-}
-</code></pre>
-<p>调用代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp 
- */
-#include &quot;MeridaFactory.h&quot;
-#include &quot;GiantFactory.h&quot;
-#include &quot;XdsFactory.h&quot;
-int main()
-{
-    MeridaFactory meridaBuilder;
-    Bicycle* pMeridaBicyle = meridaBuilder.createBicyle();
-    Ebike* pMeridaEbike = meridaBuilder.createEbike();
-    pMeridaBicyle-&gt;show();
-    pMeridaEbike-&gt;show();
-    delete pMeridaBicyle;
-    delete pMeridaEbike;
-    
-    GiantFactory giantBuilder;
-    Bicycle* pGiantBicyle = giantBuilder.createBicyle();
-    Ebike* pGiantEbike = giantBuilder.createEbike();
-    pGiantBicyle-&gt;show();
-    pGiantEbike-&gt;show();
-    delete pGiantBicyle;
-    delete pGiantEbike;
-    
-    XdsFactory xdsBuilder;
-    Bicycle* pXdsBicyle = xdsBuilder.createBicyle();
-    Ebike* pXdsEbike = xdsBuilder.createEbike();
-    pXdsBicyle-&gt;show();
-    pXdsEbike-&gt;show();
-    delete pXdsBicyle;
-    delete pXdsEbike;
-    
-    return 0;
-}
-</code></pre>
-<h2 id="关于资源回收">关于资源回收</h2>
-<p>工厂模式重点关注了类对象创建的问题，而关于类对象销毁的收尾工作并没有提及；</p>
-<p>首先，考虑将对象的销毁放在对象的提供方--工厂类中。这样做有一个缺点，即当工厂类的变量生命周期结束时，产品类对象也随即销毁，而很多时候需要产品类对象的生命周期比工厂的生命周期长很多；同时由于“工厂模式”这样的字面含义就是“生产产品”，并没有销毁的意思；所以无论从需求上还是语义上，这样做都是不合理的；</p>
-<p>接下来考虑将对象的销毁放在对象的使用方中。除非在工厂类接口的文档中进行详细说明，否则使用方只知道得到了一个对象的指针，并不了解其生命周期由谁管理，使用后贸然销毁可能会带来重复销毁的隐患；同时，另外一个问题是在具有一定规模的程序中常常会忘记销毁资源从而引起内存泄漏；所以这样做也是不合适的；</p>
-<p>比较好的解决方法是使用智能指针 std::unique_ptr&lt;T&gt;，将资源的生命周期交由智能指针管理，这样也符合C++RAII的思想理念，同时也不用考虑资源由谁回收的问题了。具体做法是在工厂类中的对象创建函数返回一个智能指针，而不是一个裸指针，示例代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Factory.h 
- */
-#include &lt;memory&gt;
-class Factory {
-public:
-    virtual std::unique_ptr&lt;Bicycle&gt; createBicyle() = 0;
-    virtual ~Factory() {}
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.h 
- */
-#include &quot;Factory.h&quot;
-class MeridaFactory : public Factory {
-public:
-    std::unique_ptr&lt;Bicycle&gt; createBicyle() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.cpp
- */
-#include &quot;MeridaBicycle.h&quot;
-std::unique_ptr&lt;Bicycle&gt; MeridaFactory::createBicyle()
-{
-    return std::make_unique&lt;Bicycle&gt;();
-}
-</code></pre>
-<h2 id="总结">总结</h2>
-<p>工厂模式是不同模块之间传递资源的重要方式，其优点是资源的使用者无需了解资源提供者的实现细节，无源码依赖，只需遵循共同的抽象接口即可，这样两个模块就完成了解耦，相互独立，可以沿着各自方向变化；</p>
-<p>简单工厂仅实现了最基本的源码隔离，遵循了依赖倒置原则；</p>
-<p>工厂方法在简单工厂的基础上，还实现了当增加产品时仅扩展代码而不破坏代码的功能，遵循了开闭原则，</p>
-<p>而抽象工厂仅在工厂方法的基础上拓展了创建产品的种类，其核心仍与工厂方法相同，无质的变化；</p>
-<p>因此工厂方法是这三个工厂模式中最为重要的一个，其包含了两大核心观点：依赖倒置原则与开闭原则；其可作为工厂模式的典型代表在开发中多加理解与恰当应用；</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
-<li>《C++设计模式》课程，李建忠主讲；</li>
-<li>《一文让你搞懂设计模式》博客，作者网名&lt;程序喵大人&gt;；</li>
-<li><a href="https://www.cnblogs.com/xiaolincoding/p/11524376.html">《C++ 深入浅出工厂模式(初识篇)》博客， &lt;小林coding&gt;</a>；</li>
-<li><a href="https://www.cnblogs.com/xiaolincoding/p/11524401.html">《C++ 深入浅出工厂模式(进阶篇)》博客， &lt;小林coding&gt;</a>；</li>
-<li><a href="https://blog.csdn.net/silangquan/article/details/20492293">《三种工厂模式的C++实现》博客， &lt;拳四郎&gt;</a>；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>]]></content>
-    </entry>
-</feed>
+  </body>
+</html>
