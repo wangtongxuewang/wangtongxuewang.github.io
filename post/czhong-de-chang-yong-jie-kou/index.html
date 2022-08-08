@@ -4,100 +4,90 @@
     <meta charset="utf-8" >
 
 <title>C++中的常用接口 | 王同学的博客</title>
+<meta name="description" content="coding &amp;&amp; writing">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1659953620980">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1659953451922">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
 
 
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
 
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 
-
-    <meta name="description" content="C++中的常用接口
-目的
-某一模块开发完成后，需要提供一个对外接口，让模块代码与调用者代码可以独立变化而互不影响，同时也能隐藏模块的实现细节；
-pImpl技法
-当自己的模块进行升级时，若接口类中成员变量发生变化，那么调用者的代码就需要重新编..." />
-    <meta name="keywords" content="" />
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://wangtongxuewang.github.io">
-        <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1659953451922" class="site-logo">
-        <h1 class="site-title">王同学的博客</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
-      
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
-      
-        
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
-        
-      
-        
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
-      
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
-      
-    </div>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://wangtongxuewang.github.io">王同学的博客</a></h3>
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
-      
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </div>
-    <div class="site-description">
-      coding && writing
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">RSS</a>
-    </div>
-  </div>
-</div>
-
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">C++中的常用接口</h2>
-            <div class="post-date">2022-01-15</div>
+          <li>
             
-            <div class="post-content" v-pre>
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>C++中的常用接口</h1>
+            <p class="article-meta">
+              2022-01-15
+              
+            </p>
+            
+            <div class="post-content">
               <h1 id="c中的常用接口">C++中的常用接口</h1>
 <h2 id="目的">目的</h2>
 <p>某一模块开发完成后，需要提供一个对外接口，让模块代码与调用者代码可以独立变化而互不影响，同时也能隐藏模块的实现细节；</p>
@@ -244,46 +234,178 @@ double foo(double x)
 </div>
 
             </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://wangtongxuewang.github.io/post/stdvector-de-emplace_back/">
-                  <h3 class="post-title">
-                    std::vector的emplace_back()
-                  </h3>
-                </a>
-              </div>
-            
-
-            
-
-          </div>
-
+          </article>
         </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://wangtongxuewang.github.io/post/stdvector-de-emplace_back/">
+                <h3 class="post-title">
+                  std::vector的emplace_back()
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1659953620980" class="no-responsive avatar">
+    <div class="text-muted">coding && writing</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/ping-mian-mian-ji-suan-fa-ji-ying-yong/">平面面积算法及应用</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/c-bian-yi-jia-su-jian-jie/">C++ 编译加速简介</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/stdstring_view-jian-yao-jie-shao/">std::string_view 简要介绍</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/lambda-biao-da-shi-jian-dan-shi-yong/">lambda 表达式简单使用</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/czhong-de-chang-yong-jie-kou/">C++中的常用接口</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/stdvector-de-emplace_back/">std::vector的emplace_back()</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/she-ji-mo-shi-xiao-jie/">设计模式小结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/dai-li-mo-shi/">代理模式</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/dan-li-mo-shi/">单例模式</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wangtongxuewang.github.io/post/gong-han-mo-shi/">工厂模式</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 <script type="application/javascript">
 
 AOS.init();
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+hljs.initHighlightingOnLoad()
 
 </script>
-
-
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>
-    hljs.initHighlightingOnLoad()
-  </script>
-
 
 
 
