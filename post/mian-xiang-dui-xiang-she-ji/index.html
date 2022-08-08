@@ -1,94 +1,99 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>面向对象设计 | 王同学的博客</title>
-<meta name="description" content="coding &amp;&amp; writing">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1659953620980">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1659953777535">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="面向对象设计 | 王同学的博客 - Atom Feed" href="https://wangtongxuewang.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
+    <meta name="description" content="面向对象设计
+目标与方法
+随着程序代码不断扩张，软件中各部分交互关系日益庞杂，其维护扩展变得异常困难，为应对此危机，面向对象设计方法得到不断发展，其要实现的目标与所用方法如下：
 
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-
+实现目标：模块相互独立，即插即用；
+使用方法：约定抽象接口，..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
-  
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="https://wangtongxuewang.github.io">王同学的博客</a></h3>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://wangtongxuewang.github.io">
+  <img class="avatar" src="https://wangtongxuewang.github.io/images/avatar.png?v=1659953777535" alt="">
+  </a>
+  <h1 class="site-title">
+    王同学的博客
+  </h1>
+  <p class="site-description">
+    coding && writing
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        
-          <li>
-            
-              <a href="/" class="menu">
-                首页
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/archives" class="menu">
-                归档
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/tags" class="menu">
-                标签
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/post/about" class="menu">
-                关于
-              </a>
-            
-          </li>
-        
-      </ul>
-    </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
-</nav>
+</div>
 
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          <article class="article">
-            <h1>面向对象设计</h1>
-            <p class="article-meta">
-              2021-07-03
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              面向对象设计
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-07-03
+              </span>
+              <span>
+                5 min read
+              </span>
               
-            </p>
+            </div>
             
-            <div class="post-content">
-              <h1 id="面向对象设计">面向对象设计</h1>
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="面向对象设计">面向对象设计</h1>
 <h2 id="目标与方法">目标与方法</h2>
 <p>随着程序代码不断扩张，软件中各部分交互关系日益庞杂，其维护扩展变得异常困难，为应对此危机，面向对象设计方法得到不断发展，其要实现的目标与所用方法如下：</p>
 <ul>
@@ -149,182 +154,96 @@
         本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
     </div>
 </div>
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1">面向对象设计</a>
+<ul>
+<li><a href="#%E7%9B%AE%E6%A0%87%E4%B8%8E%E6%96%B9%E6%B3%95">目标与方法</a></li>
+<li><a href="#%E7%89%B9%E7%82%B9">特点</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99">基本原则</a>
+<ul>
+<li><a href="#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99-srp-single-responsibility-principle">单一职责原则 (SRP - Single Responsibility Principle)</a></li>
+<li><a href="#%E5%BC%80%E6%94%BE%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99-ocp-open-closed-principle">开放封闭原则 (OCP - Open Closed Principle)</a></li>
+<li><a href="#%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99-lsp-liskov-substitution-principle">里氏替换原则 (LSP - Liskov Substitution Principle)</a></li>
+<li><a href="#%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99-isp-interface-segregation-principle">接口隔离原则 (ISP - Interface Segregation Principle)</a></li>
+<li><a href="#%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99-dip-dependency-inversion-principle">依赖倒置原则 (DIP - Dependency Inversion Principle)</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
             </div>
           </article>
         </div>
-        <div class="paper" data-aos="fade-in">
-          
-            <div class="next-post">
-              <div class="next">
-                下一篇
-              </div>
-              <a href="https://wangtongxuewang.github.io/post/cde-zhi-lei-bie/">
-                <h3 class="post-title">
-                  C++的值类别
-                </h3>
-              </a>
-            </div>
-          
-        </div>
-        
-      </div>
 
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="https://wangtongxuewang.github.io/images/avatar.png?v=1659953620980" class="no-responsive avatar">
-    <div class="text-muted">coding && writing</div>
-    <div class="social-container">
-      
         
-      
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://wangtongxuewang.github.io/post/cde-zhi-lei-bie/">
+              <h3 class="post-title">
+                C++的值类别
+              </h3>
+            </a>
+          </div>
         
-      
+
         
-      
-        
-      
-        
-      
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/ping-mian-mian-ji-suan-fa-ji-ying-yong/">平面面积算法及应用</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/c-bian-yi-jia-su-jian-jie/">C++ 编译加速简介</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/stdstring_view-jian-yao-jie-shao/">std::string_view 简要介绍</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/lambda-biao-da-shi-jian-dan-shi-yong/">lambda 表达式简单使用</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/czhong-de-chang-yong-jie-kou/">C++中的常用接口</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/stdvector-de-emplace_back/">std::vector的emplace_back()</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/she-ji-mo-shi-xiao-jie/">设计模式小结</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/dai-li-mo-shi/">代理模式</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/dan-li-mo-shi/">单例模式</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://wangtongxuewang.github.io/post/gong-han-mo-shi/">工厂模式</a>
-            </li>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">RSS</a>
-  </div>
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://wangtongxuewang.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
 </div>
 
-
+      </div>
     </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad()
 
-<script type="application/javascript">
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-AOS.init();
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
 
-hljs.initHighlightingOnLoad()
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
 
-</script>
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
 
-
-
-
+    </script>
   </body>
 </html>
