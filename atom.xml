@@ -2,14 +2,116 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2022-08-09T08:32:57.530Z</updated>
+    <updated>2023-01-11T07:45:13.274Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
     <subtitle>coding &amp;&amp; writing</subtitle>
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2022, 王同学的博客</rights>
+    <rights>All rights reserved 2023, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[C++ 实现 map-reduce 操作]]></title>
+        <id>https://wangtongxuewang.github.io/post/c-shi-xian-map-reduce-cao-zuo/</id>
+        <link href="https://wangtongxuewang.github.io/post/c-shi-xian-map-reduce-cao-zuo/">
+        </link>
+        <updated>2023-01-11T07:36:58.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="c-实现-map-reduce-操作">C++ 实现 map-reduce 操作</h1>
+<h2 id="引言">引言</h2>
+<p>在函数式编程中，map、reduce、filter 这三种对容器的操作十分方便，Python 内置函数就直接提供了上述操作；</p>
+<p>虽然 C++ 标准库中没有直接提供上述三种操作，但借助标准库可非常容易地实现，并且通过模板可支持多种容器；</p>
+<h2 id="代码实现">代码实现</h2>
+<pre><code class="language-c++">/**
+ * *****************************************************************************
+ * @file mymapreduce.hpp
+ */
+#include &lt;algorithm&gt;
+
+namespace MyMapReduce {
+/**
+ * @brief  映射操作
+ * @param  in  - 输入容器
+ * @param  op  - 一元运算
+ * @return out - 输出容器
+ */
+template&lt;typename Container, typename UnaryOperation&gt;
+Container map(const Container &amp; in, UnaryOperation op)
+{
+    Container out(in.size());
+    std::transform(in.cbegin(), in.cend(), out.begin(), op);
+    return out;
+}
+
+/**
+ * @brief  规约操作
+ * @param  in  - 输入容器
+ * @param  op  - 二元运算
+ * @return ret - 输出结果
+ */
+template&lt;typename Container, typename BinaryOperation&gt;
+typename Container::value_type reduce(const Container &amp; in, BinaryOperation op)
+{
+    typename Container::value_type ret = *in.cbegin();
+    for (auto itr = in.cbegin() + 1; itr != in.cend(); ++itr) {
+        ret = op(ret, *itr);
+    }
+    return ret;
+}
+
+/**
+ * @brief  过滤操作
+ * @param  in   - 输入容器
+ * @param  pred - 一元谓词
+ * @return out  - 输出容器
+ */
+template&lt;typename Container, typename UnaryPredicate&gt;
+Container filter(const Container &amp; in, UnaryPredicate pred)
+{
+    Container out;
+    std::copy_if(in.cbegin(), in.cend(), std::back_inserter(out), pred);
+    return out;
+}
+} // namespace MyMapReduce
+</code></pre>
+<h2 id="测试案例">测试案例</h2>
+<pre><code class="language-c++">/**
+ * *****************************************************************************
+ * @file main.cpp
+ */
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+#include &quot;mymapreduce.hpp&quot;
+
+int main()
+{
+    std::vector&lt;double&gt; vec = {1, 2, 3, 4, 5, 6};
+    
+    auto printVec = [](const std::vector&lt;double&gt;&amp; vec) {
+        for (const double ele : vec) {
+            std::cout &lt;&lt; ele &lt;&lt; &quot;  &quot;;
+        }
+        std::cout &lt;&lt; '\n';
+    };
+
+    std::vector&lt;double&gt; vec2 = MyMapReduce::map(vec, 
+                                                [](const double x) -&gt; double { return x * x; });
+    double ret = MyMapReduce::reduce(vec, 
+                                     [](const double x, const double y) -&gt; double { return x + y; });
+    std::vector&lt;double&gt; vec3 = MyMapReduce::filter(vec, 
+                                                   [](const double x) -&gt; bool {return x&gt;3;});
+    
+    printVec(vec2);    // 1  4  9  16  25  36
+    printVec({ret});   // 21 
+    printVec(vec3);    // 4  5  6 
+    
+    return 0;
+}
+</code></pre>
+<h2 id="参考">参考</h2>
+<p><a href="https://blog.csdn.net/cracker_zhou/article/details/70832923/">Python函数式编程map()、filter()和reduce()</a>；</p>
+<p><a href="https://github.com/DragonFive/cpp11">https://github.com/DragonFive/cpp11</a>；</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[平面面积算法及应用]]></title>
         <id>https://wangtongxuewang.github.io/post/ping-mian-mian-ji-suan-fa-ji-ying-yong/</id>
@@ -854,583 +956,6 @@ int main()
 <li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
 <li>《C++设计模式》课程，李建忠主讲；</li>
 <li><a href="https://zhuanlan.zhihu.com/p/37469260">《C++ 单例模式》博客， &lt;Arkin&gt; </a>；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[工厂模式]]></title>
-        <id>https://wangtongxuewang.github.io/post/gong-han-mo-shi/</id>
-        <link href="https://wangtongxuewang.github.io/post/gong-han-mo-shi/">
-        </link>
-        <updated>2021-12-04T03:25:16.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="工厂模式">工厂模式</h1>
-<h2 id="概念">概念</h2>
-<p>工厂模式是创建型模式中的一种，其目的是：隐藏各个对象创建的具体实现细节，仅通过抽象接口进行模块之间的调用；</p>
-<p>工厂模式的优点是：隔离了两个模块之间的源码依赖关系，防止了两个模块越过自己的边界而侵入对方，从而两个模块可以独立开发、独立编译、独立部署，互不影响；</p>
-<p>若整个软件代码能够确定永远是单体程序且不关心编译时间，那么工厂模式的作用并不会特别明显，</p>
-<p>工厂模式的实现关键是，创建纯虚接口，并通过多态，将创建对象的工作延迟到子类执行，由子类确定实例化的对象；</p>
-<p>工厂模式大致有：简单工厂、工厂方法、抽象工厂三种，现分述如下；</p>
-<h2 id="简单工厂">简单工厂</h2>
-<p>简单工厂模式，顾名思义，是工厂模式中较为简单的一个，没有其他多余的东西，朴素地展示了工厂模式中最精髓的观点：隐藏类创建实现细节，实现类使用者与提供者的源码隔离；</p>
-<p>为了说明简单工厂模式，使用生产自行车的场景来说明，自行车有美利达、捷安特与喜德盛三个产品类，使用工厂类来创建这三种产品，示例代码如下所示；</p>
-<p>产品类代码由：产品纯虚接口类、继承了纯虚接口的三种品牌的自行车产品类所组成，具体如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Bicycle.h
- */
-class Bicycle {
-public:
-	virtual ~Bicycle() {}
-	virtual void show() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class MeridaBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : MeridaBicycle.&quot; &lt;&lt; endl; }
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class GiantBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : GiantBicycle.&quot; &lt;&lt; std::endl; }
-};
- 
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class XdsBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : XdsBicycle.&quot; &lt;&lt; std::endl; }
-};
-</code></pre>
-<p>工厂类代码的头文件中是不包含产品类的代码的，只有实现文件中才包含产品类代码，具体如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  factory.h
- */
-class Bicycle;
-
-enum ProductType {
-    Merida,
-    Giant,
-    Xds
-};
-
-class Factory {
-public:
-	Bicycle * createBicycle(const ProductType type);
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  factory.cpp
- */
-#include &quot;factory.h&quot;
-#include &quot;MeridaBicycle.h&quot;
-#include &quot;GiantBicycle.h&quot;
-#include &quot;XdsBicycle.h&quot;
-Bicycle* Factory::creatBicycle(const ProductType type)
-{
-    switch(type) {
-	case Merida: 
-		return new MeridaBicycle();
-	case Giant:
-		return new GiantBicyle();
-	case Xds:
-		return new XdsBicycle();
-	default:
-        return nullptr;
-    }
-}
-</code></pre>
-<p>使用产品类的代码中只需要包含工厂类的头文件即可，完全没有引入产品类的源码，具体如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-#include &quot;factory.h&quot;
-int main()
-{
-    Factory builder;
-    Bicycle* pMerida = builder.createBicycle(Merida);
-    Bicycle* pGiant = builder.createBicycle(Giant);
-    Bicycle* pXds = builder.createBicycle(Xds);
-    
-    pMerida-&gt;show();
-    pGiant-&gt;show();
-    pXds-&gt;show();
-    
-    delete pMerida;
-    delete pGiant;
-    delete pXds;
-    
-    return 0;
-}
-</code></pre>
-<p>通过上述代码可知，使用简单工厂模式后，调用者不会引入对于产品类的源码的依赖，完全不知道产品类的具体实现细节，只需使用工厂类的抽象接口即可，这样就实现了不同模块之间的源码依赖；</p>
-<p>但是简单工厂模式有一个缺点，当需要增加新的产品类时，要修改工厂类的源码，这违背了开闭原则，而下述的工厂方法改进了这一点；</p>
-<h2 id="工厂方法">工厂方法</h2>
-<p>针对简单工厂的缺陷，可将工厂类改为纯虚接口，并添加继承于纯虚接口类的具体工厂类，让产品类的创建延迟到工厂子类中实现；</p>
-<p>当增加新的产品类时，同时添加一个继承于纯虚工厂类的子工厂类来实现新产品类的创建，这样就不用修改原工厂类的源码，虽然增加了部分类定义的代码，但是换来了开闭原则，这还是值得的；</p>
-<p>产品类的代码与简单工厂是一样的，示例代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Bicycle.h
- */
-class Bicycle {
-public:
-	virtual ~Bicycle() {}
-	virtual void show() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class MeridaBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : MeridaBicycle.&quot; &lt;&lt; endl; }
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class GiantBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : GiantBicycle.&quot; &lt;&lt; std::endl; }
-};
- 
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class XdsBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : XdsBicycle.&quot; &lt;&lt; std::endl; }
-};
-</code></pre>
-<p>不同的是工厂类的实现代码，需要创建纯虚工厂类，并让工厂子类继承于它：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Factory.h 
- */
-class Bicycle;
-class Factory {
-public:
-    virtual ~Factory() {}
-    virtual Bicycle* createBicycle() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.h 
- */
-#include &quot;Factory.h&quot;
-class MeridaFactory : public Factory {
-public:
-	Bicycle * createBicycle() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.cpp
- */
-#include &quot;MeridaFactory.h&quot;
-Bicycle* MeridaFactory::createBicycle()
-{
-    return new MeridaBicycle();
-}
-
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantFactory.h 
- */
-#include &quot;Factory.h&quot;
-class GiantFactory : public Factory {
-public:
-	Bicycle * createBicyle() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantFactory.cpp
- */
-#include &quot;GiantFactory.h&quot;
-Bicycle* GiantFactory::createBicyle()
-{
-    return new GiantBicycle();
-}
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsFactory.h 
- */
-#include &quot;Factory.h&quot;
-class XdsFactory : public Factory {
-public:
-	Bicycle * createBicyle() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsFactory.cpp 
- */
-#include &quot;XdsFactory.h&quot;
-Bicycle* XdsFactory::createBicycle()
-{
-    return new XdsBicycle();
-}
-</code></pre>
-<p>调用工厂类的代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp 
- */
-#include &quot;MeridaFactory.h&quot;
-#include &quot;GiantFactory.h&quot;
-#include &quot;XdsFactory.h&quot;
-int main()
-{
-    MeridaFactory meridaBuilder;
-    GiantFactory giantBuilder;
-    XdsFactory xdsBuilder;
-    
-    Bicycle* pMerida = meridaBuilder.createBicycle();
-    Bicycle* pGiant = giantBuilder.createBicycle();
-    Bicycle* pXds = xdsBuilder.createBicycle();
-    
-    pMerida-&gt;show();
-    pGiant-&gt;show();
-    pXds-&gt;show();
-    
-    delete pMerida;
-    delete pGiant;
-    delete pXds;
-    
-    return 0;
-}
-</code></pre>
-<p>从上述代码可看出，相对于简单工厂，当有新的产品时，无需修改抽象工厂类代码，只要添加继承于抽象工厂类的子类即可，遵循了开闭原则；</p>
-<p>综上，工厂方法成功实现了两大功能：</p>
-<ul>
-<li>隐藏产品类创建细节，遵循了依赖倒置原则；</li>
-<li>不修改工厂类源码的情况下添加新产品类，遵循了开闭原则；</li>
-</ul>
-<h2 id="抽象工厂">抽象工厂</h2>
-<p>有时在开发中还会遇到一个抽象工厂类需要创建多种有一定关联性的产品类的需求，由于多种产品类有一定关联性，所以放在一个抽象工厂类中创建更为合适；</p>
-<p>这时只需要在工厂方法的基础上作简单的扩展，提供更多创建产品类的接口即可，即衍生版的工厂方法，称之为抽象工厂；</p>
-<p>若无需创建多种对象，则无需使用抽象工厂，使用工厂方法即可；</p>
-<p>仍以生产自行车的厂商为例，若这三个品牌要添加电动车生产线，则产品类的代码需要添加电动车抽象产品类和三个子类，而自行车产品类代码不变，具体如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Bicycle.h
- */
-class Bicycle {
-public:
-	virtual ~Bicycle() {}
-	virtual void show() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class MeridaBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : MeridaBicycle.&quot; &lt;&lt; endl; }
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class GiantBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : GiantBicycle.&quot; &lt;&lt; std::endl; }
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsBicycle.h 
- */
-#include &quot;Bicycle.h&quot;
-class XdsBicycle : public Bicycle {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : XdsBicycle.&quot; &lt;&lt; std::endl; }
-};
-</code></pre>
-<p>下述代码为新添加的电动车产品类代码：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Ebike.h 
- */
-class Ebike {
-public:
-	virtual ~Ebike() {}
-	virtual void show() = 0;
-};
- 
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaEbike.h 
- */
-#include &quot;Ebike.h&quot;
-class MeridaEbike : public Ebike {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : MeridaEbike.&quot; &lt;&lt; std::endl; }
-};
- 
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantEbike.h 
- */
-#include &quot;Ebike.h&quot;
-class GiantEbike : public Ebike {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : GiantEbike.&quot; &lt;&lt; std::endl; }
-};
- 
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsEbike.h 
- */
-#include &quot;Ebike.h&quot;
-class XdsEbike : public Ebike {
-public:
-	void show() { std::cout &lt;&lt; &quot;product : XdsEbike.&quot; &lt;&lt; std::endl; }
-};
-</code></pre>
-<p>抽象工厂类中需要添加创建电动车的接口，各个子类也要同步添加并负责实现创建电动车产品类；</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Factory.h 
- */
-class Factory {
-public:
-    virtual Bicycle * createBicyle() = 0;
-    virtual Ebike * createEbike() = 0;
-    virtual ~Factory() {}
-};
-
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.h 
- */
-#include &quot;Factory.h&quot;
-class MeridaFactory : public Factory {
-public:
-    Bicycle * createBicyle() override;
-    Ebike * createEbike() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.cpp
- */
-#include &quot;MeridaBicycle.h&quot;
-#include &quot;MeridaEbike.h&quot;
-Bicycle* MeridaFactory::createBicyle()
-{
-    return new MeridaBicyle();
-}
-
-Ebike * MeridaFactory::createEbike()
-{
-    return new MeridaEbike();
-}
-
-
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantFactory.h 
- */
-#include &quot;Factory.h&quot;
-class GiantFactory : public Factory {
-public:
-    Bicycle * createBicyle() override;
-    Ebike * createEbike() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  GiantFactory.cpp
- */
-#include &quot;GiantBicycle.h&quot;
-#include &quot;GiantEbike.h&quot;
-Bicycle* GiantFactory::createBicyle()
-{
-    return new GiantBicyle();
-}
-
-Ebike * GiantFactory::createEbike()
-{
-    return new GiantEbike();
-}
-
-
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsFactory.h 
- */
-#include &quot;Factory.h&quot;
-class XdsFactory : public Factory {
-public:
-    Bicycle * createBicyle() override;
-    Ebike * createEbike() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  XdsFactory.cpp
- */
-#include &quot;XdsBicycle.h&quot;
-#include &quot;XdsEbike.h&quot;
-Bicycle* XdsFactory::createBicyle()
-{
-    return new XdsBicyle();
-}
-
-Ebike * XdsFactory::createEbike()
-{
-    return new XdsEbike();
-}
-</code></pre>
-<p>调用代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp 
- */
-#include &quot;MeridaFactory.h&quot;
-#include &quot;GiantFactory.h&quot;
-#include &quot;XdsFactory.h&quot;
-int main()
-{
-    MeridaFactory meridaBuilder;
-    Bicycle* pMeridaBicyle = meridaBuilder.createBicyle();
-    Ebike* pMeridaEbike = meridaBuilder.createEbike();
-    pMeridaBicyle-&gt;show();
-    pMeridaEbike-&gt;show();
-    delete pMeridaBicyle;
-    delete pMeridaEbike;
-    
-    GiantFactory giantBuilder;
-    Bicycle* pGiantBicyle = giantBuilder.createBicyle();
-    Ebike* pGiantEbike = giantBuilder.createEbike();
-    pGiantBicyle-&gt;show();
-    pGiantEbike-&gt;show();
-    delete pGiantBicyle;
-    delete pGiantEbike;
-    
-    XdsFactory xdsBuilder;
-    Bicycle* pXdsBicyle = xdsBuilder.createBicyle();
-    Ebike* pXdsEbike = xdsBuilder.createEbike();
-    pXdsBicyle-&gt;show();
-    pXdsEbike-&gt;show();
-    delete pXdsBicyle;
-    delete pXdsEbike;
-    
-    return 0;
-}
-</code></pre>
-<h2 id="关于资源回收">关于资源回收</h2>
-<p>工厂模式重点关注了类对象创建的问题，而关于类对象销毁的收尾工作并没有提及；</p>
-<p>首先，考虑将对象的销毁放在对象的提供方--工厂类中。这样做有一个缺点，即当工厂类的变量生命周期结束时，产品类对象也随即销毁，而很多时候需要产品类对象的生命周期比工厂的生命周期长很多；同时由于“工厂模式”这样的字面含义就是“生产产品”，并没有销毁的意思；所以无论从需求上还是语义上，这样做都是不合理的；</p>
-<p>接下来考虑将对象的销毁放在对象的使用方中。除非在工厂类接口的文档中进行详细说明，否则使用方只知道得到了一个对象的指针，并不了解其生命周期由谁管理，使用后贸然销毁可能会带来重复销毁的隐患；同时，另外一个问题是在具有一定规模的程序中常常会忘记销毁资源从而引起内存泄漏；所以这样做也是不合适的；</p>
-<p>比较好的解决方法是使用智能指针 std::unique_ptr&lt;T&gt;，将资源的生命周期交由智能指针管理，这样也符合C++RAII的思想理念，同时也不用考虑资源由谁回收的问题了。具体做法是在工厂类中的对象创建函数返回一个智能指针，而不是一个裸指针，示例代码如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Factory.h 
- */
-#include &lt;memory&gt;
-class Factory {
-public:
-    virtual std::unique_ptr&lt;Bicycle&gt; createBicyle() = 0;
-    virtual ~Factory() {}
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.h 
- */
-#include &quot;Factory.h&quot;
-class MeridaFactory : public Factory {
-public:
-    std::unique_ptr&lt;Bicycle&gt; createBicyle() override;
-};
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  MeridaFactory.cpp
- */
-#include &quot;MeridaBicycle.h&quot;
-std::unique_ptr&lt;Bicycle&gt; MeridaFactory::createBicyle()
-{
-    return std::make_unique&lt;Bicycle&gt;();
-}
-</code></pre>
-<h2 id="总结">总结</h2>
-<p>工厂模式是不同模块之间传递资源的重要方式，其优点是资源的使用者无需了解资源提供者的实现细节，无源码依赖，只需遵循共同的抽象接口即可，这样两个模块就完成了解耦，相互独立，可以沿着各自方向变化；</p>
-<p>简单工厂仅实现了最基本的源码隔离，遵循了依赖倒置原则；</p>
-<p>工厂方法在简单工厂的基础上，还实现了当增加产品时仅扩展代码而不破坏代码的功能，遵循了开闭原则，</p>
-<p>而抽象工厂仅在工厂方法的基础上拓展了创建产品的种类，其核心仍与工厂方法相同，无质的变化；</p>
-<p>因此工厂方法是这三个工厂模式中最为重要的一个，其包含了两大核心观点：依赖倒置原则与开闭原则；其可作为工厂模式的典型代表在开发中多加理解与恰当应用；</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
-<li>《C++设计模式》课程，李建忠主讲；</li>
-<li>《一文让你搞懂设计模式》博客，作者网名&lt;程序喵大人&gt;；</li>
-<li><a href="https://www.cnblogs.com/xiaolincoding/p/11524376.html">《C++ 深入浅出工厂模式(初识篇)》博客， &lt;小林coding&gt;</a>；</li>
-<li><a href="https://www.cnblogs.com/xiaolincoding/p/11524401.html">《C++ 深入浅出工厂模式(进阶篇)》博客， &lt;小林coding&gt;</a>；</li>
-<li><a href="https://blog.csdn.net/silangquan/article/details/20492293">《三种工厂模式的C++实现》博客， &lt;拳四郎&gt;</a>；</li>
 </ul>
 <hr>
 <div class="post-copyright">
