@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2023-01-11T08:26:55.005Z</updated>
+    <updated>2023-02-13T03:09:55.577Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[C++11 枚举前置声明]]></title>
+        <id>https://wangtongxuewang.github.io/post/c11-mei-ju-qian-zhi-sheng-ming/</id>
+        <link href="https://wangtongxuewang.github.io/post/c11-mei-ju-qian-zhi-sheng-ming/">
+        </link>
+        <updated>2023-02-13T03:05:05.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="c11-枚举前置声明">C++11 枚举前置声明</h1>
+<h2 id="引入">引入</h2>
+<p>在 C++ 的头文件中，适当使用类前置声明，可以减少头文件依赖，降低循环依赖问题发生概率；对于枚举类型，同样希望像类类型一样进行前置声明以减少依赖，而这在 C++11 之前是非法的，例如下述示例代码是不能通过编译的；</p>
+<pre><code class="language-c++">class CTest;   // 合法
+enum ETest;    // 非法
+</code></pre>
+<p>另外，C++11 之前的纯枚举类型可能会引起命名冲突问题以及类型隐式转换问题，因此需要一个增强型的枚举类型来解决这些问题；</p>
+<h2 id="使用">使用</h2>
+<p>C++11 引入了强枚举类型以解决上述问题，尤其是可以像类类型一样进行前置声明而不用引用头文件；其使用方法如下述示例代码：</p>
+<pre><code class="language-c++">// C++11 枚举前置声明使用方法：无需引用枚举头文件
+enum ETest1 : int;                // 纯枚举具体类型不定，故需指定类型以明确内存大小
+enum class ECTest2;               // 强枚举类型默认类型为 &quot;int&quot;，故可不指定具体类型
+enum class ECTest3 : unsigned;    // 强枚举类型亦可指定其他具体类型
+
+void funTest1(const ETest1 e1);
+void funTest2(const ECTest2 e2);
+void funTest3(const ECTest3 e3);
+</code></pre>
+<h2 id="题外">题外</h2>
+<p>在工程开发中，枚举类型除了有前置声明的需求外，常常还需要枚举-字符串转换等操作（这属于反射性质），但是 C++11 的强枚举并不提供此操作；幸运的是，开源库 <a href="https://github.com/Neargye/magic_enum">magic_enum</a> 提供了包含上述操作的一系列常用功能，若开发环境编译器支持 C++17，可至其官方链接了解并尝试使用；</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://segmentfault.com/a/1190000002789928">C++枚举</a>；</p>
+<p><a href="https://github.com/Neargye/magic_enum">Neargye/magic_enum</a>；</p>
+<hr>
+<div class="post-copyright">
+    <div class="author">    <b>本文作者：</b>
+        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
+    </div>
+    <div class="link">      <b>博客主页：</b>
+        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
+    </div>
+    <div class="copyright"> <b>版权声明：</b>
+        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </div>
+</div>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C++ 实现 map-reduce 操作]]></title>
         <id>https://wangtongxuewang.github.io/post/c-shi-xian-map-reduce-cao-zuo/</id>
@@ -805,181 +847,5 @@ int main()
     </div>
 </div>
 ]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[单例模式]]></title>
-        <id>https://wangtongxuewang.github.io/post/dan-li-mo-shi/</id>
-        <link href="https://wangtongxuewang.github.io/post/dan-li-mo-shi/">
-        </link>
-        <updated>2021-12-13T00:23:57.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="单例模式">单例模式</h1>
-<h2 id="目的与概念">目的与概念</h2>
-<p>在开发中有时会需要确保系统中某一个类只有一个对象实例，并提供一个全局访问点以被所有模块共享，这应由对象提供者而不是使用者来保证；</p>
-<p>例如：日志系统应只有一个，若有多个的话，可能会导致日志的混乱，而日志模块的提供者有责任约束其使用者，确保使用者的程序中只能有一个日志系统实例；</p>
-<p>实现上述目的的方法就是单例模式。单例模式实际上是对唯一变量的一种封装，约束了其使用方式，让开发者更方便更安全地访问此变量；同时其可以让单例对象如同普通对象一样，作为参数在其他模块中使用，而其他模块不必知道其是否是单例；</p>
-<p>单例模式恰当使用可以起到良好的效果，但是过度使用反而会阻碍程序的解耦，所以在实际使用中需要仔细考量；</p>
-<p>根据单例对象构建的时机的不同，可将单例模式分为两种：</p>
-<ul>
-<li>懒汉方式，在首次使用时构建单例对象，即用时间换空间；</li>
-<li>饿汉方式，在程序启动时构建单例对象，即用空间换时间；</li>
-</ul>
-<h2 id="代码示例">代码示例</h2>
-<p>懒汉方式与饿汉方式的代码描述如下所示：</p>
-<ul>
-<li>懒汉方式：</li>
-</ul>
-<pre><code class="language-C++">//  ----------------------------------------------------------------------------
-/**
- * @file  Singleton.h
- */
-// 本例中使用 Scott Meyers，《Effective C++》 中的 Singleton，这种方式在C++11之后保证线程安全。
-class Singleton {
-public:
-	Singleton(const Singleton&amp; rhs) = delete;
-	Singleton&amp; operator=(const Singleton&amp; rhs) = delete;
-    Singleton(Singleton&amp;&amp; rhs) = delete;
-    Singleton&amp; operator=(Singleton&amp;&amp; rhs) = delete;
-    ~Singleton() {}
-    
-	static Singleton&amp; getInstance() {
-		static Singleton s_instance;
-		return s_instance;
-	}
-private:
-    Singleton() {}
-    // 其他非静态成员变量
-    // ...
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-// 调用代码
-#include &quot;Singleton.h&quot;
-int main()
-{
-    // 类型为引用
-    Singleton &amp; singleInst = Singleton::getInstance();
-    // ...
-    return 0;
-}
-</code></pre>
-<ul>
-<li>饿汉方式：</li>
-</ul>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Singleton.h
- */
-// 此方式无需担心线程安全性问题，但是可能存在初始化顺序不确定问题
-class Singleton {
-public:
-	Singleton(const Singleton&amp; rhs) = delete;
-	Singleton&amp; operator=(const Singleton&amp; rhs) = delete;
-    Singleton(Singleton&amp;&amp; rhs) = delete;
-    Singleton&amp; operator=(Singleton&amp;&amp; rhs) = delete;
-    ~Singleton() {}
-
-	static Singleton&amp; getInstance() {
-		return s_instance;
-	}
-private:
-    Singleton() {}
-	static Singleton s_instance;
-    // 其他非静态成员变量
-    // ...
-};
-//  ----------------------------------------------------------------------------
-/**
- * @file  Singleton.cpp
- */
-// 静态变量类外初始化
-#include &quot;Singleton.h&quot;
-Singleton Singleton::s_instance = {};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-// 调用代码
-#include &quot;Singleton.h&quot;
-int main()
-{
-    // 类型为引用
-    Singleton &amp; singleInst = Singleton::getInstance();
-    // ...
-    return 0;
-}
-</code></pre>
-<h2 id="qt中的单例模式">Qt中的单例模式</h2>
-<p>单例模式使用十分广泛，例如 Qt 中 QCoreApplication 的实现也使用了单例模式，其代码片段如下：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  qapplication.h
- * @note  引自 Qt 库中的 include/QtCore/qapplication.h
- */
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (static_cast&lt;QApplication *&gt;(QCoreApplication::instance()))
-// ...
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  qcoreapplication.h
- * @note  引自 Qt 库中的 include/QtCore/qcoreapplication.h
- */
-class QCoreApplication {
-    // ...
-    static QCoreApplication *instance() { return self; }
-    // ...
-private:
-    // ...
-    static QCoreApplication *self;
-
-    Q_DISABLE_COPY(QCoreApplication)
-    // ...
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-// 调用代码
-#include &lt;QApplication&gt;
-#include &lt;QString&gt;
-int main()
-{
-    // ...
-    QString sheetStr = qApp-&gt;styleSheet();
-    qDebug() &lt;&lt; sheetStr;
-    // ...
-    
-    return 0;
-}
-</code></pre>
-<h2 id="参考">参考</h2>
-<ul>
-<li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
-<li>《C++设计模式》课程，李建忠主讲；</li>
-<li><a href="https://zhuanlan.zhihu.com/p/37469260">《C++ 单例模式》博客， &lt;Arkin&gt; </a>；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>]]></content>
     </entry>
 </feed>

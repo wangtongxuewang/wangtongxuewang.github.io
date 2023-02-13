@@ -2,18 +2,18 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>std::string_view 简要介绍 | 王同学的博客</title>
+<title>C++11 枚举前置声明 | 王同学的博客</title>
 <link rel="shortcut icon" href="https://wangtongxuewang.github.io/favicon.ico?v=1676257786783">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wangtongxuewang.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="std::string_view 简要介绍 | 王同学的博客 - Atom Feed" href="https://wangtongxuewang.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="C++11 枚举前置声明 | 王同学的博客 - Atom Feed" href="https://wangtongxuewang.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="std::string_view 简要介绍
-目的
-字符串在开发中使用频率很高，其性能至关重要。C++ 标准库中的 std::string 采用多种技术以提升性能。比如：短字符串优化技术，当字符串较短时，直接在栈上分配空间，不进行动态内存分配..." />
+    <meta name="description" content="C++11 枚举前置声明
+引入
+在 C++ 的头文件中，适当使用类前置声明，可以减少头文件依赖，降低循环依赖问题发生概率；对于枚举类型，同样希望像类类型一样进行前置声明以减少依赖，而这在 C++11 之前是非法的，例如下述示例代码是不能通过..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -76,74 +76,43 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              std::string_view 简要介绍
+              C++11 枚举前置声明
             </h2>
             <div class="post-info">
               <span>
-                2022-02-15
+                2023-02-13
               </span>
               <span>
-                3 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="stdstring_view-简要介绍">std::string_view 简要介绍</h1>
-<h2 id="目的">目的</h2>
-<p>字符串在开发中使用频率很高，其性能至关重要。C++ 标准库中的 std::string 采用多种技术以提升性能。比如：短字符串优化技术，当字符串较短时，直接在栈上分配空间，不进行动态内存分配，从而提升短字符串的效率；</p>
-<p>但是字符串的初始化会影响其性能。std::string 一般通过 char* 类型进行初始化，例如：字符串字面量、从文件读入等，这样就需将 char* 字符数据拷贝到 std::string 所管理的内存空间中；而很多时候并不会去修改字符串内容，拷贝毫无必要，仅需生成 char* 某种标记即可，所以此时 std::string 初始化就造成了性能损失；</p>
-<p>针对上述问题，C++17 引入了 std::string_view 。std::string_view 仅标记字符串位置与尺寸，不拷贝字符串数据，避免了额外的内存分配。所以当仅访问而不修改字符串时，std::string_view 即可提升效率；</p>
-<h2 id="对比">对比</h2>
-<p>下述代码对 std::string 与 std::string_view 的性能进行了简单对比。需要注意的是，测试字符串的长度需超过 std::string 开启短字符串优化的长度，这样差别更为显著；</p>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;string&gt;
-#include &lt;string_view&gt;
-#include &lt;chrono&gt;
-
-/**
- * @brief  std::string 与 std::string_view 测试
- */
-int main()
-{
-    const int N = 1000000;
-    const char s[] = &quot;qwertyuiopasdfghjklzxcvbnm1234567890&quot;;  // 使用 GCC 编译，长度需超过 23
-
-    auto start = std::chrono::system_clock::now();
-    for (int i = 0; i &lt; N; ++i) {
-        std::string str = s;
-        std::string sub = str.substr(2, 10);
-    }
-    auto end = std::chrono::system_clock::now();
-    auto elapse = (std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(end-start)).count();
-    std::cout &lt;&lt; &quot;string      type elapse: &quot; &lt;&lt; elapse &lt;&lt; &quot; ms \n&quot;;
-
-    start = std::chrono::system_clock::now();
-    for (int i = 0; i &lt; N; ++i) {
-        std::string_view str = s;
-        std::string_view sub = str.substr(2, 10);
-    }
-    end = std::chrono::system_clock::now();
-    elapse = (std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(end-start)).count();
-    std::cout &lt;&lt; &quot;string_view type elapse: &quot; &lt;&lt; elapse &lt;&lt; &quot; ms \n&quot;;
-
-    return 0;
-}
+                <h1 id="c11-枚举前置声明">C++11 枚举前置声明</h1>
+<h2 id="引入">引入</h2>
+<p>在 C++ 的头文件中，适当使用类前置声明，可以减少头文件依赖，降低循环依赖问题发生概率；对于枚举类型，同样希望像类类型一样进行前置声明以减少依赖，而这在 C++11 之前是非法的，例如下述示例代码是不能通过编译的；</p>
+<pre><code class="language-c++">class CTest;   // 合法
+enum ETest;    // 非法
 </code></pre>
-<p>终端输出：</p>
-<pre><code class="language-c++">string      type elapse: 4111 ms 
-string_view type elapse: 8 ms 
+<p>另外，C++11 之前的纯枚举类型可能会引起命名冲突问题以及类型隐式转换问题，因此需要一个增强型的枚举类型来解决这些问题；</p>
+<h2 id="使用">使用</h2>
+<p>C++11 引入了强枚举类型以解决上述问题，尤其是可以像类类型一样进行前置声明而不用引用头文件；其使用方法如下述示例代码：</p>
+<pre><code class="language-c++">// C++11 枚举前置声明使用方法：无需引用枚举头文件
+enum ETest1 : int;                // 纯枚举具体类型不定，故需指定类型以明确内存大小
+enum class ECTest2;               // 强枚举类型默认类型为 &quot;int&quot;，故可不指定具体类型
+enum class ECTest3 : unsigned;    // 强枚举类型亦可指定其他具体类型
+
+void funTest1(const ETest1 e1);
+void funTest2(const ECTest2 e2);
+void funTest3(const ECTest3 e3);
 </code></pre>
-<p>从上述代码看出，使用 std::string_view 后，循环中的操作性能提升约 500 倍，几乎是质的飞跃；</p>
-<h2 id="总结">总结</h2>
-<p>在处理字符串时，当仅需访问而不修改其内容时，可多使用 std::string_view 代替 std::string，以消除数据拷贝，避免额外内存分配，进而提升处理字符串的效率；</p>
+<h2 id="题外">题外</h2>
+<p>在工程开发中，枚举类型除了有前置声明的需求外，常常还需要枚举-字符串转换等操作（这属于反射性质），但是 C++11 的强枚举并不提供此操作；幸运的是，开源库 <a href="https://github.com/Neargye/magic_enum">magic_enum</a> 提供了包含上述操作的一系列常用功能，若开发环境编译器支持 C++17，可至其官方链接了解并尝试使用；</p>
 <h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://blog.csdn.net/sxy15956107015/article/details/105177307">字符串复制的优化策略</a>；</li>
-<li><a href="https://blog.csdn.net/tkokof1/article/details/82527370">C++17,使用 string_view 来避免复制</a>；</li>
-</ul>
+<p><a href="https://segmentfault.com/a/1190000002789928">C++枚举</a>；</p>
+<p><a href="https://github.com/Neargye/magic_enum">Neargye/magic_enum</a>；</p>
 <hr>
 <div class="post-copyright">
     <div class="author">    <b>本文作者：</b>
@@ -156,15 +125,14 @@ string_view type elapse: 8 ms
         本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
     </div>
 </div>
-
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li><a href="#stdstring_view-%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D">std::string_view 简要介绍</a>
+<li><a href="#c11-%E6%9E%9A%E4%B8%BE%E5%89%8D%E7%BD%AE%E5%A3%B0%E6%98%8E">C++11 枚举前置声明</a>
 <ul>
-<li><a href="#%E7%9B%AE%E7%9A%84">目的</a></li>
-<li><a href="#%E5%AF%B9%E6%AF%94">对比</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+<li><a href="#%E9%A2%98%E5%A4%96">题外</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 </li>
@@ -178,9 +146,9 @@ string_view type elapse: 8 ms
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://wangtongxuewang.github.io/post/lambda-biao-da-shi-jian-dan-shi-yong/">
+            <a href="https://wangtongxuewang.github.io/post/c-shi-xian-map-reduce-cao-zuo/">
               <h3 class="post-title">
-                lambda 表达式简单使用
+                C++ 实现 map-reduce 操作
               </h3>
             </a>
           </div>
