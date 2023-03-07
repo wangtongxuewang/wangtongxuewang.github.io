@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2023-02-23T11:28:19.666Z</updated>
+    <updated>2023-03-07T04:10:19.302Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -10,6 +10,22 @@
     <logo>https://wangtongxuewang.github.io/images/avatar.png</logo>
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 王同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[二〇二三年〇二月]]></title>
+        <id>https://wangtongxuewang.github.io/post/er-0er-san-nian-0er-yue/</id>
+        <link href="https://wangtongxuewang.github.io/post/er-0er-san-nian-0er-yue/">
+        </link>
+        <updated>2023-03-07T03:57:57.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="二〇二三年〇二月">二〇二三年〇二月</h1>
+<p>发现浪漫，偶尔治愈；</p>
+<figure data-type="image" tabindex="1"><img src="https://wangtongxuewang.github.io/post-images/1678161702921.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://wangtongxuewang.github.io/post-images/1678161711953.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://wangtongxuewang.github.io/post-images/1678161759631.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://wangtongxuewang.github.io/post-images/1678161794379.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://wangtongxuewang.github.io/post-images/1678161747871.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://wangtongxuewang.github.io/post-images/1678161822945.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C++11 枚举前置声明]]></title>
         <id>https://wangtongxuewang.github.io/post/c11-mei-ju-qian-zhi-sheng-ming/</id>
@@ -708,131 +724,6 @@ int main()
 <ul>
 <li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
 <li>《C++设计模式》课程，李建忠主讲；</li>
-</ul>
-<hr>
-<div class="post-copyright">
-    <div class="author">    <b>本文作者：</b>
-        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
-    </div>
-    <div class="link">      <b>博客主页：</b>
-        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
-    </div>
-    <div class="copyright"> <b>版权声明：</b>
-        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-    </div>
-</div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[代理模式]]></title>
-        <id>https://wangtongxuewang.github.io/post/dai-li-mo-shi/</id>
-        <link href="https://wangtongxuewang.github.io/post/dai-li-mo-shi/">
-        </link>
-        <updated>2021-12-18T07:53:52.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="代理模式">代理模式</h1>
-<h2 id="目的与概念">目的与概念</h2>
-<p>代理模式是一种结构型模式，其目的是为调用者提供中间层以<strong>控制</strong>对某个对象的访问，即在调用者与被调用者之间添加一层代理层，调用代理接口层来实现被调用者复杂的操作；</p>
-<p>代理模式提供了中间层，屏蔽了实现层复杂且用户并不想知道的操作，让调用者只需关注自己所需求的操作，这样调用者就可以方便地使用这些接口，而不用了解底层的具体操作；</p>
-<p>其另一个优点是，此中间层起到了隔离调用者与实现者的作用，当需求变更时，可以仅修改代理类而不修改具体实现，提高了代码的复用性与扩展性；</p>
-<p>代理模式与一些其他结构型模式虽目的不同，但在思想及做法上有很多相似的地方，即往往要添加一层中间层以实现自己的目标；</p>
-<p>代理模式思想的使用非常普遍，工程实践中，我们常会有意无意地应用代理模式的思想，只是很多时候我们并没有意识到而已；</p>
-<h2 id="代码示例">代码示例</h2>
-<p>下述代码简陋地展示了代理模式的某一种代码实现方式，代码仅作演示：</p>
-<pre><code class="language-c++">//  ----------------------------------------------------------------------------
-/**
- * @file  Subject.h
- */
-// 接口类，可以被用户看到
-class Subject {
-public:
-    virtual ~Subject() {}
-    virtual void operate() = 0;
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  SubjectProxy.h
- */
-// 代理类，可以被用户看到
-#include &quot;Subject.h&quot;
-class RealSubject;
-class SubjectProxy : public Subject {
-public:
-    void operate() override;
-private:
-    void preProcess();
-    void postProcess();
-    std::unique_ptr&lt;RealSubject&gt; m_realSubject;
-}
-//  ----------------------------------------------------------------------------
-/**
- * @file  SubjectProxy.cpp
- */
-#include &quot;SubjectProxy.h&quot;
-#include &quot;RealSubject.h&quot;
-SubjectProxy::SubjectProxy()
-{
-    m_realSubject = std::make_unique&lt;RealSubject&gt;();
-}
-void SubjectProxy::operate() 
-{
-    preProcess();
-    m_realSubject-&gt;operate(); // 调用真正的实现函数
-    postProcess();
-}
-void SubjectProxy::preProcess()
-{
-    // 前处理操作
-    // ...
-}
-void SubjectProxy::postProcess() 
-{
-    // 后处理操作
-    // ...
-}
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  RealSubject.h
- */
-// 真正的实现类，不被用户看到
-#include &quot;Subject.h&quot;
-class RealSubject : public Subject {
-public:
-    void operate() override {
-        // 具体实现方法代码，一般会放在 RealSubject.cpp 中
-        // ...
-    }
-    // 其他各种复杂的操作代码
-    // ...
-};
-
-
-//  ----------------------------------------------------------------------------
-/**
- * @file  main.cpp
- */
-// 调用代码
-#include &quot;SubjectProxy.h&quot;
-int main()
-{
-    std::unique&lt;Subject&gt; subj = std::make_unique&lt;SubjectProxy&gt;();
-    subj-&gt;operate();
-    
-    // ...
-    
-    return 0;
-}
-</code></pre>
-<p>代理模式不一定要使用如上述代码的纯虚接口类与继承这样的方式来实现，上述代码仅仅是其中一种方式的演示；</p>
-<p>实际工程中，代理模式实现是十分复杂的，而且会含有很多变化，并没有固定的套路。例如：STL 中的智能指针、Qt 库中 QString 的写时复制技术等，都包含了代理模式的影子，关于这些技术的详细阐述，并非本文重点，故不赘述，若要了解，可自行查阅资料；</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li>《设计模式--可复用面向对象软件的基础》，GoF，机械工业出版社，2000年09月；</li>
-<li>《C++设计模式》课程，李建忠主讲；</li>
-<li><a href="https://blog.csdn.net/Kobe51920/article/details/104217965">《C++设计模式：代理模式》博客， &lt;ZY-JIMMY&gt;</a>；</li>
 </ul>
 <hr>
 <div class="post-copyright">
