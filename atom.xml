@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2023-03-07T04:10:19.302Z</updated>
+    <updated>2023-03-13T02:31:36.894Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -19,11 +19,29 @@
         <content type="html"><![CDATA[<h1 id="二〇二三年〇二月">二〇二三年〇二月</h1>
 <p>发现浪漫，偶尔治愈；</p>
 <figure data-type="image" tabindex="1"><img src="https://wangtongxuewang.github.io/post-images/1678161702921.jpg" alt="" loading="lazy"></figure>
+<center><p></p>田野</center></br></br>
 <figure data-type="image" tabindex="2"><img src="https://wangtongxuewang.github.io/post-images/1678161711953.jpg" alt="" loading="lazy"></figure>
+<center><p></p>白墙灰瓦</center></br></br>
 <figure data-type="image" tabindex="3"><img src="https://wangtongxuewang.github.io/post-images/1678161759631.jpg" alt="" loading="lazy"></figure>
+<center><p></p>漫步桥上</center></br></br>
 <figure data-type="image" tabindex="4"><img src="https://wangtongxuewang.github.io/post-images/1678161794379.jpg" alt="" loading="lazy"></figure>
+<center><p></p>远眺</center></br></br>
 <figure data-type="image" tabindex="5"><img src="https://wangtongxuewang.github.io/post-images/1678161747871.jpg" alt="" loading="lazy"></figure>
+<center><p></p>老厂房</center></br></br>
 <figure data-type="image" tabindex="6"><img src="https://wangtongxuewang.github.io/post-images/1678161822945.jpg" alt="" loading="lazy"></figure>
+<center><p></p>傍晚渡口</center></br></br>
+<hr>
+<div class="post-copyright">
+    <div class="author">    <b>本文作者：</b>
+        <a href="https://wangtongxuewang.github.io/post/about/">王同学</a>
+    </div>
+    <div class="link">      <b>博客主页：</b>
+        <a href="https://wangtongxuewang.github.io/">https://wangtongxuewang.github.io/</a>
+    </div>
+    <div class="copyright"> <b>版权声明：</b>
+        本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </div>
+</div>
 ]]></content>
     </entry>
     <entry>
