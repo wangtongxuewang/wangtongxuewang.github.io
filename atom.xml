@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangtongxuewang.github.io</id>
     <title>王同学的博客</title>
-    <updated>2023-03-21T11:27:55.700Z</updated>
+    <updated>2023-03-22T00:49:28.817Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangtongxuewang.github.io"/>
     <link rel="self" href="https://wangtongxuewang.github.io/atom.xml"/>
@@ -11,12 +11,12 @@
     <icon>https://wangtongxuewang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 王同学的博客</rights>
     <entry>
-        <title type="html"><![CDATA[C++的宏]]></title>
+        <title type="html"><![CDATA[C++宏]]></title>
         <id>https://wangtongxuewang.github.io/post/cde-hong/</id>
         <link href="https://wangtongxuewang.github.io/post/cde-hong/">
         </link>
         <updated>2023-03-21T11:17:33.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="c的宏">C++的宏</h1>
+        <content type="html"><![CDATA[<h1 id="c宏">C++宏</h1>
 <p>C++ 中的宏常用于条件编译与防卫式声明等场景，而定义常量及短函数，出于类型检查方面考虑，并不推荐使用宏；</p>
 <p>但是有两种宏的使用方式可简洁实现复杂功能，推荐使用，示例如下：</p>
 <h2 id="转为字符串">转为字符串</h2>
